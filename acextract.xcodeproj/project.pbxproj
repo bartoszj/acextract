@@ -7,8 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		960CEF931A3F7C2C00F0B156 /* CommandLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF901A3F7C2C00F0B156 /* CommandLine.swift */; };
+		960CEF941A3F7C2C00F0B156 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF911A3F7C2C00F0B156 /* Option.swift */; };
+		960CEF951A3F7C2C00F0B156 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF921A3F7C2C00F0B156 /* StringExtensions.swift */; };
+		960CEF971A3F828B00F0B156 /* ImageSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF961A3F828B00F0B156 /* ImageSet.swift */; };
 		966A50361A3DEBE0002C814F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A50351A3DEBE0002C814F /* main.swift */; };
+		966A504F1A3DF14C002C814F /* CatalogReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A504E1A3DF14C002C814F /* CatalogReader.swift */; };
+		966A50521A3E13B2002C814F /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966A50511A3E13B2002C814F /* CoreUI.framework */; };
+		96F49FCD1A40C2E700F54148 /* CoreUI_Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		960CEF8B1A3F7BF700F0B156 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 960CEF861A3F7BF700F0B156 /* CommandLine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D06884319674D7D00BBFAAC;
+			remoteInfo = CommandLine;
+		};
+		960CEF8D1A3F7BF700F0B156 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 960CEF861A3F7BF700F0B156 /* CommandLine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D06884E19674D7D00BBFAAC;
+			remoteInfo = CommandLineTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		966A50301A3DEBE0002C814F /* CopyFiles */ = {
@@ -23,8 +47,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		960CEF861A3F7BF700F0B156 /* CommandLine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommandLine.xcodeproj; path = CommandLine/CommandLine.xcodeproj; sourceTree = "<group>"; };
+		960CEF901A3F7C2C00F0B156 /* CommandLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandLine.swift; path = CommandLine/CommandLine/CommandLine.swift; sourceTree = SOURCE_ROOT; };
+		960CEF911A3F7C2C00F0B156 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Option.swift; path = CommandLine/CommandLine/Option.swift; sourceTree = SOURCE_ROOT; };
+		960CEF921A3F7C2C00F0B156 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtensions.swift; path = CommandLine/CommandLine/StringExtensions.swift; sourceTree = SOURCE_ROOT; };
+		960CEF961A3F828B00F0B156 /* ImageSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSet.swift; sourceTree = "<group>"; };
 		966A50321A3DEBE0002C814F /* acextract */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = acextract; sourceTree = BUILT_PRODUCTS_DIR; };
 		966A50351A3DEBE0002C814F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		966A503C1A3DEC0C002C814F /* acextract-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "acextract-Bridging-Header.h"; sourceTree = "<group>"; };
+		966A504E1A3DF14C002C814F /* CatalogReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogReader.swift; sourceTree = "<group>"; };
+		966A50501A3E0E3F002C814F /* CoreUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreUI.h; sourceTree = "<group>"; };
+		966A50511A3E13B2002C814F /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = /System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<absolute>"; };
+		96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreUI_Swift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,17 +66,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				966A50521A3E13B2002C814F /* CoreUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		960CEF851A3F7BEB00F0B156 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				966A50511A3E13B2002C814F /* CoreUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		960CEF871A3F7BF700F0B156 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				960CEF8C1A3F7BF700F0B156 /* CommandLine.framework */,
+				960CEF8E1A3F7BF700F0B156 /* CommandLineTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		960CEF8F1A3F7C2000F0B156 /* CommandLine */ = {
+			isa = PBXGroup;
+			children = (
+				960CEF901A3F7C2C00F0B156 /* CommandLine.swift */,
+				960CEF911A3F7C2C00F0B156 /* Option.swift */,
+				960CEF921A3F7C2C00F0B156 /* StringExtensions.swift */,
+			);
+			name = CommandLine;
+			sourceTree = "<group>";
+		};
 		966A50291A3DEBE0002C814F = {
 			isa = PBXGroup;
 			children = (
 				966A50341A3DEBE0002C814F /* acextract */,
+				960CEF851A3F7BEB00F0B156 /* Frameworks */,
 				966A50331A3DEBE0002C814F /* Products */,
+				960CEF861A3F7BF700F0B156 /* CommandLine.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,6 +121,12 @@
 		966A50341A3DEBE0002C814F /* acextract */ = {
 			isa = PBXGroup;
 			children = (
+				966A503C1A3DEC0C002C814F /* acextract-Bridging-Header.h */,
+				966A504E1A3DF14C002C814F /* CatalogReader.swift */,
+				960CEF8F1A3F7C2000F0B156 /* CommandLine */,
+				96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */,
+				966A50501A3E0E3F002C814F /* CoreUI.h */,
+				960CEF961A3F828B00F0B156 /* ImageSet.swift */,
 				966A50351A3DEBE0002C814F /* main.swift */,
 			);
 			path = acextract;
@@ -106,6 +176,12 @@
 			mainGroup = 966A50291A3DEBE0002C814F;
 			productRefGroup = 966A50331A3DEBE0002C814F /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 960CEF871A3F7BF700F0B156 /* Products */;
+					ProjectRef = 960CEF861A3F7BF700F0B156 /* CommandLine.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				966A50311A3DEBE0002C814F /* acextract */,
@@ -113,12 +189,35 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		960CEF8C1A3F7BF700F0B156 /* CommandLine.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = CommandLine.framework;
+			remoteRef = 960CEF8B1A3F7BF700F0B156 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		960CEF8E1A3F7BF700F0B156 /* CommandLineTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CommandLineTests.xctest;
+			remoteRef = 960CEF8D1A3F7BF700F0B156 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXSourcesBuildPhase section */
 		966A502E1A3DEBE0002C814F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				960CEF971A3F828B00F0B156 /* ImageSet.swift in Sources */,
+				960CEF951A3F7C2C00F0B156 /* StringExtensions.swift in Sources */,
 				966A50361A3DEBE0002C814F /* main.swift in Sources */,
+				960CEF941A3F7C2C00F0B156 /* Option.swift in Sources */,
+				966A504F1A3DF14C002C814F /* CatalogReader.swift in Sources */,
+				960CEF931A3F7C2C00F0B156 /* CommandLine.swift in Sources */,
+				96F49FCD1A40C2E700F54148 /* CoreUI_Swift.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,14 +302,24 @@
 		966A503A1A3DEBE0002C814F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "acextract/acextract-Bridging-Header.h";
 			};
 			name = Debug;
 		};
 		966A503B1A3DEBE0002C814F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "acextract/acextract-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -233,6 +342,7 @@
 				966A503B1A3DEBE0002C814F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
