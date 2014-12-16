@@ -12,7 +12,7 @@ import Foundation
 let cli = CommandLine()
 let cli_help = BoolOption(shortFlag: "h", longFlag: "help", helpMessage: "Show help message.")
 let cli_list = BoolOption(shortFlag: "l", longFlag: "list", helpMessage: "Print content of the CAR file without extracting.")
-let cli_verbose = CounterOption(shortFlag: "v", longFlag: "verbose", helpMessage: "Print more detail. You can use -vv for more info.")
+let cli_verbose = CounterOption(shortFlag: "v", longFlag: "verbose", helpMessage: "Print more detail. You can use -vv or -vvv for more info.")
 let cli_input = StringOption(shortFlag: "i", longFlag: "input", required: true, helpMessage: "Path to input CAR file.")
 let cli_output = StringOption(shortFlag: "o", longFlag: "output", required: false, helpMessage: "Path to output directory.")
 cli.addOptions([cli_input, cli_output, cli_list, cli_help, cli_verbose])

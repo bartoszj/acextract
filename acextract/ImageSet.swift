@@ -170,11 +170,32 @@ class ImageSet {
         case 2:
             var desc = "\(escapeSeq)[1m\(self.name)\(escapeSeq)[0m:\n"
             for namedImage in self.namedImages {
-                desc += "  \(namedImage.ac_imageName):\n"
+                desc += "  \(namedImage.ac_imageName)\n"
             }
             return desc
         default:
-            return ""
+            var desc = "\(escapeSeq)[1m\(self.name)\(escapeSeq)[0m:\n"
+            for namedImage in self.namedImages {
+                desc += "  \(namedImage.ac_imageName):\n"
+                desc += "    imageType: \(namedImage.imageType)\n"
+                desc += "    idiom: \(namedImage.idiom())\n"
+                desc += "    subtype: \(namedImage.subtype())\n"
+                desc += "    scale: \(namedImage.scale)\n"
+                desc += "    size vlass horizontal: \(namedImage.sizeClassHorizontal())\n"
+                desc += "    size vlass vertical: \(namedImage.sizeClassVertical())\n"
+                desc += "    opacity: \(namedImage.opacity)\n"
+                desc += "    size: \(namedImage.size)\n"
+                desc += "    blend mode: \(namedImage.blendMode)\n"
+                desc += "    resizing mode: \(namedImage.resizingMode)\n"
+                desc += "    is template: \(namedImage.isTemplate)\n"
+                desc += "    vector based: \(namedImage.isVectorBased)\n"
+                desc += "    template rendering mode: \(namedImage.templateRenderingMode)\n"
+                desc += "    edge insets: \(namedImage.edgeInsets)\n"
+                desc += "    alignment edge insets: \(namedImage.alignmentEdgeInsets)\n"
+                desc += "    alignment rect: \(namedImage.alignmentRect())\n"
+                desc += "    exifOrientation: \(namedImage.exifOrientation)\n"
+            }
+            return desc
         }
     }
 }

@@ -31,6 +31,89 @@ enum NamedImageBasicType {
     case NotRecognized
 }
 
+extension CUIImageInsets: Printable {
+    public var description: String {
+        return "(\(top),\(left),\(bottom),\(right))"
+    }
+}
+
+extension CUIDeviceIdiom: Printable {
+    public var description: String {
+        switch self {
+        case .IdiomUniversal:
+            return "universal"
+        case .IdiomiPhone:
+            return "iPhone"
+        case .IdiomiPad:
+            return "i{ad"
+        }
+        
+    }
+}
+
+extension CUISubtype: Printable {
+    public var description: String {
+        switch self {
+        case .SubtypeUndetermined:
+            return "undetermined"
+        case .SubtypeiPhone4Inch:
+            return "-568h"
+        }
+    }
+}
+
+extension CUIUserInterfaceSizeClass: Printable {
+    public var description: String {
+        switch self {
+        case .Any:
+            return "any"
+        case .Compact:
+            return "compact"
+        case .Regular:
+            return "regular"
+        }
+    }
+}
+
+extension CUIRenderMode: Printable {
+    public var description: String {
+        switch self {
+        case .Original:
+            return "original"
+        case .Template:
+            return "template"
+        case .Default:
+            return "default"
+        }
+    }
+}
+
+extension CUIResizingMode: Printable {
+    public var description: String {
+        switch self {
+        case .Tiles:
+            return "tiles"
+        case .Stretches:
+            return "stretches"
+        }
+    }
+}
+
+extension CUIImageType: Printable {
+    public var description: String {
+        switch self {
+        case .None:
+            return "none"
+        case .Horizontal:
+            return "horizontal"
+        case .Vertical:
+            return "vertical"
+        case .HorizontalAndVertical:
+            return "horizontal & vertical"
+        }
+    }
+}
+
 extension CUINamedImage {
     var ac_basicType: NamedImageBasicType {
         switch self.idiom() {
