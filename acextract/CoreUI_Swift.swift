@@ -31,8 +31,7 @@ enum CoreUIErrorCodes: Int {
     case RenditionMissingData
     case RenditionMissingImage
     case RenditionMissingPDF
-    case NamedImageOutputDirectoryDoesntExists
-    case NamedImageOutputPathIsNotDirectory
+    case CannotCreatePDFDocument
 }
 
 enum NamedImageBasicType {
@@ -335,7 +334,36 @@ extension CUINamedImage {
         return true
     }
     
-    func ac_savePDFToDirectory(filefilePathPath: String, error: NSErrorPointer) -> Bool {
-        return true
+    func ac_savePDFToDirectory(filePath: String, error: NSErrorPointer) -> Bool {
+        // Based on:
+        // http://stackoverflow.com/questions/3780745/saving-a-pdf-document-to-disk-using-quartz
+        
+        let cgPDFDocument = self._rendition().pdfDocument().takeUnretainedValue()
+        //Create the pdf context
+        let cgPage = CGPDFDocumentGetPage(cgPDFDocument, 1);
+        var cgPageRect = CGPDFPageGetBoxRect(cgPage, kCGPDFMediaBox);
+        let mutableData = NSMutableData()
+        
+        let cgDataConsumer = CGDataConsumerCreateWithCFData(mutableData);
+        let cgPDFContext = CGPDFContextCreate(cgDataConsumer, &cgPageRect, nil);
+        
+        if (CGPDFDocumentGetNumberOfPages(cgPDFDocument) > 0)
+        {
+            CGPDFContextBeginPage(cgPDFContext, nil);
+            CGContextDrawPDFPage(cgPDFContext, cgPage);
+            CGPDFContextEndPage(cgPDFContext);
+        }
+        else
+        {
+            if error != nil {
+                error.memory = NSError(domain: CoreUIErrorDomain, code: CoreUIErrorCodes.CannotCreatePDFDocument.rawValue, userInfo: nil)
+            }
+            return false
+        }
+        
+        CGPDFContextClose(cgPDFContext)
+        
+        let success = mutableData.writeToFile(filePath, atomically: true)
+        return success
     }
 }
