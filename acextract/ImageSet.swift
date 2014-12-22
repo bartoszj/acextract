@@ -211,6 +211,13 @@ class ImageSet {
                 desc += "    alignment edge insets: \(namedImage.alignmentEdgeInsets)\n"
                 desc += "    alignment rect: \(namedImage.alignmentRect())\n"
                 desc += "    exifOrientation: \(namedImage.exifOrientation)\n"
+                desc += "    rendition name: \(namedImage._rendition().name())\n"
+                desc += "    rendition data: \(namedImage._rendition().data())\n"
+                desc += "    rendition pdf: \(namedImage._rendition().pdfDocument())\n"
+                desc += "    rendition image: \(namedImage._rendition().unslicedImage())\n"
+                desc += "    rendition UTI type: \(namedImage._rendition().utiType())\n"
+                desc += "    rendition type: \(namedImage._rendition().type())\n"
+                desc += "    rendition subtype: \(namedImage._rendition().subtype())\n"
             }
             return desc
         }

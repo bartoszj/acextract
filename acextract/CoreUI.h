@@ -54,6 +54,8 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 
 @end
 
+@class CUIRenditionKey, CUIThemeRendition;
+
 @interface CUINamedImage : NSObject
 
 @property(copy, nonatomic) NSString *name;
@@ -77,4 +79,32 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 - (CUISubtype)subtype;
 - (CUIDeviceIdiom)idiom;
 
+- (CUIRenditionKey *)baseKey;
+- (long long)graphicsClass;
+- (long long)memoryClass;
+- (CUIThemeRendition *)_rendition;
+- (CUIRenditionKey *)renditionKey;
+
 @end
+
+@interface CUIRenditionKey : NSObject <NSCopying, NSCoding>
+
+- (long long)themeGraphicsClass;
+- (long long)themeMemoryClass;
+
+@end
+
+@interface CUIThemeRendition : NSObject
+
+- (unsigned int)subtype;
+- (NSData *)data;
+- (CGPDFDocumentRef)pdfDocument;
+- (CGImageRef)unslicedImage;
+- (NSString *)utiType;
+- (NSString *)name;
+- (NSInteger)type;
+
+@end
+
+// Helper functions.
+NSData *GetRenditionSrcData(id rendition);

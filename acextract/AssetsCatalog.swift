@@ -25,7 +25,14 @@
 
 import Foundation
 
-class CatalogReader {
+let AssetsCatalogErrorDomain = "AssetsCatalogErrorDomain"
+
+enum AssetsCatalogErrorCodes: Int {
+    case OutputDirectoryDoesntExists
+    case OutputPathIsNotDirectory
+}
+
+class AssetsCatalog {
     // MARK: - Properties
     let filePath: String!
     let fileURL: NSURL!
@@ -64,13 +71,53 @@ class CatalogReader {
         for name in names {
             let namedImages = self.imagesWithName(name)
             let imageSet = ImageSet(name: name, namedImages: namedImages)
-            println(imageSet.verboseDescription(verbose))
+            content += imageSet.verboseDescription(verbose) + "\n"
         }
         
         return content
     }
     
-    func extractContentToDirectoryAtPath(path: String) {
+    func extractContentToDirectoryAtPath(path: String, error: NSErrorPointer) {
         
+        let expandedPath = path.stringByExpandingTildeInPath
+        
+        // Check if directory exits.
+        var isDirectory: ObjCBool = false
+        if !NSFileManager.defaultManager().fileExistsAtPath(expandedPath, isDirectory: &isDirectory) {
+            if error != nil {
+                error.memory = NSError(domain: AssetsCatalogErrorDomain, code: AssetsCatalogErrorCodes.OutputDirectoryDoesntExists.rawValue, userInfo: nil)
+            }
+            return
+        }
+        
+        // Check is it is directory.
+        if !isDirectory {
+            if error != nil {
+                error.memory = NSError(domain: AssetsCatalogErrorDomain, code: AssetsCatalogErrorCodes.OutputPathIsNotDirectory.rawValue, userInfo: nil)
+            }
+            return
+        }
+        
+        // Get image names.
+        let names = self.allImageNames()
+        for name in names {
+            let namedImages = self.imagesWithName(name)
+            
+            for namedImage in namedImages {
+                let filePath = expandedPath.stringByAppendingPathComponent(namedImage.ac_imageName)
+                var error: NSError?
+                print("Extracting: \(namedImage.ac_imageName)")
+                let success = namedImage.ac_saveAtPath(filePath, error: &error)
+                if success {
+                    println(" OK")
+                } else {
+                    if let e = error {
+                        println(" FAILED \(e.localizedDescription)")
+                    } else {
+                        println(" FAILED")
+                    }
+                }
+            }
+        }
     }
 }

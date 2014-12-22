@@ -25,6 +25,16 @@
 
 import Foundation
 
+let CoreUIErrorDomain = "CoreUIErrorDomain"
+
+enum CoreUIErrorCodes: Int {
+    case RenditionMissingData
+    case RenditionMissingImage
+    case RenditionMissingPDF
+    case NamedImageOutputDirectoryDoesntExists
+    case NamedImageOutputPathIsNotDirectory
+}
+
 enum NamedImageBasicType {
     case Universal1x
     case Universal2x
@@ -231,6 +241,13 @@ extension CUINamedImage {
         }
     }
     
+    var ac_isPDF: Bool {
+        if self.isVectorBased && self.size == CGSizeZero {
+            return true
+        }
+        return false
+    }
+    
     var ac_imageName: String {
         // Size class suffix.
         var sizeClassSuffix = ""
@@ -252,9 +269,9 @@ extension CUINamedImage {
         }
         
         // Vector.
-        var vector = ""
-        if self.isVectorBased && self.size == CGSizeZero {
-            vector = "-vecotr"
+        var fileExtension = "png"
+        if self.ac_isPDF {
+            fileExtension = "pdf"
         }
         
         // Subtype (4 inch).
@@ -277,6 +294,48 @@ extension CUINamedImage {
             idiom = "~ipad"
         }
         
-        return "\(self.name)\(sizeClassSuffix)\(vector)\(subtype)\(scale)\(idiom).png"
+        return "\(self.name)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
+    }
+    
+    var ac_renditionName: String {
+        let rendition = self._rendition()
+        let realName = rendition.name()
+        return realName
+    }
+    
+    var ac_renditionSrcData: NSData {
+        let rendition = self._rendition()
+        let data = GetRenditionSrcData(rendition)
+        return data
+    }
+    
+    func ac_saveAtPath(filePath: String, error: NSErrorPointer) -> Bool {
+        if self._rendition().pdfDocument() != nil {
+            return self.ac_savePDFToDirectory(filePath, error: error)
+        } else if self._rendition().unslicedImage() != nil {
+            return self.ac_saveImageToDirectory(filePath, error: error)
+        } else {
+            if error != nil {
+                error.memory = NSError(domain: CoreUIErrorDomain, code: CoreUIErrorCodes.RenditionMissingData.rawValue, userInfo: nil)
+            }
+            return false
+        }
+    }
+    
+    func ac_saveImageToDirectory(filePath: String, error: NSErrorPointer) -> Bool {
+        let filePathURL = NSURL(fileURLWithPath: filePath)!
+        let cgImage = self._rendition().unslicedImage().takeUnretainedValue()
+        let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil)
+        CGImageDestinationAddImage(cgDestination, cgImage, nil)
+        
+        if !CGImageDestinationFinalize(cgDestination) {
+            return false
+        }
+        
+        return true
+    }
+    
+    func ac_savePDFToDirectory(filefilePathPath: String, error: NSErrorPointer) -> Bool {
+        return true
     }
 }
