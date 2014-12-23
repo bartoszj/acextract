@@ -857,6 +857,7 @@
 				967178EC1A497C0F00A2490F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		967178F01A497C0F00A2490F /* Build configuration list for PBXNativeTarget "iOSTestApp WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -865,6 +866,7 @@
 				967178EA1A497C0F00A2490F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		968FAAE11A48C1500083A943 /* Build configuration list for PBXNativeTarget "iOSTestApp" */ = {
 			isa = XCConfigurationList;

@@ -45,6 +45,7 @@ if !success {
 // Print help screen.
 if cli_help.value {
     cli.printUsage()
+    exit(EX_OK)
 }
 // List or extract assets catalog.
 else if let input = cli_input.value {
@@ -62,5 +63,6 @@ else if let input = cli_input.value {
     // Cannot create catalog reader.
     else {
         cli.printUsage()
+        exit(EX_USAGE)
     }
 }
