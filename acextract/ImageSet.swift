@@ -48,6 +48,10 @@ private struct ImageSetIdioms {
     var iPad3x = false
     var iPadVector = false
     
+    var AppleWatch = false
+    var AppleWatch38 = false
+    var AppleWatch42 = false
+    
     // MARK: - Initialization
     init(namedImages: [CUINamedImage]) {
         for namedImage in namedImages {
@@ -86,6 +90,14 @@ private struct ImageSetIdioms {
                 self.iPad3x = true
             case .iPadVector:
                 self.iPadVector = true
+                
+            case .AppleWatch:
+                self.AppleWatch = true
+            case .AppleWatch38:
+                self.AppleWatch38 = true
+            case .AppleWatch42:
+                self.AppleWatch42 = true
+                
             case .NotRecognized:
                 break
             }
@@ -159,6 +171,21 @@ private struct ImageSetIdioms {
                 images.append("vector")
             }
             devices.append("iPad: " + ",".join(images))
+        }
+        
+        // Apple Watch
+        if AppleWatch || AppleWatch38 || AppleWatch42 {
+            var images = [String]()
+            if AppleWatch {
+                images.append("-0")
+            }
+            if AppleWatch38 {
+                images.append("-38")
+            }
+            if AppleWatch42 {
+                images.append("-42")
+            }
+            devices.append("AppleWatch: " + ",".join(images))
         }
         
         return "; ".join(devices)

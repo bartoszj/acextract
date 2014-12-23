@@ -2,15 +2,6 @@
   "images" : [
     {
       "idiom" : "iphone",
-      "filename" : "facebook.pdf"
-    },
-    {
-      "idiom" : "iphone",
-      "subtype" : "retina4",
-      "filename" : "facebook-1.pdf"
-    },
-    {
-      "idiom" : "iphone",
       "scale" : "1x",
       "filename" : "green.png"
     },
@@ -21,7 +12,7 @@
     },
     {
       "idiom" : "iphone",
-      "filename" : "green@2x-1.png",
+      "filename" : "green@3x-1.png",
       "subtype" : "retina4",
       "scale" : "2x"
     },
@@ -32,17 +23,13 @@
     },
     {
       "idiom" : "ipad",
-      "filename" : "facebook-1-1.pdf"
-    },
-    {
-      "idiom" : "ipad",
       "scale" : "1x",
-      "filename" : "green-1.png"
+      "filename" : "blue.png"
     },
     {
       "idiom" : "ipad",
       "scale" : "2x",
-      "filename" : "green@2x-2.png"
+      "filename" : "blue@2x.png"
     },
     {
       "idiom" : "watch",
@@ -63,17 +50,13 @@
     },
     {
       "idiom" : "mac",
-      "filename" : "facebook-1-1-1.pdf"
-    },
-    {
-      "idiom" : "mac",
       "scale" : "1x",
-      "filename" : "green-2.png"
+      "filename" : "image.png"
     },
     {
       "idiom" : "mac",
       "scale" : "2x",
-      "filename" : "green@2x-3.png"
+      "filename" : "image@2x.png"
     }
   ],
   "info" : {

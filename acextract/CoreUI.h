@@ -33,14 +33,17 @@ typedef struct CUIImageInsets {
 } CUIImageInsets;
 
 typedef NS_ENUM(NSInteger, CUIDeviceIdiom) {
-    CUIDeviceIdiomUniversal = 0,
-    CUIDeviceIdiomiPhone    = 1,
-    CUIDeviceIdiomiPad      = 2,
+    CUIDeviceIdiomUniversal  = 0,
+    CUIDeviceIdiomiPhone     = 1,
+    CUIDeviceIdiomiPad       = 2,
+    CUIDeviceIdiomAppleWatch = 5,
 };
 
 typedef NS_ENUM(NSUInteger, CUISubtype) {
-    CUISubtypeUndetermined  = 0,
-    CUISubtypeiPhone4Inch   = 568,
+    CUISubtypeNormal       = 0,
+    CUISubtypeAppleWarch38 = 320,
+    CUISubtypeAppleWarch42 = 384,
+    CUISubtypeiPhone4Inch  = 568,
 };
 
 typedef NS_ENUM(NSInteger, CUIUserInterfaceSizeClass) {

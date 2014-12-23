@@ -54,6 +54,10 @@ enum NamedImageBasicType {
     case iPad3x
     case iPadVector
     
+    case AppleWatch
+    case AppleWatch38
+    case AppleWatch42
+    
     case NotRecognized
 }
 
@@ -71,19 +75,24 @@ extension CUIDeviceIdiom: Printable {
         case .IdiomiPhone:
             return "iPhone"
         case .IdiomiPad:
-            return "i{ad"
+            return "iPad"
+        case .IdiomAppleWatch:
+            return "AppleWatch"
         }
-        
     }
 }
 
 extension CUISubtype: Printable {
     public var description: String {
         switch self {
-        case .SubtypeUndetermined:
-            return "undetermined"
+        case .SubtypeNormal:
+            return "normal"
         case .SubtypeiPhone4Inch:
             return "-568h"
+        case .SubtypeAppleWarch38:
+            return "-38"
+        case .SubtypeAppleWarch42:
+            return "-42"
         }
     }
 }
@@ -145,7 +154,7 @@ extension CUINamedImage {
         switch self.idiom() {
         // Universal / Mac
         case .IdiomUniversal:
-            assert(self.subtype() == .SubtypeUndetermined, "Not recognized subtype.")
+            assert(self.subtype() == .SubtypeNormal, "Not recognized subtype.")
             if self.isVectorBased && self.size == CGSizeZero {
                 return .UniversalVector
             } else {
@@ -195,10 +204,10 @@ extension CUINamedImage {
         // iPad
         case .IdiomiPad:
             if self.isVectorBased && self.size == CGSizeZero {
-                assert(self.subtype() == .SubtypeUndetermined, "Not recognized subtype.")
+                assert(self.subtype() == .SubtypeNormal, "Not recognized subtype.")
                 return .iPadVector
             } else {
-                assert(self.subtype() == .SubtypeUndetermined, "Not recognized subtype.")
+                assert(self.subtype() == .SubtypeNormal, "Not recognized subtype.")
                 switch self.scale {
                 case 1.0:
                     return .iPad1x
@@ -209,6 +218,18 @@ extension CUINamedImage {
                 default:
                     assert(false, "Not recognized scale.")
                 }
+            }
+        // Aplpe Watch.
+        case .IdiomAppleWatch:
+            switch self.subtype() {
+            case .SubtypeNormal:
+                return .AppleWatch
+            case .SubtypeAppleWarch38:
+                return .AppleWatch38
+            case .SubtypeAppleWarch42:
+                return .AppleWatch42
+            default:
+                assert(false, "Not recognized subtype.")
             }
         default:
             assert(false, "Not recognized idiom.")
@@ -276,10 +297,14 @@ extension CUINamedImage {
         // Subtype (4 inch).
         var subtype = ""
         switch self.subtype() {
-        case .SubtypeUndetermined:
+        case .SubtypeNormal:
             subtype = ""
         case .SubtypeiPhone4Inch:
             subtype = "-568h"
+        case .SubtypeAppleWarch38:
+            subtype = "-38"
+        case .SubtypeAppleWarch42:
+            subtype = "-42"
         }
         
         // Idiom.
@@ -291,6 +316,8 @@ extension CUINamedImage {
             idiom = "~iphone"
         case .IdiomiPad:
             idiom = "~ipad"
+        case .IdiomAppleWatch:
+            idiom = "~watch"
         }
         
         return "\(self.name)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
