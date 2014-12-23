@@ -39,7 +39,11 @@ let (success, error) = cli.parse()
 if !success {
     println(error!)
     cli.printUsage()
-    exit(EX_USAGE)
+    if cli_help.value {
+        exit(EX_OK)
+    } else {
+        exit(EX_USAGE)
+    }
 }
 
 // Print help screen.
