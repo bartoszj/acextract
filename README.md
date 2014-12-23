@@ -3,26 +3,26 @@ acextract
 
 A tool to list and extract content from Assets.car files.
 
-Support Mac and iOS assets (Apple Watch in progress). Can extract PNG and PDF files.
+Support Mac, iOS and AppleWatch assets. Can extract PNG and PDF files.
 
 ## Usage:
     input is required
     Usage: ./acextract [options]
       -i, --input:  
           Path to input CAR file.
-      -o, --output: 
+      -o, --output:
           Path to output directory.
-      -l, --list:   
+      -l, --list:
           Print content of the CAR file without extracting.
-      -h, --help:   
+      -h, --help:
           Show help message.
       -v, --verbose:
           Print more detail. You can use -vv or -vvv for more info.
-          
+
 ## Installation:
 
     git clone https://github.com/bartoszj/acextract.git --recursive
-    
+
 or
 
     git clone https://github.com/bartoszj/acextract.git
@@ -34,7 +34,7 @@ or
 **Print content**
 
     acextract -i ~/Assets.car -l
-    
+
 **Extract content**
 
     mkdir -p ~/AssetsOutput
