@@ -33,7 +33,7 @@ private struct ImageSetIdioms {
     var universal2x = false
     var universal3x = false
     var universalVector = false
-    
+
     var iPhone1x = false
     var iPhone1x_4Inch = false
     var iPhone2x = false
@@ -42,16 +42,16 @@ private struct ImageSetIdioms {
     var iPhone3x_4Inch = false
     var iPhoneVector = false
     var iPhoneVector_4Inch = false
-    
+
     var iPad1x = false
     var iPad2x = false
     var iPad3x = false
     var iPadVector = false
-    
+
     var AppleWatch = false
     var AppleWatch38 = false
     var AppleWatch42 = false
-    
+
     // MARK: - Initialization
     init(namedImages: [CUINamedImage]) {
         for namedImage in namedImages {
@@ -64,7 +64,7 @@ private struct ImageSetIdioms {
                 self.universal3x = true
             case .UniversalVector:
                 self.universalVector = true
-                
+
             case .iPhone1x:
                 self.iPhone1x = true
             case .iPhone1x_4Inch:
@@ -81,7 +81,7 @@ private struct ImageSetIdioms {
                 self.iPhoneVector = true
             case .iPhoneVector_4Inch:
                 self.iPhoneVector_4Inch = true
-                
+
             case .iPad1x:
                 self.iPad1x = true
             case .iPad2x:
@@ -90,20 +90,20 @@ private struct ImageSetIdioms {
                 self.iPad3x = true
             case .iPadVector:
                 self.iPadVector = true
-                
+
             case .AppleWatch:
                 self.AppleWatch = true
             case .AppleWatch38:
                 self.AppleWatch38 = true
             case .AppleWatch42:
                 self.AppleWatch42 = true
-                
+
             case .NotRecognized:
                 break
             }
         }
     }
-    
+
     // MARK: - Methods
     func shortDescription() -> String {
         // Universal.
@@ -122,9 +122,9 @@ private struct ImageSetIdioms {
             if universalVector {
                 images.append("vector")
             }
-            devices.append("universal: " + ",".join(images))
+            devices.append("universal: " + images.joinWithSeparator(","))
         }
-        
+
         // iPhone.
         if iPhone1x || iPhone1x_4Inch || iPhone2x || iPhone2x_4Inch || iPhone3x || iPhone3x_4Inch || iPhoneVector || iPhoneVector_4Inch {
             var images = [String]()
@@ -152,9 +152,9 @@ private struct ImageSetIdioms {
             if iPhoneVector_4Inch {
                 images.append("vector-568h")
             }
-            devices.append("iPhone: " + ",".join(images))
+            devices.append("iPhone: " + images.joinWithSeparator(","))
         }
-        
+
         // iPad
         if iPad1x || iPad2x || iPad3x || iPadVector {
             var images = [String]()
@@ -170,9 +170,9 @@ private struct ImageSetIdioms {
             if iPadVector {
                 images.append("vector")
             }
-            devices.append("iPad: " + ",".join(images))
+            devices.append("iPad: " + images.joinWithSeparator(","))
         }
-        
+
         // Apple Watch
         if AppleWatch || AppleWatch38 || AppleWatch42 {
             var images = [String]()
@@ -185,10 +185,10 @@ private struct ImageSetIdioms {
             if AppleWatch42 {
                 images.append("-42")
             }
-            devices.append("AppleWatch: " + ",".join(images))
+            devices.append("AppleWatch: " + images.joinWithSeparator(","))
         }
-        
-        return "; ".join(devices)
+
+        return devices.joinWithSeparator("; ")
     }
 }
 
@@ -197,13 +197,13 @@ class ImageSet {
     let name: String
     let namedImages: [CUINamedImage]
     private lazy var imageIdioms: ImageSetIdioms = ImageSetIdioms(namedImages: self.namedImages)
-    
+
     // MARK: - Initialization
     init(name: String, namedImages: [CUINamedImage]) {
         self.name = name
         self.namedImages = namedImages
     }
-    
+
     // MARK: - Methods
     func verboseDescription(verbose: Int) -> String {
         switch verbose {
@@ -251,13 +251,13 @@ class ImageSet {
     }
 }
 
-extension ImageSet: Printable {
+extension ImageSet: CustomStringConvertible {
     var description: String {
         return self.verboseDescription(1)
     }
 }
 
-extension ImageSet: DebugPrintable {
+extension ImageSet: CustomDebugStringConvertible {
     var debugDescription: String {
         return self.description
     }

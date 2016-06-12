@@ -35,9 +35,10 @@ let cli_output = StringOption(shortFlag: "o", longFlag: "output", required: fals
 cli.addOptions([cli_input, cli_output, cli_list, cli_help, cli_verbose])
 
 // Parse.
-let (success, error) = cli.parse()
-if !success {
-    println(error!)
+do {
+    try cli.parse()
+} catch {
+    print(error)
     cli.printUsage()
     if cli_help.value {
         exit(EX_OK)
@@ -56,7 +57,7 @@ else if let input = cli_input.value {
     if let assetsCatalog = AssetsCatalog(filePath: input) {
         // Print content of the file.
         if cli_list.value {
-            print(assetsCatalog.listContent(cli_verbose.value))
+            print(assetsCatalog.listContent(cli_verbose.value), terminator: "")
         }
         // Extract to folder.
         if let output = cli_output.value {

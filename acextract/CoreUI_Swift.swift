@@ -27,11 +27,12 @@ import Foundation
 
 let CoreUIErrorDomain = "CoreUIErrorDomain"
 
-enum CoreUIErrorCodes: Int {
+enum CoreUIError: ErrorType {
     case RenditionMissingData
     case RenditionMissingImage
     case RenditionMissingPDF
     case CannotCreatePDFDocument
+    case CannotSaveImage
 }
 
 enum NamedImageBasicType {
@@ -39,7 +40,7 @@ enum NamedImageBasicType {
     case Universal2x
     case Universal3x
     case UniversalVector
-    
+
     case iPhone1x
     case iPhone1x_4Inch
     case iPhone2x
@@ -48,26 +49,26 @@ enum NamedImageBasicType {
     case iPhone3x_4Inch
     case iPhoneVector
     case iPhoneVector_4Inch
-    
+
     case iPad1x
     case iPad2x
     case iPad3x
     case iPadVector
-    
+
     case AppleWatch
     case AppleWatch38
     case AppleWatch42
-    
+
     case NotRecognized
 }
 
-extension CUIImageInsets: Printable {
+extension CUIImageInsets: CustomStringConvertible {
     public var description: String {
         return "(\(top),\(left),\(bottom),\(right))"
     }
 }
 
-extension CUIDeviceIdiom: Printable {
+extension CUIDeviceIdiom: CustomStringConvertible {
     public var description: String {
         switch self {
         case .IdiomUniversal:
@@ -82,7 +83,7 @@ extension CUIDeviceIdiom: Printable {
     }
 }
 
-extension CUISubtype: Printable {
+extension CUISubtype: CustomStringConvertible {
     public var description: String {
         switch self {
         case .SubtypeNormal:
@@ -97,7 +98,7 @@ extension CUISubtype: Printable {
     }
 }
 
-extension CUIUserInterfaceSizeClass: Printable {
+extension CUIUserInterfaceSizeClass: CustomStringConvertible {
     public var description: String {
         switch self {
         case .Any:
@@ -110,7 +111,7 @@ extension CUIUserInterfaceSizeClass: Printable {
     }
 }
 
-extension CUIRenderMode: Printable {
+extension CUIRenderMode: CustomStringConvertible {
     public var description: String {
         switch self {
         case .Original:
@@ -123,7 +124,7 @@ extension CUIRenderMode: Printable {
     }
 }
 
-extension CUIResizingMode: Printable {
+extension CUIResizingMode: CustomStringConvertible {
     public var description: String {
         switch self {
         case .Tiles:
@@ -134,7 +135,7 @@ extension CUIResizingMode: Printable {
     }
 }
 
-extension CUIImageType: Printable {
+extension CUIImageType: CustomStringConvertible {
     public var description: String {
         switch self {
         case .None:
@@ -152,7 +153,7 @@ extension CUIImageType: Printable {
 extension CUINamedImage {
     var ac_basicType: NamedImageBasicType {
         switch self.idiom() {
-        // Universal / Mac
+            // Universal / Mac
         case .IdiomUniversal:
             assert(self.subtype() == .SubtypeNormal, "Not recognized subtype.")
             if self.isVectorBased && self.size == CGSizeZero {
@@ -169,7 +170,7 @@ extension CUINamedImage {
                     assert(false, "Not recognized scale.")
                 }
             }
-        // iPhone
+            // iPhone
         case .IdiomiPhone:
             if self.isVectorBased && self.size == CGSizeZero {
                 if self.subtype() == .SubtypeiPhone4Inch {
@@ -201,7 +202,7 @@ extension CUINamedImage {
                     assert(false, "Not recognized scale.")
                 }
             }
-        // iPad
+            // iPad
         case .IdiomiPad:
             if self.isVectorBased && self.size == CGSizeZero {
                 assert(self.subtype() == .SubtypeNormal, "Not recognized subtype.")
@@ -219,7 +220,7 @@ extension CUINamedImage {
                     assert(false, "Not recognized scale.")
                 }
             }
-        // Aplpe Watch.
+            // Aplpe Watch.
         case .IdiomAppleWatch:
             switch self.subtype() {
             case .SubtypeNormal:
@@ -231,13 +232,11 @@ extension CUINamedImage {
             default:
                 assert(false, "Not recognized subtype.")
             }
-        default:
-            assert(false, "Not recognized idiom.")
         }
-        
+
         return .NotRecognized
     }
-    
+
     var ac_sizeClassString: String? {
         switch (self.sizeClassHorizontal(), self.sizeClassVertical()) {
         case (.Any, .Any):
@@ -260,21 +259,21 @@ extension CUINamedImage {
             return "++"
         }
     }
-    
+
     var ac_isPDF: Bool {
         if self.isVectorBased && self.size == CGSizeZero {
             return true
         }
         return false
     }
-    
+
     var ac_imageName: String {
         // Size class suffix.
         var sizeClassSuffix = ""
         if let sc = self.ac_sizeClassString {
             sizeClassSuffix = "_\(sc)"
         }
-        
+
         // Scale.
         var scale = ""
         switch self.scale {
@@ -287,13 +286,13 @@ extension CUINamedImage {
         default:
             assert(false, "Not recognized idiom.")
         }
-        
+
         // Vector.
         var fileExtension = "png"
         if self.ac_isPDF {
             fileExtension = "pdf"
         }
-        
+
         // Subtype (4 inch).
         var subtype = ""
         switch self.subtype() {
@@ -306,7 +305,7 @@ extension CUINamedImage {
         case .SubtypeAppleWarch42:
             subtype = "-42"
         }
-        
+
         // Idiom.
         var idiom = ""
         switch self.idiom() {
@@ -319,78 +318,72 @@ extension CUINamedImage {
         case .IdiomAppleWatch:
             idiom = "~watch"
         }
-        
+
         return "\(self.name)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
     }
-    
+
     var ac_renditionName: String {
         let rendition = self._rendition()
         let realName = rendition.name()
         return realName
     }
-    
+
     var ac_renditionSrcData: NSData {
         let rendition = self._rendition()
         let data = GetRenditionSrcData(rendition)
         return data
     }
-    
-    func ac_saveAtPath(filePath: String, error: NSErrorPointer) -> Bool {
+
+    func ac_saveAtPath(filePath: String) throws {
         if self._rendition().pdfDocument() != nil {
-            return self.ac_savePDFToDirectory(filePath, error: error)
+            try self.ac_savePDFToDirectory(filePath)
         } else if self._rendition().unslicedImage() != nil {
-            return self.ac_saveImageToDirectory(filePath, error: error)
+            try self.ac_saveImageToDirectory(filePath)
         } else {
-            if error != nil {
-                error.memory = NSError(domain: CoreUIErrorDomain, code: CoreUIErrorCodes.RenditionMissingData.rawValue, userInfo: nil)
-            }
-            return false
+            throw CoreUIError.RenditionMissingData
         }
     }
-    
-    func ac_saveImageToDirectory(filePath: String, error: NSErrorPointer) -> Bool {
-        let filePathURL = NSURL(fileURLWithPath: filePath)!
+
+    func ac_saveImageToDirectory(filePath: String) throws {
+        let filePathURL = NSURL(fileURLWithPath: filePath)
         let cgImage = self._rendition().unslicedImage().takeUnretainedValue()
-        let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil)
-        CGImageDestinationAddImage(cgDestination, cgImage, nil)
-        
-        if !CGImageDestinationFinalize(cgDestination) {
-            return false
+        guard let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil) else {
+            throw CoreUIError.CannotSaveImage
         }
-        
-        return true
+
+        CGImageDestinationAddImage(cgDestination, cgImage, nil)
+
+        if !CGImageDestinationFinalize(cgDestination) {
+            throw CoreUIError.CannotSaveImage
+        }
     }
-    
-    func ac_savePDFToDirectory(filePath: String, error: NSErrorPointer) -> Bool {
+
+    func ac_savePDFToDirectory(filePath: String) throws {
         // Based on:
         // http://stackoverflow.com/questions/3780745/saving-a-pdf-document-to-disk-using-quartz
-        
+
         let cgPDFDocument = self._rendition().pdfDocument().takeUnretainedValue()
-        //Create the pdf context
+        // Create the pdf context
         let cgPage = CGPDFDocumentGetPage(cgPDFDocument, 1);
-        var cgPageRect = CGPDFPageGetBoxRect(cgPage, kCGPDFMediaBox);
+        var cgPageRect = CGPDFPageGetBoxRect(cgPage, .MediaBox);
         let mutableData = NSMutableData()
-        
+
         let cgDataConsumer = CGDataConsumerCreateWithCFData(mutableData);
         let cgPDFContext = CGPDFContextCreate(cgDataConsumer, &cgPageRect, nil);
-        
-        if (CGPDFDocumentGetNumberOfPages(cgPDFDocument) > 0)
-        {
+
+        if (CGPDFDocumentGetNumberOfPages(cgPDFDocument) > 0) {
             CGPDFContextBeginPage(cgPDFContext, nil);
             CGContextDrawPDFPage(cgPDFContext, cgPage);
             CGPDFContextEndPage(cgPDFContext);
+        } else {
+            throw CoreUIError.CannotCreatePDFDocument
         }
-        else
-        {
-            if error != nil {
-                error.memory = NSError(domain: CoreUIErrorDomain, code: CoreUIErrorCodes.CannotCreatePDFDocument.rawValue, userInfo: nil)
-            }
-            return false
-        }
-        
+
         CGPDFContextClose(cgPDFContext)
-        
+
         let success = mutableData.writeToFile(filePath, atomically: true)
-        return success
+        if !success {
+            throw CoreUIError.CannotCreatePDFDocument
+        }
     }
 }
