@@ -54,19 +54,24 @@ if cli_help.value {
 }
 // List or extract assets catalog.
 else if let input = cli_input.value {
-    if let assetsCatalog = AssetsCatalog(filePath: input) {
+    do {
+        let assetsCatalog = try AssetsCatalog(filePath: input)
         // Print content of the file.
         if cli_list.value {
             print(assetsCatalog.listContent(cli_verbose.value), terminator: "")
         }
         // Extract to folder.
         if let output = cli_output.value {
-            var error: NSError?
-            assetsCatalog.extractContentToDirectoryAtPath(output, error: &error)
+            do {
+                try assetsCatalog.extractContentToDirectoryAtPath(output)
+            } catch {
+                cli.printUsage()
+                exit(EX_USAGE)
+            }
         }
     }
     // Cannot create catalog reader.
-    else {
+    catch {
         cli.printUsage()
         exit(EX_USAGE)
     }

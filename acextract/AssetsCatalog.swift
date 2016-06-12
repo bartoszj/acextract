@@ -25,46 +25,45 @@
 
 import Foundation
 
-let AssetsCatalogErrorDomain = "AssetsCatalogErrorDomain"
-
-enum AssetsCatalogErrorCodes: Int {
+enum AssetsCatalogError: ErrorType {
+    case FileDoesntExists
     case OutputDirectoryDoesntExists
     case OutputPathIsNotDirectory
 }
 
 class AssetsCatalog {
-    // MARK: - Properties
-    let filePath: String!
-    let fileURL: NSURL!
-    let catalog: CUICatalog!
-    
-    // MARK: - Initialization
-    init?(filePath: String) {
+    // MARK: Properties
+    let filePath: String
+    let fileURL: NSURL
+    let catalog: CUICatalog
+
+    // MARK: Initialization
+    init(filePath: String) throws {
         let fp = (filePath as NSString).stringByExpandingTildeInPath
         if NSFileManager.defaultManager().fileExistsAtPath(fp) {
             let url = NSURL(fileURLWithPath: fp)
             self.filePath = fp
             self.fileURL = url
-            
+
             do {
                 self.catalog = try CUICatalog(URL: self.fileURL)
             } catch {
-                self.catalog = nil
+                throw AssetsCatalogError.FileDoesntExists
             }
         } else {
-            return nil
+            throw AssetsCatalogError.FileDoesntExists
         }
     }
-    
-    // MARK: - Methods
+
+    // MARK: Methods
     func allImageNames() -> [String] {
         return self.catalog.allImageNames() as? [String] ?? []
     }
-    
+
     func imagesWithName(name: String) -> [CUINamedImage] {
         return self.catalog.imagesWithName(name) as? [CUINamedImage] ?? []
     }
-    
+
     func listContent(verbose: Int) -> String {
         var content = ""
         let names = self.allImageNames()
@@ -73,56 +72,44 @@ class AssetsCatalog {
             let imageSet = ImageSet(name: name, namedImages: namedImages)
             content += imageSet.verboseDescription(verbose) + "\n"
         }
-        
+
         return content
     }
-    
-    func extractContentToDirectoryAtPath(path: String, error: NSErrorPointer) {
-        
+
+    func extractContentToDirectoryAtPath(path: String) throws {
+
         let expandedPath = (path as NSString).stringByExpandingTildeInPath
-        
+
         // Check if directory exits.
         var isDirectory: ObjCBool = false
         if !NSFileManager.defaultManager().fileExistsAtPath(expandedPath, isDirectory: &isDirectory) {
-            if error != nil {
-                error.memory = NSError(domain: AssetsCatalogErrorDomain, code: AssetsCatalogErrorCodes.OutputDirectoryDoesntExists.rawValue, userInfo: nil)
-            }
-            return
+            throw AssetsCatalogError.OutputDirectoryDoesntExists
         }
-        
+
         // Check is it is directory.
         if !isDirectory {
-            if error != nil {
-                error.memory = NSError(domain: AssetsCatalogErrorDomain, code: AssetsCatalogErrorCodes.OutputPathIsNotDirectory.rawValue, userInfo: nil)
-            }
-            return
+            throw AssetsCatalogError.OutputPathIsNotDirectory
         }
-        
+
         // Get image names.
         let names = self.allImageNames()
         for name in names {
             let namedImages = self.imagesWithName(name)
-            
+
             for namedImage in namedImages {
                 let filePath = (expandedPath as NSString).stringByAppendingPathComponent(namedImage.ac_imageName)
-                var error: NSError?
                 print("Extracting: \(namedImage.ac_imageName)", terminator: "")
                 let success: Bool
                 do {
                     try namedImage.ac_saveAtPath(filePath)
                     success = true
-                } catch var error1 as NSError {
-                    error = error1
+                } catch {
                     success = false
                 }
                 if success {
                     print(" OK", terminator: "")
                 } else {
-                    if let e = error {
-                        print(" FAILED \(e.localizedDescription)", terminator: "")
-                    } else {
-                        print(" FAILED", terminator: "")
-                    }
+                    print(" FAILED", terminator: "")
                 }
             }
         }

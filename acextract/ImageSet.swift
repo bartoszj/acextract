@@ -28,7 +28,7 @@ import Foundation
 private let escapeSeq = "\u{1b}"
 
 private struct ImageSetIdioms {
-    // MARK: - Properties
+    // MARK: Properties
     var universal1x = false
     var universal2x = false
     var universal3x = false
@@ -52,7 +52,7 @@ private struct ImageSetIdioms {
     var AppleWatch38 = false
     var AppleWatch42 = false
 
-    // MARK: - Initialization
+    // MARK: Initialization
     init(namedImages: [CUINamedImage]) {
         for namedImage in namedImages {
             switch namedImage.ac_basicType {
@@ -104,7 +104,7 @@ private struct ImageSetIdioms {
         }
     }
 
-    // MARK: - Methods
+    // MARK: Methods
     func shortDescription() -> String {
         // Universal.
         var devices = [String]()
@@ -193,18 +193,18 @@ private struct ImageSetIdioms {
 }
 
 class ImageSet {
-    // MARK: - Properties
+    // MARK: Properties
     let name: String
     let namedImages: [CUINamedImage]
     private lazy var imageIdioms: ImageSetIdioms = ImageSetIdioms(namedImages: self.namedImages)
 
-    // MARK: - Initialization
+    // MARK: Initialization
     init(name: String, namedImages: [CUINamedImage]) {
         self.name = name
         self.namedImages = namedImages
     }
 
-    // MARK: - Methods
+    // MARK: Methods
     func verboseDescription(verbose: Int) -> String {
         switch verbose {
         case 0:
