@@ -13,7 +13,8 @@ endef
 ASSETS := "Assets.car"
 DATA := "acextractTests/data"
 
-all: 
+all:
+	
 assets: iphone ipad ios mac tv watch
 
 iphone:

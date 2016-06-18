@@ -25,8 +25,6 @@
 
 import Foundation
 
-let CoreUIErrorDomain = "CoreUIErrorDomain"
-
 enum CoreUIError: ErrorType {
     case RenditionMissingData
     case RenditionMissingImage
@@ -86,13 +84,13 @@ extension CUIDeviceIdiom: CustomStringConvertible {
 extension CUISubtype: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .SubtypeNormal:
+        case .Normal:
             return "normal"
-        case .SubtypeiPhone4Inch:
+        case .IPhone4Inch:
             return "-568h"
-        case .SubtypeAppleWarch38:
+        case .AppleWatch38:
             return "-38"
-        case .SubtypeAppleWarch42:
+        case .AppleWatch42:
             return "-42"
         }
     }
@@ -155,8 +153,8 @@ extension CUINamedImage {
         switch self.idiom() {
             // Universal / Mac
         case .IdiomUniversal:
-            assert(self.subtype() == .SubtypeNormal, "Not recognized subtype.")
-            if self.isVectorBased && self.size == CGSizeZero {
+            assert(self.subtype() == .Normal, "Not recognized subtype.")
+            if self.isVectorBased && self.size == CGSize.zero {
                 return .UniversalVector
             } else {
                 switch self.scale {
@@ -172,8 +170,8 @@ extension CUINamedImage {
             }
             // iPhone
         case .IdiomiPhone:
-            if self.isVectorBased && self.size == CGSizeZero {
-                if self.subtype() == .SubtypeiPhone4Inch {
+            if self.isVectorBased && self.size == CGSize.zero {
+                if self.subtype() == .IPhone4Inch {
                     return .iPhoneVector_4Inch
                 } else {
                     return .iPhoneVector
@@ -181,19 +179,19 @@ extension CUINamedImage {
             } else {
                 switch self.scale {
                 case 1.0:
-                    if self.subtype() == .SubtypeiPhone4Inch {
+                    if self.subtype() == .IPhone4Inch {
                         return .iPhone1x_4Inch
                     } else {
                         return .iPhone1x
                     }
                 case 2.0:
-                    if self.subtype() == .SubtypeiPhone4Inch {
+                    if self.subtype() == .IPhone4Inch {
                         return .iPhone2x_4Inch
                     } else {
                         return .iPhone2x
                     }
                 case 3.0:
-                    if self.subtype() == .SubtypeiPhone4Inch {
+                    if self.subtype() == .IPhone4Inch {
                         return .iPhone3x_4Inch
                     } else {
                         return .iPhone3x
@@ -204,11 +202,11 @@ extension CUINamedImage {
             }
             // iPad
         case .IdiomiPad:
-            if self.isVectorBased && self.size == CGSizeZero {
-                assert(self.subtype() == .SubtypeNormal, "Not recognized subtype.")
+            if self.isVectorBased && self.size == CGSize.zero {
+                assert(self.subtype() == .Normal, "Not recognized subtype.")
                 return .iPadVector
             } else {
-                assert(self.subtype() == .SubtypeNormal, "Not recognized subtype.")
+                assert(self.subtype() == .Normal, "Not recognized subtype.")
                 switch self.scale {
                 case 1.0:
                     return .iPad1x
@@ -223,11 +221,11 @@ extension CUINamedImage {
             // Aplpe Watch.
         case .IdiomAppleWatch:
             switch self.subtype() {
-            case .SubtypeNormal:
+            case .Normal:
                 return .AppleWatch
-            case .SubtypeAppleWarch38:
+            case .AppleWatch38:
                 return .AppleWatch38
-            case .SubtypeAppleWarch42:
+            case .AppleWatch42:
                 return .AppleWatch42
             default:
                 assert(false, "Not recognized subtype.")
@@ -261,7 +259,7 @@ extension CUINamedImage {
     }
 
     var ac_isPDF: Bool {
-        if self.isVectorBased && self.size == CGSizeZero {
+        if self.isVectorBased && self.size == CGSize.zero {
             return true
         }
         return false
@@ -296,13 +294,13 @@ extension CUINamedImage {
         // Subtype (4 inch).
         var subtype = ""
         switch self.subtype() {
-        case .SubtypeNormal:
+        case .Normal:
             subtype = ""
-        case .SubtypeiPhone4Inch:
+        case .IPhone4Inch:
             subtype = "-568h"
-        case .SubtypeAppleWarch38:
+        case .AppleWatch38:
             subtype = "-38"
-        case .SubtypeAppleWarch42:
+        case .AppleWatch42:
             subtype = "-42"
         }
 
@@ -344,7 +342,7 @@ extension CUINamedImage {
         }
     }
 
-    func ac_saveImageToDirectory(filePath: String) throws {
+    private func ac_saveImageToDirectory(filePath: String) throws {
         let filePathURL = NSURL(fileURLWithPath: filePath)
         let cgImage = self._rendition().unslicedImage().takeUnretainedValue()
         guard let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil) else {
@@ -358,23 +356,23 @@ extension CUINamedImage {
         }
     }
 
-    func ac_savePDFToDirectory(filePath: String) throws {
+    private func ac_savePDFToDirectory(filePath: String) throws {
         // Based on:
         // http://stackoverflow.com/questions/3780745/saving-a-pdf-document-to-disk-using-quartz
 
         let cgPDFDocument = self._rendition().pdfDocument().takeUnretainedValue()
         // Create the pdf context
-        let cgPage = CGPDFDocumentGetPage(cgPDFDocument, 1);
-        var cgPageRect = CGPDFPageGetBoxRect(cgPage, .MediaBox);
+        let cgPage = CGPDFDocumentGetPage(cgPDFDocument, 1)
+        var cgPageRect = CGPDFPageGetBoxRect(cgPage, .MediaBox)
         let mutableData = NSMutableData()
 
-        let cgDataConsumer = CGDataConsumerCreateWithCFData(mutableData);
-        let cgPDFContext = CGPDFContextCreate(cgDataConsumer, &cgPageRect, nil);
+        let cgDataConsumer = CGDataConsumerCreateWithCFData(mutableData)
+        let cgPDFContext = CGPDFContextCreate(cgDataConsumer, &cgPageRect, nil)
 
-        if (CGPDFDocumentGetNumberOfPages(cgPDFDocument) > 0) {
-            CGPDFContextBeginPage(cgPDFContext, nil);
-            CGContextDrawPDFPage(cgPDFContext, cgPage);
-            CGPDFContextEndPage(cgPDFContext);
+        if CGPDFDocumentGetNumberOfPages(cgPDFDocument) > 0 {
+            CGPDFContextBeginPage(cgPDFContext, nil)
+            CGContextDrawPDFPage(cgPDFContext, cgPage)
+            CGPDFContextEndPage(cgPDFContext)
         } else {
             throw CoreUIError.CannotCreatePDFDocument
         }

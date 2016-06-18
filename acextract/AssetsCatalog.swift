@@ -38,8 +38,8 @@ class AssetsCatalog {
     let catalog: CUICatalog
 
     // MARK: Initialization
-    init(filePath: String) throws {
-        let fp = (filePath as NSString).stringByExpandingTildeInPath
+    init(path: String) throws {
+        let fp = (path as NSString).stringByExpandingTildeInPath
         if NSFileManager.defaultManager().fileExistsAtPath(fp) {
             let url = NSURL(fileURLWithPath: fp)
             self.filePath = fp

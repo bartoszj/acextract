@@ -35,22 +35,22 @@ private struct ImageSetIdioms {
     var universalVector = false
 
     var iPhone1x = false
-    var iPhone1x_4Inch = false
+    var iPhone1x4Inch = false
     var iPhone2x = false
-    var iPhone2x_4Inch = false
+    var iPhone2x4Inch = false
     var iPhone3x = false
-    var iPhone3x_4Inch = false
+    var iPhone3x4Inch = false
     var iPhoneVector = false
-    var iPhoneVector_4Inch = false
+    var iPhoneVector4Inch = false
 
     var iPad1x = false
     var iPad2x = false
     var iPad3x = false
     var iPadVector = false
 
-    var AppleWatch = false
-    var AppleWatch38 = false
-    var AppleWatch42 = false
+    var appleWatch = false
+    var appleWatch38 = false
+    var appleWatch42 = false
 
     // MARK: Initialization
     init(namedImages: [CUINamedImage]) {
@@ -68,19 +68,19 @@ private struct ImageSetIdioms {
             case .iPhone1x:
                 self.iPhone1x = true
             case .iPhone1x_4Inch:
-                self.iPhone1x_4Inch = true
+                self.iPhone1x4Inch = true
             case .iPhone2x:
                 self.iPhone2x = true
             case .iPhone2x_4Inch:
-                self.iPhone2x_4Inch = true
+                self.iPhone2x4Inch = true
             case .iPhone3x:
                 self.iPhone3x = true
             case .iPhone3x_4Inch:
-                self.iPhone3x_4Inch = true
+                self.iPhone3x4Inch = true
             case .iPhoneVector:
                 self.iPhoneVector = true
             case .iPhoneVector_4Inch:
-                self.iPhoneVector_4Inch = true
+                self.iPhoneVector4Inch = true
 
             case .iPad1x:
                 self.iPad1x = true
@@ -92,11 +92,11 @@ private struct ImageSetIdioms {
                 self.iPadVector = true
 
             case .AppleWatch:
-                self.AppleWatch = true
+                self.appleWatch = true
             case .AppleWatch38:
-                self.AppleWatch38 = true
+                self.appleWatch38 = true
             case .AppleWatch42:
-                self.AppleWatch42 = true
+                self.appleWatch42 = true
 
             case .NotRecognized:
                 break
@@ -126,30 +126,30 @@ private struct ImageSetIdioms {
         }
 
         // iPhone.
-        if iPhone1x || iPhone1x_4Inch || iPhone2x || iPhone2x_4Inch || iPhone3x || iPhone3x_4Inch || iPhoneVector || iPhoneVector_4Inch {
+        if iPhone1x || iPhone1x4Inch || iPhone2x || iPhone2x4Inch || iPhone3x || iPhone3x4Inch || iPhoneVector || iPhoneVector4Inch {
             var images = [String]()
             if iPhone1x {
                 images.append("@1x")
             }
-            if iPhone1x_4Inch {
+            if iPhone1x4Inch {
                 images.append("-568@1x")
             }
             if iPhone2x {
                 images.append("@2x")
             }
-            if iPhone2x_4Inch {
+            if iPhone2x4Inch {
                 images.append("-568@2x")
             }
             if iPhone3x {
                 images.append("@3x")
             }
-            if iPhone3x_4Inch {
+            if iPhone3x4Inch {
                 images.append("-568h@3x")
             }
             if iPhoneVector {
                 images.append("vector")
             }
-            if iPhoneVector_4Inch {
+            if iPhoneVector4Inch {
                 images.append("vector-568h")
             }
             devices.append("iPhone: " + images.joinWithSeparator(","))
@@ -174,15 +174,15 @@ private struct ImageSetIdioms {
         }
 
         // Apple Watch
-        if AppleWatch || AppleWatch38 || AppleWatch42 {
+        if appleWatch || appleWatch38 || appleWatch42 {
             var images = [String]()
-            if AppleWatch {
+            if appleWatch {
                 images.append("-0")
             }
-            if AppleWatch38 {
+            if appleWatch38 {
                 images.append("-38")
             }
-            if AppleWatch42 {
+            if appleWatch42 {
                 images.append("-42")
             }
             devices.append("AppleWatch: " + images.joinWithSeparator(","))

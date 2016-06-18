@@ -1,6 +1,6 @@
 //
-//  acextractTests.swift
-//  acextractTests
+//  AcextractTests.swift
+//  AcextractTests
 //
 //  Created by Bartosz Janda on 12.06.2016.
 //  Copyright © 2016 Bartosz Janda. All rights reserved.
@@ -13,7 +13,7 @@ enum Assets: String {
     case iPhone = "data/assets_iphone"
     case iPad = "data/assets_ipad"
     case macOS = "data/assets_mac"
-    case tvOS = "data/assets_mtv"
+    case tvOS = "data/assets_tv"
     case watchOS = "data/assets_watch"
 
     var path: String {
@@ -31,21 +31,12 @@ enum Assets: String {
     }
 }
 
-class acextractTests: XCTestCase {
-
-    // MARK: Setup
-    override func setUp() {
-        super.setUp()
-    }
-
-    override func tearDown() {
-        super.tearDown()
-    }
+class AcextractTests: XCTestCase {
 
     // MARK: Tests
     func testCreateAssetsCatalog_Success() {
         do {
-            _ = try AssetsCatalog(filePath: Assets.iOS.path)
+            _ = try AssetsCatalog(path: Assets.iOS.path)
         } catch {
             XCTFail("Cannot create AssetsCatalog object")
         }
@@ -53,7 +44,7 @@ class acextractTests: XCTestCase {
 
     func testCreateAssetsCatalog_Failure() {
         do {
-            _ = try AssetsCatalog(filePath: "Fake path")
+            _ = try AssetsCatalog(path: "Fake path")
             XCTFail("AssetsCatalog should not be created")
         } catch AssetsCatalogError.FileDoesntExists {
 

@@ -41,9 +41,9 @@ typedef NS_ENUM(NSInteger, CUIDeviceIdiom) {
 
 typedef NS_ENUM(NSUInteger, CUISubtype) {
     CUISubtypeNormal       = 0,
-    CUISubtypeAppleWarch38 = 320,
-    CUISubtypeAppleWarch42 = 384,
-    CUISubtypeiPhone4Inch  = 568,
+    CUISubtypeAppleWatch38 = 320,
+    CUISubtypeAppleWatch42 = 384,
+    CUISubtypeIPhone4Inch  = 568,
 };
 
 typedef NS_ENUM(NSInteger, CUIUserInterfaceSizeClass) {

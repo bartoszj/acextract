@@ -39,12 +39,13 @@
 		96A84A5D1D0DF0D500B79D25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96A84A5B1D0DF0D500B79D25 /* Main.storyboard */; };
 		96A84A5F1D0DF0D500B79D25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96A84A5E1D0DF0D500B79D25 /* Assets.xcassets */; };
 		96A84A661D0DF0EF00B79D25 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9625C14A1A48C24A00EE5162 /* Images.xcassets */; };
-		96E9F6AA1D0DD320001588FF /* acextractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E9F6A91D0DD320001588FF /* acextractTests.swift */; };
+		96E9F6AA1D0DD320001588FF /* AcextractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E9F6A91D0DD320001588FF /* AcextractTests.swift */; };
 		96E9F6B11D0DD450001588FF /* AssetsCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A504E1A3DF14C002C814F /* AssetsCatalog.swift */; };
 		96E9F6B21D0DD454001588FF /* CoreUI_Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */; };
 		96E9F6B31D0DD458001588FF /* CoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 966E3CBE1A4769B300F45574 /* CoreUI.m */; };
 		96E9F6B41D0DD45C001588FF /* ImageSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF961A3F828B00F0B156 /* ImageSet.swift */; };
 		96E9F6B51D0DD4A3001588FF /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966A50511A3E13B2002C814F /* CoreUI.framework */; };
+		96F446661D15DB7000F30964 /* DeviceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F446651D15DB6F00F30964 /* DeviceTests.swift */; };
 		96F49FCD1A40C2E700F54148 /* CoreUI_Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */; };
 /* End PBXBuildFile section */
 
@@ -155,9 +156,10 @@
 		96A84A5E1D0DF0D500B79D25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96A84A601D0DF0D500B79D25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96E9F6A71D0DD31F001588FF /* acextractTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = acextractTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		96E9F6A91D0DD320001588FF /* acextractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = acextractTests.swift; sourceTree = "<group>"; };
+		96E9F6A91D0DD320001588FF /* AcextractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcextractTests.swift; sourceTree = "<group>"; };
 		96E9F6AB1D0DD320001588FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96E9F6B61D0DD4ED001588FF /* acextractTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "acextractTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		96F446651D15DB6F00F30964 /* DeviceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTests.swift; sourceTree = "<group>"; };
 		96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreUI_Swift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -357,9 +359,10 @@
 		96E9F6A81D0DD31F001588FF /* acextractTests */ = {
 			isa = PBXGroup;
 			children = (
-				96856B891D0DE62F0053B1B8 /* data */,
 				96E9F6B61D0DD4ED001588FF /* acextractTests-Bridging-Header.h */,
-				96E9F6A91D0DD320001588FF /* acextractTests.swift */,
+				96E9F6A91D0DD320001588FF /* AcextractTests.swift */,
+				96856B891D0DE62F0053B1B8 /* data */,
+				96F446651D15DB6F00F30964 /* DeviceTests.swift */,
 				96E9F6AB1D0DD320001588FF /* Info.plist */,
 			);
 			path = acextractTests;
@@ -409,6 +412,7 @@
 				966A502E1A3DEBE0002C814F /* Sources */,
 				966A502F1A3DEBE0002C814F /* Frameworks */,
 				966A50301A3DEBE0002C814F /* CopyFiles */,
+				96F446691D15DBF500F30964 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -629,6 +633,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		96F446691D15DBF500F30964 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		961DEFE61D0DDD2F002AD0CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -686,10 +707,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				96E9F6B11D0DD450001588FF /* AssetsCatalog.swift in Sources */,
-				96E9F6AA1D0DD320001588FF /* acextractTests.swift in Sources */,
+				96E9F6AA1D0DD320001588FF /* AcextractTests.swift in Sources */,
 				96E9F6B31D0DD458001588FF /* CoreUI.m in Sources */,
 				96E9F6B21D0DD454001588FF /* CoreUI_Swift.swift in Sources */,
 				96E9F6B41D0DD45C001588FF /* ImageSet.swift in Sources */,
+				96F446661D15DB7000F30964 /* DeviceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1128,6 +1150,7 @@
 				96A84A621D0DF0D500B79D25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		96E9F6B01D0DD320001588FF /* Build configuration list for PBXNativeTarget "acextractTests" */ = {
 			isa = XCConfigurationList;
