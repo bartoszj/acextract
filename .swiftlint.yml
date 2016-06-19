@@ -22,13 +22,6 @@ variable_name:
   excluded: # excluded via string array
     - id
     - URL
-    # To remove:
-    - ac_sizeClassString
-    - ac_isPDF
-    - ac_imageName
-    - ac_renditionName
-    - ac_renditionSrcData
-    - ac_basicType
 type_body_length:
   warning: 300
   error: 500

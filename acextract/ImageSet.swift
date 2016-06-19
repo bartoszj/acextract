@@ -25,178 +25,175 @@
 
 import Foundation
 
-private let escapeSeq = "\u{1b}"
+//private struct ImageSetIdioms {
+//    // MARK: Properties
+//    var universal1x = false
+//    var universal2x = false
+//    var universal3x = false
+//    var universalVector = false
+//
+//    var iPhone1x = false
+//    var iPhone1x4Inch = false
+//    var iPhone2x = false
+//    var iPhone2x4Inch = false
+//    var iPhone3x = false
+//    var iPhone3x4Inch = false
+//    var iPhoneVector = false
+//    var iPhoneVector4Inch = false
+//
+//    var iPad1x = false
+//    var iPad2x = false
+//    var iPad3x = false
+//    var iPadVector = false
+//
+//    var appleWatch = false
+//    var appleWatch38 = false
+//    var appleWatch42 = false
+//
+//    // MARK: Initialization
+//    init(namedImages: [CUINamedImage]) {
+//        for namedImage in namedImages {
+//            switch namedImage.acBasicType {
+//            case .Universal1x:
+//                self.universal1x = true
+//            case .Universal2x:
+//                self.universal2x = true
+//            case .Universal3x:
+//                self.universal3x = true
+//            case .UniversalVector:
+//                self.universalVector = true
+//
+//            case .iPhone1x:
+//                self.iPhone1x = true
+//            case .iPhone1x_4Inch:
+//                self.iPhone1x4Inch = true
+//            case .iPhone2x:
+//                self.iPhone2x = true
+//            case .iPhone2x_4Inch:
+//                self.iPhone2x4Inch = true
+//            case .iPhone3x:
+//                self.iPhone3x = true
+//            case .iPhone3x_4Inch:
+//                self.iPhone3x4Inch = true
+//            case .iPhoneVector:
+//                self.iPhoneVector = true
+//            case .iPhoneVector_4Inch:
+//                self.iPhoneVector4Inch = true
+//
+//            case .iPad1x:
+//                self.iPad1x = true
+//            case .iPad2x:
+//                self.iPad2x = true
+//            case .iPad3x:
+//                self.iPad3x = true
+//            case .iPadVector:
+//                self.iPadVector = true
+//
+//            case .AppleWatch:
+//                self.appleWatch = true
+//            case .AppleWatch38:
+//                self.appleWatch38 = true
+//            case .AppleWatch42:
+//                self.appleWatch42 = true
+//
+//            case .NotRecognized:
+//                break
+//            }
+//        }
+//    }
+//
+//    // MARK: Methods
+//    func shortDescription() -> String {
+//        // Universal.
+//        var devices = [String]()
+//        if universal1x || universal2x || universal3x || universalVector {
+//            var images = [String]()
+//            if universal1x {
+//                images.append("@1x")
+//            }
+//            if universal2x {
+//                images.append("@2x")
+//            }
+//            if universal3x {
+//                images.append("@3x")
+//            }
+//            if universalVector {
+//                images.append("vector")
+//            }
+//            devices.append("universal: " + images.joinWithSeparator(","))
+//        }
+//
+//        // iPhone.
+//        if iPhone1x || iPhone1x4Inch || iPhone2x || iPhone2x4Inch || iPhone3x || iPhone3x4Inch || iPhoneVector || iPhoneVector4Inch {
+//            var images = [String]()
+//            if iPhone1x {
+//                images.append("@1x")
+//            }
+//            if iPhone1x4Inch {
+//                images.append("-568@1x")
+//            }
+//            if iPhone2x {
+//                images.append("@2x")
+//            }
+//            if iPhone2x4Inch {
+//                images.append("-568@2x")
+//            }
+//            if iPhone3x {
+//                images.append("@3x")
+//            }
+//            if iPhone3x4Inch {
+//                images.append("-568h@3x")
+//            }
+//            if iPhoneVector {
+//                images.append("vector")
+//            }
+//            if iPhoneVector4Inch {
+//                images.append("vector-568h")
+//            }
+//            devices.append("iPhone: " + images.joinWithSeparator(","))
+//        }
+//
+//        // iPad
+//        if iPad1x || iPad2x || iPad3x || iPadVector {
+//            var images = [String]()
+//            if iPad1x {
+//                images.append("@1x")
+//            }
+//            if iPad2x {
+//                images.append("@2x")
+//            }
+//            if iPad3x {
+//                images.append("@3x")
+//            }
+//            if iPadVector {
+//                images.append("vector")
+//            }
+//            devices.append("iPad: " + images.joinWithSeparator(","))
+//        }
+//
+//        // Apple Watch
+//        if appleWatch || appleWatch38 || appleWatch42 {
+//            var images = [String]()
+//            if appleWatch {
+//                images.append("-0")
+//            }
+//            if appleWatch38 {
+//                images.append("-38")
+//            }
+//            if appleWatch42 {
+//                images.append("-42")
+//            }
+//            devices.append("AppleWatch: " + images.joinWithSeparator(","))
+//        }
+//
+//        return devices.joinWithSeparator("; ")
+//    }
+//}
 
-private struct ImageSetIdioms {
-    // MARK: Properties
-    var universal1x = false
-    var universal2x = false
-    var universal3x = false
-    var universalVector = false
-
-    var iPhone1x = false
-    var iPhone1x4Inch = false
-    var iPhone2x = false
-    var iPhone2x4Inch = false
-    var iPhone3x = false
-    var iPhone3x4Inch = false
-    var iPhoneVector = false
-    var iPhoneVector4Inch = false
-
-    var iPad1x = false
-    var iPad2x = false
-    var iPad3x = false
-    var iPadVector = false
-
-    var appleWatch = false
-    var appleWatch38 = false
-    var appleWatch42 = false
-
-    // MARK: Initialization
-    init(namedImages: [CUINamedImage]) {
-        for namedImage in namedImages {
-            switch namedImage.ac_basicType {
-            case .Universal1x:
-                self.universal1x = true
-            case .Universal2x:
-                self.universal2x = true
-            case .Universal3x:
-                self.universal3x = true
-            case .UniversalVector:
-                self.universalVector = true
-
-            case .iPhone1x:
-                self.iPhone1x = true
-            case .iPhone1x_4Inch:
-                self.iPhone1x4Inch = true
-            case .iPhone2x:
-                self.iPhone2x = true
-            case .iPhone2x_4Inch:
-                self.iPhone2x4Inch = true
-            case .iPhone3x:
-                self.iPhone3x = true
-            case .iPhone3x_4Inch:
-                self.iPhone3x4Inch = true
-            case .iPhoneVector:
-                self.iPhoneVector = true
-            case .iPhoneVector_4Inch:
-                self.iPhoneVector4Inch = true
-
-            case .iPad1x:
-                self.iPad1x = true
-            case .iPad2x:
-                self.iPad2x = true
-            case .iPad3x:
-                self.iPad3x = true
-            case .iPadVector:
-                self.iPadVector = true
-
-            case .AppleWatch:
-                self.appleWatch = true
-            case .AppleWatch38:
-                self.appleWatch38 = true
-            case .AppleWatch42:
-                self.appleWatch42 = true
-
-            case .NotRecognized:
-                break
-            }
-        }
-    }
-
-    // MARK: Methods
-    func shortDescription() -> String {
-        // Universal.
-        var devices = [String]()
-        if universal1x || universal2x || universal3x || universalVector {
-            var images = [String]()
-            if universal1x {
-                images.append("@1x")
-            }
-            if universal2x {
-                images.append("@2x")
-            }
-            if universal3x {
-                images.append("@3x")
-            }
-            if universalVector {
-                images.append("vector")
-            }
-            devices.append("universal: " + images.joinWithSeparator(","))
-        }
-
-        // iPhone.
-        if iPhone1x || iPhone1x4Inch || iPhone2x || iPhone2x4Inch || iPhone3x || iPhone3x4Inch || iPhoneVector || iPhoneVector4Inch {
-            var images = [String]()
-            if iPhone1x {
-                images.append("@1x")
-            }
-            if iPhone1x4Inch {
-                images.append("-568@1x")
-            }
-            if iPhone2x {
-                images.append("@2x")
-            }
-            if iPhone2x4Inch {
-                images.append("-568@2x")
-            }
-            if iPhone3x {
-                images.append("@3x")
-            }
-            if iPhone3x4Inch {
-                images.append("-568h@3x")
-            }
-            if iPhoneVector {
-                images.append("vector")
-            }
-            if iPhoneVector4Inch {
-                images.append("vector-568h")
-            }
-            devices.append("iPhone: " + images.joinWithSeparator(","))
-        }
-
-        // iPad
-        if iPad1x || iPad2x || iPad3x || iPadVector {
-            var images = [String]()
-            if iPad1x {
-                images.append("@1x")
-            }
-            if iPad2x {
-                images.append("@2x")
-            }
-            if iPad3x {
-                images.append("@3x")
-            }
-            if iPadVector {
-                images.append("vector")
-            }
-            devices.append("iPad: " + images.joinWithSeparator(","))
-        }
-
-        // Apple Watch
-        if appleWatch || appleWatch38 || appleWatch42 {
-            var images = [String]()
-            if appleWatch {
-                images.append("-0")
-            }
-            if appleWatch38 {
-                images.append("-38")
-            }
-            if appleWatch42 {
-                images.append("-42")
-            }
-            devices.append("AppleWatch: " + images.joinWithSeparator(","))
-        }
-
-        return devices.joinWithSeparator("; ")
-    }
-}
-
-class ImageSet {
+struct ImageSet {
     // MARK: Properties
     let name: String
     let namedImages: [CUINamedImage]
-    private lazy var imageIdioms: ImageSetIdioms = ImageSetIdioms(namedImages: self.namedImages)
 
     // MARK: Initialization
     init(name: String, namedImages: [CUINamedImage]) {
@@ -204,61 +201,13 @@ class ImageSet {
         self.namedImages = namedImages
     }
 
-    // MARK: Methods
-    func verboseDescription(verbose: Int) -> String {
-        switch verbose {
-        case 0:
-            return self.name
-        case 1:
-            return "\(escapeSeq)[1m\(self.name)\(escapeSeq)[0m: \(self.imageIdioms.shortDescription())"
-        case 2:
-            var desc = "\(escapeSeq)[1m\(self.name)\(escapeSeq)[0m:\n"
-            for namedImage in self.namedImages {
-                desc += "  \(namedImage.ac_imageName)\n"
-            }
-            return desc
-        default:
-            var desc = "\(escapeSeq)[1m\(self.name)\(escapeSeq)[0m:\n"
-            for namedImage in self.namedImages {
-                desc += "  \(namedImage.ac_imageName):\n"
-                desc += "    imageType: \(namedImage.imageType)\n"
-                desc += "    idiom: \(namedImage.idiom())\n"
-                desc += "    subtype: \(namedImage.subtype())\n"
-                desc += "    scale: \(namedImage.scale)\n"
-                desc += "    size vlass horizontal: \(namedImage.sizeClassHorizontal())\n"
-                desc += "    size vlass vertical: \(namedImage.sizeClassVertical())\n"
-                desc += "    opacity: \(namedImage.opacity)\n"
-                desc += "    size: \(namedImage.size)\n"
-                desc += "    blend mode: \(namedImage.blendMode)\n"
-                desc += "    resizing mode: \(namedImage.resizingMode)\n"
-                desc += "    is template: \(namedImage.isTemplate)\n"
-                desc += "    vector based: \(namedImage.isVectorBased)\n"
-                desc += "    template rendering mode: \(namedImage.templateRenderingMode)\n"
-                desc += "    edge insets: \(namedImage.edgeInsets)\n"
-                desc += "    alignment edge insets: \(namedImage.alignmentEdgeInsets)\n"
-                desc += "    alignment rect: \(namedImage.alignmentRect())\n"
-                desc += "    exifOrientation: \(namedImage.exifOrientation)\n"
-                desc += "    rendition name: \(namedImage._rendition().name())\n"
-                desc += "    rendition data: \(namedImage._rendition().data())\n"
-                desc += "    rendition pdf: \(namedImage._rendition().pdfDocument())\n"
-                desc += "    rendition image: \(namedImage._rendition().unslicedImage())\n"
-                desc += "    rendition UTI type: \(namedImage._rendition().utiType())\n"
-                desc += "    rendition type: \(namedImage._rendition().type())\n"
-                desc += "    rendition subtype: \(namedImage._rendition().subtype())\n"
-            }
-            return desc
-        }
+    var shortDesription: String {
+        return ""
     }
 }
 
 extension ImageSet: CustomStringConvertible {
     var description: String {
-        return self.verboseDescription(1)
-    }
-}
-
-extension ImageSet: CustomDebugStringConvertible {
-    var debugDescription: String {
-        return self.description
+        return self.shortDesription
     }
 }

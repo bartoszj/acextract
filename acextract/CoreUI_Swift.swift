@@ -25,6 +25,10 @@
 
 import Foundation
 
+protocol NameStringConvertible {
+    var name: String { get }
+}
+
 enum CoreUIError: ErrorType {
     case RenditionMissingData
     case RenditionMissingImage
@@ -149,7 +153,7 @@ extension CUIImageType: CustomStringConvertible {
 }
 
 extension CUINamedImage {
-    var ac_basicType: NamedImageBasicType {
+    var acBasicType: NamedImageBasicType {
         switch self.idiom() {
             // Universal / Mac
         case .IdiomUniversal:
@@ -235,7 +239,7 @@ extension CUINamedImage {
         return .NotRecognized
     }
 
-    var ac_sizeClassString: String? {
+    var acSizeClassString: String? {
         switch (self.sizeClassHorizontal(), self.sizeClassVertical()) {
         case (.Any, .Any):
             return nil
@@ -258,17 +262,17 @@ extension CUINamedImage {
         }
     }
 
-    var ac_isPDF: Bool {
+    var acIsPDF: Bool {
         if self.isVectorBased && self.size == CGSize.zero {
             return true
         }
         return false
     }
 
-    var ac_imageName: String {
+    var acImageName: String {
         // Size class suffix.
         var sizeClassSuffix = ""
-        if let sc = self.ac_sizeClassString {
+        if let sc = self.acSizeClassString {
             sizeClassSuffix = "_\(sc)"
         }
 
@@ -287,7 +291,7 @@ extension CUINamedImage {
 
         // Vector.
         var fileExtension = "png"
-        if self.ac_isPDF {
+        if self.acIsPDF {
             fileExtension = "pdf"
         }
 
@@ -318,18 +322,6 @@ extension CUINamedImage {
         }
 
         return "\(self.name)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
-    }
-
-    var ac_renditionName: String {
-        let rendition = self._rendition()
-        let realName = rendition.name()
-        return realName
-    }
-
-    var ac_renditionSrcData: NSData {
-        let rendition = self._rendition()
-        let data = GetRenditionSrcData(rendition)
-        return data
     }
 
     func ac_saveAtPath(filePath: String) throws {

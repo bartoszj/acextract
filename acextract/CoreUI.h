@@ -70,14 +70,6 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
     CUIImageTypeHorizontalAndVertical = 3,
 };
 
-@interface CUICatalog : NSObject
-
-- (instancetype)initWithURL:(NSURL *)url error:(NSError * __autoreleasing *)error;
-- (NSArray *)allImageNames;
-- (NSArray *)imagesWithName:(NSString *)name;
-
-@end
-
 @class CUIRenditionKey, CUIThemeRendition;
 
 @interface CUINamedImage : NSObject
@@ -130,5 +122,10 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 
 @end
 
-// Helper functions.
-NSData *GetRenditionSrcData(id rendition);
+@interface CUICatalog : NSObject
+
+- (instancetype)initWithURL:(NSURL *)url error:(NSError * __autoreleasing *)error;
+- (NSArray<NSString *> *)allImageNames;
+- (NSArray<CUINamedImage *> *)imagesWithName:(NSString *)name;
+
+@end

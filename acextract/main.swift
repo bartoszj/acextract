@@ -58,16 +58,19 @@ else if let input = cliInput.value {
         let assetsCatalog = try AssetsCatalog(path: input)
         // Print content of the file.
         if cliList.value {
-            print(assetsCatalog.listContent(cliVerbose.value), terminator: "")
+            let verbose: PrintInformationOperation.Verbose
+            switch cliVerbose.value {
+            case 0: verbose = .Name
+            case 1: verbose = .Verbose
+            default: verbose = .VeryVerbose
+            }
+            let pi = PrintInformationOperation(verbose: verbose)
+            assetsCatalog.performOperation(pi)
         }
         // Extract to folder.
         if let output = cliOutput.value {
-            do {
-                try assetsCatalog.extractContentToDirectoryAtPath(output)
-            } catch {
-                cli.printUsage()
-                exit(EX_USAGE)
-            }
+            let extract = ExtractOperation(output: output)
+            assetsCatalog.performOperation(extract)
         }
     }
     // Cannot create catalog reader.

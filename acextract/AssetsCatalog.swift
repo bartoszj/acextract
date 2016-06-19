@@ -27,91 +27,65 @@ import Foundation
 
 enum AssetsCatalogError: ErrorType {
     case FileDoesntExists
-    case OutputDirectoryDoesntExists
-    case OutputPathIsNotDirectory
+    case CannotOpenAssetsCatalog
 }
 
-class AssetsCatalog {
+struct AssetsCatalog {
     // MARK: Properties
     let filePath: String
-    let fileURL: NSURL
     let catalog: CUICatalog
+
+    /**
+     Returns all image sets from assets catalog.
+
+     - returns: List of image sets.
+     */
+    var imageSets: [ImageSet] {
+        guard let imageNames = self.catalog.allImageNames() else {
+            return []
+        }
+
+        return imageNames.map(imageSet(withName:))
+    }
 
     // MARK: Initialization
     init(path: String) throws {
         let fp = (path as NSString).stringByExpandingTildeInPath
-        if NSFileManager.defaultManager().fileExistsAtPath(fp) {
-            let url = NSURL(fileURLWithPath: fp)
-            self.filePath = fp
-            self.fileURL = url
-
-            do {
-                self.catalog = try CUICatalog(URL: self.fileURL)
-            } catch {
-                throw AssetsCatalogError.FileDoesntExists
-            }
-        } else {
+        guard NSFileManager.defaultManager().fileExistsAtPath(fp) else {
             throw AssetsCatalogError.FileDoesntExists
+        }
+
+        let url = NSURL(fileURLWithPath: fp)
+        self.filePath = fp
+
+        do {
+            self.catalog = try CUICatalog(URL: url)
+        } catch {
+            throw AssetsCatalogError.CannotOpenAssetsCatalog
         }
     }
 
     // MARK: Methods
-    func allImageNames() -> [String] {
-        return self.catalog.allImageNames() as? [String] ?? []
+    /**
+     Return image set with given name.
+
+     - parameter name: Name of image set.
+
+     - returns: Image set with given name.
+     */
+    func imageSet(withName name: String) -> ImageSet {
+        let images = self.catalog.imagesWithName(name)
+        return ImageSet(name: name, namedImages: images)
+    }
+}
+
+extension AssetsCatalog {
+    func performOperation(operation: Operation) {
+        operation.read(self)
     }
 
-    func imagesWithName(name: String) -> [CUINamedImage] {
-        return self.catalog.imagesWithName(name) as? [CUINamedImage] ?? []
-    }
-
-    func listContent(verbose: Int) -> String {
-        var content = ""
-        let names = self.allImageNames()
-        for name in names {
-            let namedImages = self.imagesWithName(name)
-            let imageSet = ImageSet(name: name, namedImages: namedImages)
-            content += imageSet.verboseDescription(verbose) + "\n"
-        }
-
-        return content
-    }
-
-    func extractContentToDirectoryAtPath(path: String) throws {
-
-        let expandedPath = (path as NSString).stringByExpandingTildeInPath
-
-        // Check if directory exits.
-        var isDirectory: ObjCBool = false
-        if !NSFileManager.defaultManager().fileExistsAtPath(expandedPath, isDirectory: &isDirectory) {
-            throw AssetsCatalogError.OutputDirectoryDoesntExists
-        }
-
-        // Check is it is directory.
-        if !isDirectory {
-            throw AssetsCatalogError.OutputPathIsNotDirectory
-        }
-
-        // Get image names.
-        let names = self.allImageNames()
-        for name in names {
-            let namedImages = self.imagesWithName(name)
-
-            for namedImage in namedImages {
-                let filePath = (expandedPath as NSString).stringByAppendingPathComponent(namedImage.ac_imageName)
-                print("Extracting: \(namedImage.ac_imageName)", terminator: "")
-                let success: Bool
-                do {
-                    try namedImage.ac_saveAtPath(filePath)
-                    success = true
-                } catch {
-                    success = false
-                }
-                if success {
-                    print(" OK", terminator: "")
-                } else {
-                    print(" FAILED", terminator: "")
-                }
-            }
-        }
+    func performOperations(operations: [Operation]) {
+        let compundOperation = CompoundOperation(operations: operations)
+        compundOperation.read(self)
     }
 }

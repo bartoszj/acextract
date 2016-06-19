@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9603F7561D1719A4005EFB46 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603F7551D1719A4005EFB46 /* Operation.swift */; };
+		9603F7571D1719A4005EFB46 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603F7551D1719A4005EFB46 /* Operation.swift */; };
 		960CEF931A3F7C2C00F0B156 /* CommandLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF901A3F7C2C00F0B156 /* CommandLine.swift */; };
 		960CEF941A3F7C2C00F0B156 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF911A3F7C2C00F0B156 /* Option.swift */; };
 		960CEF951A3F7C2C00F0B156 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF921A3F7C2C00F0B156 /* StringExtensions.swift */; };
@@ -25,7 +27,6 @@
 		966A50361A3DEBE0002C814F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A50351A3DEBE0002C814F /* main.swift */; };
 		966A504F1A3DF14C002C814F /* AssetsCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A504E1A3DF14C002C814F /* AssetsCatalog.swift */; };
 		966A50521A3E13B2002C814F /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966A50511A3E13B2002C814F /* CoreUI.framework */; };
-		966E3CBF1A4769B300F45574 /* CoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 966E3CBE1A4769B300F45574 /* CoreUI.m */; };
 		96856B8A1D0DE62F0053B1B8 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 96856B891D0DE62F0053B1B8 /* data */; };
 		968FAAC41A48C1500083A943 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968FAAC31A48C1500083A943 /* AppDelegate.swift */; };
 		968FAAC61A48C1500083A943 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968FAAC51A48C1500083A943 /* ViewController.swift */; };
@@ -42,7 +43,6 @@
 		96E9F6AA1D0DD320001588FF /* AcextractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E9F6A91D0DD320001588FF /* AcextractTests.swift */; };
 		96E9F6B11D0DD450001588FF /* AssetsCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A504E1A3DF14C002C814F /* AssetsCatalog.swift */; };
 		96E9F6B21D0DD454001588FF /* CoreUI_Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */; };
-		96E9F6B31D0DD458001588FF /* CoreUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 966E3CBE1A4769B300F45574 /* CoreUI.m */; };
 		96E9F6B41D0DD45C001588FF /* ImageSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF961A3F828B00F0B156 /* ImageSet.swift */; };
 		96E9F6B51D0DD4A3001588FF /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966A50511A3E13B2002C814F /* CoreUI.framework */; };
 		96F446661D15DB7000F30964 /* DeviceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F446651D15DB6F00F30964 /* DeviceTests.swift */; };
@@ -115,6 +115,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9603F7551D1719A4005EFB46 /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		960CEF861A3F7BF700F0B156 /* CommandLine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommandLine.xcodeproj; path = CommandLine/CommandLine.xcodeproj; sourceTree = "<group>"; };
 		960CEF901A3F7C2C00F0B156 /* CommandLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandLine.swift; path = CommandLine/CommandLine/CommandLine.swift; sourceTree = SOURCE_ROOT; };
 		960CEF911A3F7C2C00F0B156 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Option.swift; path = CommandLine/CommandLine/Option.swift; sourceTree = SOURCE_ROOT; };
@@ -136,7 +137,6 @@
 		966A504E1A3DF14C002C814F /* AssetsCatalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsCatalog.swift; sourceTree = "<group>"; };
 		966A50501A3E0E3F002C814F /* CoreUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreUI.h; sourceTree = "<group>"; };
 		966A50511A3E13B2002C814F /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = /System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<absolute>"; };
-		966E3CBE1A4769B300F45574 /* CoreUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreUI.m; sourceTree = "<group>"; };
 		96856B891D0DE62F0053B1B8 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		968FAABF1A48C1500083A943 /* iOSTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		968FAAC21A48C1500083A943 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -238,6 +238,15 @@
 			name = CommandLine;
 			sourceTree = "<group>";
 		};
+		961A9EA11D171017009BFF62 /* CoreUI */ = {
+			isa = PBXGroup;
+			children = (
+				96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */,
+				966A50501A3E0E3F002C814F /* CoreUI.h */,
+			);
+			name = CoreUI;
+			sourceTree = "<group>";
+		};
 		961DEFDF1D0DDD2F002AD0CC /* watchTestApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,11 +305,10 @@
 				966A503C1A3DEC0C002C814F /* acextract-Bridging-Header.h */,
 				966A504E1A3DF14C002C814F /* AssetsCatalog.swift */,
 				960CEF8F1A3F7C2000F0B156 /* CommandLine */,
-				96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */,
-				966A50501A3E0E3F002C814F /* CoreUI.h */,
-				966E3CBE1A4769B300F45574 /* CoreUI.m */,
+				961A9EA11D171017009BFF62 /* CoreUI */,
 				960CEF961A3F828B00F0B156 /* ImageSet.swift */,
 				966A50351A3DEBE0002C814F /* main.swift */,
+				9603F7551D1719A4005EFB46 /* Operation.swift */,
 			);
 			path = acextract;
 			sourceTree = "<group>";
@@ -666,9 +674,9 @@
 			files = (
 				960CEF971A3F828B00F0B156 /* ImageSet.swift in Sources */,
 				960CEF951A3F7C2C00F0B156 /* StringExtensions.swift in Sources */,
-				966E3CBF1A4769B300F45574 /* CoreUI.m in Sources */,
 				966A50361A3DEBE0002C814F /* main.swift in Sources */,
 				960CEF941A3F7C2C00F0B156 /* Option.swift in Sources */,
+				9603F7561D1719A4005EFB46 /* Operation.swift in Sources */,
 				966A504F1A3DF14C002C814F /* AssetsCatalog.swift in Sources */,
 				960CEF931A3F7C2C00F0B156 /* CommandLine.swift in Sources */,
 				96F49FCD1A40C2E700F54148 /* CoreUI_Swift.swift in Sources */,
@@ -707,8 +715,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				96E9F6B11D0DD450001588FF /* AssetsCatalog.swift in Sources */,
+				9603F7571D1719A4005EFB46 /* Operation.swift in Sources */,
 				96E9F6AA1D0DD320001588FF /* AcextractTests.swift in Sources */,
-				96E9F6B31D0DD458001588FF /* CoreUI.m in Sources */,
 				96E9F6B21D0DD454001588FF /* CoreUI_Swift.swift in Sources */,
 				96E9F6B41D0DD45C001588FF /* ImageSet.swift in Sources */,
 				96F446661D15DB7000F30964 /* DeviceTests.swift in Sources */,
