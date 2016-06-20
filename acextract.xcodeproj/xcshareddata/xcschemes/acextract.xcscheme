@@ -100,7 +100,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-v"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-i"
@@ -108,7 +108,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_ios.car"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_ipad.car"
@@ -120,7 +120,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_mac.car"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_tv.car"

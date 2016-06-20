@@ -74,13 +74,18 @@ struct PrintInformationOperation: Operation {
         }
     }
 
+    /**
+     Print image set data depending on the verbosity level,
+
+     - parameter imageSet: Image set.
+     */
     private func printImageSetData(imageSet: ImageSet) {
         switch verbose {
         case .Name:
             print("\(imageSet.name)")
         case .Verbose:
-            print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq): \(imageSetShortData(imageSet))")
-            imageSetShortData(imageSet)
+            print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq): \(imageSetData(imageSet))")
+            imageSetData(imageSet)
         case .VeryVerbose:
             print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq):")
             for namedImage in imageSet.namedImages {
@@ -94,123 +99,102 @@ struct PrintInformationOperation: Operation {
         }
     }
 
-    private func imageSetShortData(imageSet: ImageSet) -> String {
+    /**
+     Returns basic image set data.
 
+     - parameter imageSet: Image set.
+
+     - returns: Image set basic data
+     */
+    private func imageSetData(imageSet: ImageSet) -> String {
+        // Filter images by idiom.
+        func imageFilter(idiom: CUIDeviceIdiom) -> (CUINamedImage) -> (Bool) {
+            return { $0.idiom() == idiom }
+        }
+
+        // Map image to "short" description.
         func imageMap(image: CUINamedImage) -> String {
             let pdf = image.acIsPDF ? "PDF" : ""
             return "\(pdf+image.subtype().name+image.scale.informationName+image.acSizeClassString)"
         }
 
-        var output = [String]()
-
-        // Universal
-        let universal = imageSet.namedImages.filter({ return $0.idiom() == .Universal }).map(imageMap)
-        if universal.count > 0 {
-            output.append("universal: \(universal.joinWithSeparator(","))")
-        }
-        // iPhone
-        let iPhone = imageSet.namedImages.filter({ return $0.idiom() == .IPhone }).map(imageMap)
-        if iPhone.count > 0 {
-            output.append("iPhone: \(iPhone.joinWithSeparator(","))")
-        }
-        // iPad
-        let iPad = imageSet.namedImages.filter({ return $0.idiom() == .IPad }).map(imageMap)
-        if iPad.count > 0 {
-            output.append("iPad: \(iPad.joinWithSeparator(","))")
-        }
-        // AppleTV
-        let appleTV = imageSet.namedImages.filter({ return $0.idiom() == .AppleTV }).map(imageMap)
-        if appleTV.count > 0 {
-            output.append("AppleTV: \(appleTV.joinWithSeparator(","))")
-        }
-        // AppleWatch
-        let appleWatch = imageSet.namedImages.filter({ return $0.idiom() == .AppleWatch }).map { $0.scale.informationName }
-        if appleWatch.count > 0 {
-            output.append("AppleWatch: \(appleWatch.joinWithSeparator(","))")
+        // Combine information for given idiom.
+        func deviceInfo(idiom: CUIDeviceIdiom) -> String? {
+            let images = imageSet.namedImages.filter(imageFilter(idiom)).map(imageMap)
+            guard images.count > 0 else {
+                return nil
+            }
+            return "\(idiom): \(images.joinWithSeparator(","))"
         }
 
+        // Create output.
+        let output = CUIDeviceIdiom.allValues.map { deviceInfo($0) }.flatMap({ $0 })
         return output.joinWithSeparator(", ")
     }
 
+    /**
+     Print named image name.
+
+     - parameter namedImage: Named image.
+     */
     private func printNamedImageShortData(namedImage: CUINamedImage) {
         print("  \(namedImage.acImageName)")
     }
 
+    /**
+     Print named image verbose logs.
+
+     - parameter namedImage: Named image.
+     */
     private func printNamedImageVerboseData(namedImage: CUINamedImage) {
+        func printProperty1(label: String, value: Any?) {
+            if let value = value {
+                print("    \(label): \(value)")
+            } else {
+                print("    \(label): \(value)")
+            }
+        }
+
+        func printProperty2<T: protocol<RawRepresentable, IncorrectValueAssertion>>(label: String, rawValue: T) {
+            var text = "    \(label): \(rawValue) (\(rawValue.rawValue))"
+            if !rawValue.assertIncorrectValue() {
+                text += " INCORRECT!"
+            }
+            print(text)
+        }
+
+        func printProperty3(label: String, rawValue: IncorrectValueAssertion) {
+            var text = "    \(label): \(rawValue))"
+            if !rawValue.assertIncorrectValue() {
+                text += " INCORRECT!"
+            }
+            print(text)
+        }
+
         print("  \(namedImage.acImageName):")
-
-        // Image type
-        var imageType = "    imageType: \(namedImage.imageType) (\(namedImage.imageType.rawValue))"
-        if !namedImage.imageType.assertIncorrectValue() {
-            imageType += " INCORRECT!"
-        }
-        print(imageType)
-
-        // Idiom
-        var idiom = "    idiom: \(namedImage.idiom()) (\(namedImage.idiom().rawValue))"
-        if !namedImage.idiom().assertIncorrectValue() {
-            idiom += " INCORRECT!"
-        }
-        print(idiom)
-
-        // Subtype
-        var subtype = "    subtype: \(namedImage.subtype()) (\(namedImage.subtype().rawValue))"
-        if !namedImage.subtype().assertIncorrectValue() {
-            subtype += " INCORRECT!"
-        }
-        print(subtype)
-
-        // Scale
-        var scale = "    scale: \(namedImage.scale)"
-        if !namedImage.scale.assertIncorrectValue() {
-            scale += " INCORRECT!"
-        }
-        print(scale)
-
-        // Size class
-        var sizeClassHorizontal = "    size vlass horizontal: \(namedImage.sizeClassHorizontal()) (\(namedImage.sizeClassHorizontal().rawValue))"
-        if !namedImage.sizeClassHorizontal().assertIncorrectValue() {
-            sizeClassHorizontal += " INCORRECT!"
-        }
-        print(sizeClassHorizontal)
-
-        var sizeClassVertical = "    size vlass vertical: \(namedImage.sizeClassVertical()) (\(namedImage.sizeClassVertical().rawValue))"
-        if !namedImage.sizeClassVertical().assertIncorrectValue() {
-            sizeClassVertical += " INCORRECT!"
-        }
-        print(sizeClassVertical)
-
-        print("    opacity: \(namedImage.opacity)")
-        print("    size: \(namedImage.size)")
-        print("    blend mode: \(namedImage.blendMode)")
-
-        // Resizing mode
-        var resizingMode = "    resizing mode: \(namedImage.resizingMode) (\(namedImage.resizingMode.rawValue))"
-        if !namedImage.resizingMode.assertIncorrectValue() {
-            resizingMode += " INCORRECT!"
-        }
-        print(resizingMode)
-
-        print("    is template: \(namedImage.isTemplate)")
-        print("    vector based: \(namedImage.isVectorBased)")
-
-        // Rendering mode
-        var templateRenderingMode = "    template rendering mode: \(namedImage.templateRenderingMode) (\(namedImage.templateRenderingMode.rawValue))"
-        if !namedImage.templateRenderingMode.assertIncorrectValue() {
-            templateRenderingMode += " INCORRECT!"
-        }
-        print(templateRenderingMode)
-        print("    edge insets: \(namedImage.edgeInsets)")
-        print("    alignment edge insets: \(namedImage.alignmentEdgeInsets)")
-//         print("    alignment rect: \(image.alignmentRect())")
-        print("    exifOrientation: \(namedImage.exifOrientation)")
-        print("    rendition name: \(namedImage._rendition().name())")
-        print("    rendition data: \(namedImage._rendition().data())")
-        print("    rendition pdf: \(namedImage._rendition().pdfDocument())")
-        print("    rendition image: \(namedImage._rendition().unslicedImage())")
-        print("    rendition UTI type: \(namedImage._rendition().utiType())")
-        print("    rendition type: \(namedImage._rendition().type())")
-        print("    rendition subtype: \(namedImage._rendition().subtype())")
+        printProperty2("imageType", rawValue: namedImage.imageType)
+        printProperty2("idiom", rawValue: namedImage.idiom())
+        printProperty2("subtype", rawValue: namedImage.subtype())
+        printProperty3("scale", rawValue: namedImage.scale)
+        printProperty2("size vlass horizontal", rawValue: namedImage.sizeClassHorizontal())
+        printProperty2("size vlass vertical", rawValue: namedImage.sizeClassVertical())
+        printProperty1("opacity", value: namedImage.opacity)
+        printProperty1("size", value: namedImage.size)
+        printProperty1("blend mode", value: namedImage.blendMode)
+        printProperty2("resizing mode", rawValue: namedImage.resizingMode)
+        printProperty1("is template", value: namedImage.isTemplate)
+        printProperty1("vector based", value: namedImage.isVectorBased)
+        printProperty2("template rendering mode", rawValue: namedImage.templateRenderingMode)
+        printProperty1("edge insets", value: namedImage.edgeInsets)
+        printProperty1("alignment edge insets", value: namedImage.alignmentEdgeInsets)
+        printProperty1("exifOrientation", value: namedImage.exifOrientation)
+        printProperty1("rendition name", value: namedImage._rendition().name())
+        printProperty1("rendition data", value: namedImage._rendition().data())
+        printProperty1("rendition pdf", value: namedImage._rendition().pdfDocument())
+        printProperty1("rendition image", value: namedImage._rendition().unslicedImage())
+        printProperty1("rendition UTI type", value: namedImage._rendition().utiType())
+        printProperty1("rendition type", value: namedImage._rendition().type())
+        printProperty1("rendition subtype", value: namedImage._rendition().subtype())
     }
 }
 

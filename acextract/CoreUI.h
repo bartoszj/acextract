@@ -90,7 +90,6 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 @property(readonly, nonatomic) double scale;
 @property(readonly, nonatomic) struct CGSize size;
 @property(readonly, nonatomic) struct CGImage *image;
-- (struct CGRect)alignmentRect;
 - (CUIUserInterfaceSizeClass)sizeClassVertical;
 - (CUIUserInterfaceSizeClass)sizeClassHorizontal;
 - (CUISubtype)subtype;

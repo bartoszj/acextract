@@ -45,6 +45,10 @@ extension IncorrectValueAssertion where Self: protocol<RawRepresentable, ValueCo
     }
 }
 
+protocol AllValues {
+    static var allValues: [Self] { get }
+}
+
 enum CoreUIError: ErrorType {
     case RenditionMissingData
     case RenditionMissingImage
@@ -81,6 +85,12 @@ extension CUIDeviceIdiom: ValueCorrectness, IncorrectValueAssertion {
         case .AppleTV: return rawValue == AppleTV.rawValue
         case .AppleWatch: return rawValue == AppleWatch.rawValue
         }
+    }
+}
+
+extension CUIDeviceIdiom: AllValues {
+    static var allValues: [CUIDeviceIdiom] {
+        return [.Universal, .IPhone, .IPad, .AppleTV, .AppleWatch]
     }
 }
 
