@@ -248,7 +248,7 @@ extension Double: IncorrectValueAssertion {
 }
 
 extension CUINamedImage {
-    private var acSizeClassString: String {
+    var acSizeClassString: String {
         switch (self.sizeClassHorizontal(), self.sizeClassVertical()) {
         case (.Any, .Any): return ""
         case let (horizontal, vertical): return "\(horizontal.name)\(vertical.name)"
@@ -288,17 +288,17 @@ extension CUINamedImage {
         return "\(self.name)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
     }
 
-    func ac_saveAtPath(filePath: String) throws {
+    private func acSaveAtPath(filePath: String) throws {
         if self._rendition().pdfDocument() != nil {
-            try self.ac_savePDFToDirectory(filePath)
+            try self.acSavePDFToDirectory(filePath)
         } else if self._rendition().unslicedImage() != nil {
-            try self.ac_saveImageToDirectory(filePath)
+            try self.acSaveImageToDirectory(filePath)
         } else {
             throw CoreUIError.RenditionMissingData
         }
     }
 
-    private func ac_saveImageToDirectory(filePath: String) throws {
+    private func acSaveImageToDirectory(filePath: String) throws {
         let filePathURL = NSURL(fileURLWithPath: filePath)
         let cgImage = self._rendition().unslicedImage().takeUnretainedValue()
         guard let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil) else {
@@ -312,7 +312,7 @@ extension CUINamedImage {
         }
     }
 
-    private func ac_savePDFToDirectory(filePath: String) throws {
+    private func acSavePDFToDirectory(filePath: String) throws {
         // Based on:
         // http://stackoverflow.com/questions/3780745/saving-a-pdf-document-to-disk-using-quartz
 

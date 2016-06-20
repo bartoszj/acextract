@@ -200,14 +200,10 @@ struct ImageSet {
         self.name = name
         self.namedImages = namedImages
     }
-
-    var shortDesription: String {
-        return ""
-    }
 }
 
 extension ImageSet: CustomStringConvertible {
     var description: String {
-        return self.shortDesription
+        return "\(name)"
     }
 }

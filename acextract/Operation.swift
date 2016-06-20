@@ -39,7 +39,24 @@ struct CompoundOperation: Operation {
     }
 }
 
+private protocol InformationNameStringConvertible {
+    var informationName: String { get }
+}
+
+extension Double: InformationNameStringConvertible {
+    private var informationName: String {
+        switch self {
+        case 1.0: return "@1x"
+        case 2.0: return "@2x"
+        case 3.0: return "@3x"
+        default: return "other"
+        }
+    }
+}
+
 private let escapeSeq = "\u{1b}"
+private let boldSeq = "[1m"
+private let resetSeq = "[0m"
 struct PrintInformationOperation: Operation {
     let verbose: Verbose
 
@@ -47,30 +64,79 @@ struct PrintInformationOperation: Operation {
         case Name
         case Verbose
         case VeryVerbose
+        case VeryVeryVerbose
     }
 
     func read(catalg: AssetsCatalog) {
         print("Assets catalog: \(catalg.filePath)")
         for imageSet in catalg.imageSets {
-            printImageData(imageSet)
+            printImageSetData(imageSet)
         }
     }
 
-    private func printImageData(imageSet: ImageSet) {
+    private func printImageSetData(imageSet: ImageSet) {
         switch verbose {
         case .Name:
-            print("Name: \(escapeSeq)[1m\(imageSet.name)\(escapeSeq)[0m")
+            print("\(imageSet.name)")
         case .Verbose:
-            print("Name: \(escapeSeq)[1m\(imageSet.name)\(escapeSeq)[0m: (\(imageSet.shortDesription))")
+            print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq): \(imageSetShortData(imageSet))")
+            imageSetShortData(imageSet)
         case .VeryVerbose:
-            print("Name: \(escapeSeq)[1m\(imageSet.name)\(escapeSeq)[0m")
+            print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq):")
             for namedImage in imageSet.namedImages {
-                printNameImageData(namedImage)
+                printNamedImageShortData(namedImage)
+            }
+        case .VeryVeryVerbose:
+            print("Name: \(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq)")
+            for namedImage in imageSet.namedImages {
+                printNamedImageVerboseData(namedImage)
             }
         }
     }
 
-    private func printNameImageData(namedImage: CUINamedImage) {
+    private func imageSetShortData(imageSet: ImageSet) -> String {
+
+        func imageMap(image: CUINamedImage) -> String {
+            let pdf = image.acIsPDF ? "PDF" : ""
+            return "\(pdf+image.subtype().name+image.scale.informationName+image.acSizeClassString)"
+        }
+
+        var output = [String]()
+
+        // Universal
+        let universal = imageSet.namedImages.filter({ return $0.idiom() == .Universal }).map(imageMap)
+        if universal.count > 0 {
+            output.append("universal: \(universal.joinWithSeparator(","))")
+        }
+        // iPhone
+        let iPhone = imageSet.namedImages.filter({ return $0.idiom() == .IPhone }).map(imageMap)
+        if iPhone.count > 0 {
+            output.append("iPhone: \(iPhone.joinWithSeparator(","))")
+        }
+        // iPad
+        let iPad = imageSet.namedImages.filter({ return $0.idiom() == .IPad }).map(imageMap)
+        if iPad.count > 0 {
+            output.append("iPad: \(iPad.joinWithSeparator(","))")
+        }
+        // AppleTV
+        let appleTV = imageSet.namedImages.filter({ return $0.idiom() == .AppleTV }).map(imageMap)
+        if appleTV.count > 0 {
+            output.append("AppleTV: \(appleTV.joinWithSeparator(","))")
+        }
+        // AppleWatch
+        let appleWatch = imageSet.namedImages.filter({ return $0.idiom() == .AppleWatch }).map { $0.scale.informationName }
+        if appleWatch.count > 0 {
+            output.append("AppleWatch: \(appleWatch.joinWithSeparator(","))")
+        }
+
+        return output.joinWithSeparator(", ")
+    }
+
+    private func printNamedImageShortData(namedImage: CUINamedImage) {
+        print("  \(namedImage.acImageName)")
+    }
+
+    private func printNamedImageVerboseData(namedImage: CUINamedImage) {
         print("  \(namedImage.acImageName):")
 
         // Image type
@@ -149,7 +215,7 @@ struct PrintInformationOperation: Operation {
 }
 
 struct ExtractOperation: Operation {
-    let output: String
+    let outputPath: String
 
     func read(catalg: AssetsCatalog) {
 
