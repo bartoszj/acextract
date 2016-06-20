@@ -34,8 +34,9 @@ typedef struct CUIImageInsets {
 
 typedef NS_ENUM(NSInteger, CUIDeviceIdiom) {
     CUIDeviceIdiomUniversal  = 0,
-    CUIDeviceIdiomiPhone     = 1,
-    CUIDeviceIdiomiPad       = 2,
+    CUIDeviceIdiomIPhone     = 1,
+    CUIDeviceIdiomIPad       = 2,
+    CUIDeviceIdiomAppleTV    = 3,
     CUIDeviceIdiomAppleWatch = 5,
 };
 

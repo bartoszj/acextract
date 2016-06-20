@@ -29,6 +29,22 @@ protocol NameStringConvertible {
     var name: String { get }
 }
 
+protocol ValueCorrectness {
+    var correct: Bool { get }
+}
+
+protocol IncorrectValueAssertion {
+    func assertIncorrectValue() -> Bool
+}
+
+extension IncorrectValueAssertion where Self: protocol<RawRepresentable, ValueCorrectness> {
+    func assertIncorrectValue() -> Bool {
+        let c = correct
+        assert(c, "Incorrect value: \(self) - \(rawValue)")
+        return c
+    }
+}
+
 enum CoreUIError: ErrorType {
     case RenditionMissingData
     case RenditionMissingImage
@@ -37,50 +53,67 @@ enum CoreUIError: ErrorType {
     case CannotSaveImage
 }
 
-enum NamedImageBasicType {
-    case Universal1x
-    case Universal2x
-    case Universal3x
-    case UniversalVector
-
-    case iPhone1x
-    case iPhone1x_4Inch
-    case iPhone2x
-    case iPhone2x_4Inch
-    case iPhone3x
-    case iPhone3x_4Inch
-    case iPhoneVector
-    case iPhoneVector_4Inch
-
-    case iPad1x
-    case iPad2x
-    case iPad3x
-    case iPadVector
-
-    case AppleWatch
-    case AppleWatch38
-    case AppleWatch42
-
-    case NotRecognized
-}
-
 extension CUIImageInsets: CustomStringConvertible {
     public var description: String {
         return "(\(top),\(left),\(bottom),\(right))"
     }
 }
 
+extension CUIDeviceIdiom: NameStringConvertible {
+    var name: String {
+        // Idiom.
+        switch self {
+        case .Universal: return ""
+        case .IPhone: return "~iphone"
+        case .IPad: return "~ipad"
+        case .AppleTV: return "~tv"
+        case .AppleWatch: return "~watch"
+        }
+    }
+}
+
+extension CUIDeviceIdiom: ValueCorrectness, IncorrectValueAssertion {
+    var correct: Bool {
+        switch self {
+        case .Universal: return rawValue == Universal.rawValue
+        case .IPhone: return rawValue == IPhone.rawValue
+        case .IPad: return rawValue == IPad.rawValue
+        case .AppleTV: return rawValue == AppleTV.rawValue
+        case .AppleWatch: return rawValue == AppleWatch.rawValue
+        }
+    }
+}
+
 extension CUIDeviceIdiom: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .IdiomUniversal:
-            return "universal"
-        case .IdiomiPhone:
-            return "iPhone"
-        case .IdiomiPad:
-            return "iPad"
-        case .IdiomAppleWatch:
-            return "AppleWatch"
+        case .Universal: return "universal"
+        case .IPhone: return "iPhone"
+        case .IPad: return "iPad"
+        case .AppleTV: return "AppleTV"
+        case .AppleWatch: return "AppleWatch"
+        }
+    }
+}
+
+extension CUISubtype: NameStringConvertible {
+    var name: String {
+        switch self {
+        case .Normal: return ""
+        case .IPhone4Inch: return "-568h"
+        case .AppleWatch38: return "-38"
+        case .AppleWatch42: return "-42"
+        }
+    }
+}
+
+extension CUISubtype: ValueCorrectness, IncorrectValueAssertion {
+    var correct: Bool {
+        switch self {
+        case .Normal: return rawValue == Normal.rawValue
+        case .IPhone4Inch: return rawValue == IPhone4Inch.rawValue
+        case .AppleWatch38: return rawValue == AppleWatch38.rawValue
+        case .AppleWatch42: return rawValue == AppleWatch42.rawValue
         }
     }
 }
@@ -88,14 +121,30 @@ extension CUIDeviceIdiom: CustomStringConvertible {
 extension CUISubtype: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Normal:
-            return "normal"
-        case .IPhone4Inch:
-            return "-568h"
-        case .AppleWatch38:
-            return "-38"
-        case .AppleWatch42:
-            return "-42"
+        case .Normal: return "normal"
+        case .IPhone4Inch: return "-568h"
+        case .AppleWatch38: return "-38"
+        case .AppleWatch42: return "-42"
+        }
+    }
+}
+
+extension CUIUserInterfaceSizeClass: NameStringConvertible {
+    var name: String {
+        switch self {
+        case .Any: return "*"
+        case .Compact: return "-"
+        case .Regular: return "+"
+        }
+    }
+}
+
+extension CUIUserInterfaceSizeClass: ValueCorrectness, IncorrectValueAssertion {
+    var correct: Bool {
+        switch self {
+        case .Any: return rawValue == Any.rawValue
+        case .Compact: return rawValue == Compact.rawValue
+        case .Regular: return rawValue == Regular.rawValue
         }
     }
 }
@@ -103,12 +152,19 @@ extension CUISubtype: CustomStringConvertible {
 extension CUIUserInterfaceSizeClass: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Any:
-            return "any"
-        case .Compact:
-            return "compact"
-        case .Regular:
-            return "regular"
+        case .Any: return "any"
+        case .Compact: return "compact"
+        case .Regular: return "regular"
+        }
+    }
+}
+
+extension CUIRenderMode: ValueCorrectness, IncorrectValueAssertion {
+    var correct: Bool {
+        switch self {
+        case .Original: return rawValue == Original.rawValue
+        case .Template: return rawValue == Template.rawValue
+        case .Default: return rawValue == Default.rawValue
         }
     }
 }
@@ -116,12 +172,18 @@ extension CUIUserInterfaceSizeClass: CustomStringConvertible {
 extension CUIRenderMode: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Original:
-            return "original"
-        case .Template:
-            return "template"
-        case .Default:
-            return "default"
+        case .Original: return "original"
+        case .Template: return "template"
+        case .Default: return "default"
+        }
+    }
+}
+
+extension CUIResizingMode: ValueCorrectness, IncorrectValueAssertion {
+    var correct: Bool {
+        switch self {
+        case .Tiles: return rawValue == Tiles.rawValue
+        case .Stretches: return rawValue == Stretches.rawValue
         }
     }
 }
@@ -129,10 +191,19 @@ extension CUIRenderMode: CustomStringConvertible {
 extension CUIResizingMode: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Tiles:
-            return "tiles"
-        case .Stretches:
-            return "stretches"
+        case .Tiles: return "tiles"
+        case .Stretches: return "stretches"
+        }
+    }
+}
+
+extension CUIImageType: ValueCorrectness, IncorrectValueAssertion {
+    var correct: Bool {
+        switch self {
+        case .None: return rawValue == None.rawValue
+        case .Horizontal: return rawValue == Horizontal.rawValue
+        case .Vertical: return rawValue == Vertical.rawValue
+        case .HorizontalAndVertical: return rawValue == HorizontalAndVertical.rawValue
         }
     }
 }
@@ -140,126 +211,55 @@ extension CUIResizingMode: CustomStringConvertible {
 extension CUIImageType: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .None:
-            return "none"
-        case .Horizontal:
-            return "horizontal"
-        case .Vertical:
-            return "vertical"
-        case .HorizontalAndVertical:
-            return "horizontal & vertical"
+        case .None: return "none"
+        case .Horizontal: return "horizontal"
+        case .Vertical: return "vertical"
+        case .HorizontalAndVertical: return "horizontal & vertical"
         }
     }
 }
 
-extension CUINamedImage {
-    var acBasicType: NamedImageBasicType {
-        switch self.idiom() {
-            // Universal / Mac
-        case .IdiomUniversal:
-            assert(self.subtype() == .Normal, "Not recognized subtype.")
-            if self.isVectorBased && self.size == CGSize.zero {
-                return .UniversalVector
-            } else {
-                switch self.scale {
-                case 1.0:
-                    return .Universal1x
-                case 2.0:
-                    return .Universal2x
-                case 3.0:
-                    return .Universal3x
-                default:
-                    assert(false, "Not recognized scale.")
-                }
-            }
-            // iPhone
-        case .IdiomiPhone:
-            if self.isVectorBased && self.size == CGSize.zero {
-                if self.subtype() == .IPhone4Inch {
-                    return .iPhoneVector_4Inch
-                } else {
-                    return .iPhoneVector
-                }
-            } else {
-                switch self.scale {
-                case 1.0:
-                    if self.subtype() == .IPhone4Inch {
-                        return .iPhone1x_4Inch
-                    } else {
-                        return .iPhone1x
-                    }
-                case 2.0:
-                    if self.subtype() == .IPhone4Inch {
-                        return .iPhone2x_4Inch
-                    } else {
-                        return .iPhone2x
-                    }
-                case 3.0:
-                    if self.subtype() == .IPhone4Inch {
-                        return .iPhone3x_4Inch
-                    } else {
-                        return .iPhone3x
-                    }
-                default:
-                    assert(false, "Not recognized scale.")
-                }
-            }
-            // iPad
-        case .IdiomiPad:
-            if self.isVectorBased && self.size == CGSize.zero {
-                assert(self.subtype() == .Normal, "Not recognized subtype.")
-                return .iPadVector
-            } else {
-                assert(self.subtype() == .Normal, "Not recognized subtype.")
-                switch self.scale {
-                case 1.0:
-                    return .iPad1x
-                case 2.0:
-                    return .iPad2x
-                case 3.0:
-                    return .iPad3x
-                default:
-                    assert(false, "Not recognized scale.")
-                }
-            }
-            // Aplpe Watch.
-        case .IdiomAppleWatch:
-            switch self.subtype() {
-            case .Normal:
-                return .AppleWatch
-            case .AppleWatch38:
-                return .AppleWatch38
-            case .AppleWatch42:
-                return .AppleWatch42
-            default:
-                assert(false, "Not recognized subtype.")
-            }
+extension Double: NameStringConvertible {
+    var name: String {
+        switch self {
+        case 1.0: return ""
+        case 2.0: return "@2x"
+        case 3.0: return "@3x"
+        default: return ""
         }
+    }
+}
 
-        return .NotRecognized
+extension Double: ValueCorrectness {
+    var correct: Bool {
+        if self == 1.0 || self == 2.0 || self == 3.0 {
+            return true
+        }
+        return false
+    }
+}
+
+extension Double: IncorrectValueAssertion {
+    func assertIncorrectValue() -> Bool {
+        let c = correct
+        assert(c, "Incorrect value: \(self)")
+        return c
+    }
+}
+
+extension CUINamedImage {
+    private var acSizeClassString: String {
+        switch (self.sizeClassHorizontal(), self.sizeClassVertical()) {
+        case (.Any, .Any): return ""
+        case let (horizontal, vertical): return "\(horizontal.name)\(vertical.name)"
+        }
     }
 
-    var acSizeClassString: String? {
-        switch (self.sizeClassHorizontal(), self.sizeClassVertical()) {
-        case (.Any, .Any):
-            return nil
-        case (.Any, .Compact):
-            return "*-"
-        case (.Any, .Regular):
-            return "*+"
-        case (.Compact, .Any):
-            return "-*"
-        case (.Compact, .Compact):
-            return "--"
-        case (.Compact, .Regular):
-            return "-+"
-        case (.Regular, .Any):
-            return "+*"
-        case (.Regular, .Compact):
-            return "+-"
-        case (.Regular, .Regular):
-            return "++"
+    private var acFileExtension: String {
+        if acIsPDF {
+            return "pdf"
         }
+        return "png"
     }
 
     var acIsPDF: Bool {
@@ -270,56 +270,20 @@ extension CUINamedImage {
     }
 
     var acImageName: String {
-        // Size class suffix.
-        var sizeClassSuffix = ""
-        if let sc = self.acSizeClassString {
-            sizeClassSuffix = "_\(sc)"
-        }
+        // Size class suffix
+        let sizeClassSuffix = acSizeClassString
 
-        // Scale.
-        var scale = ""
-        switch self.scale {
-        case 1.0:
-            scale = ""
-        case 2.0:
-            scale = "@2x"
-        case 3.0:
-            scale = "@3x"
-        default:
-            assert(false, "Not recognized idiom.")
-        }
+        // Scale
+        let scale = self.scale.name
 
-        // Vector.
-        var fileExtension = "png"
-        if self.acIsPDF {
-            fileExtension = "pdf"
-        }
+        // File extension
+        let fileExtension = acFileExtension
 
-        // Subtype (4 inch).
-        var subtype = ""
-        switch self.subtype() {
-        case .Normal:
-            subtype = ""
-        case .IPhone4Inch:
-            subtype = "-568h"
-        case .AppleWatch38:
-            subtype = "-38"
-        case .AppleWatch42:
-            subtype = "-42"
-        }
+        // Subtype (4 inch)
+        let subtype = self.subtype().name
 
-        // Idiom.
-        var idiom = ""
-        switch self.idiom() {
-        case .IdiomUniversal:
-            idiom = ""
-        case .IdiomiPhone:
-            idiom = "~iphone"
-        case .IdiomiPad:
-            idiom = "~ipad"
-        case .IdiomAppleWatch:
-            idiom = "~watch"
-        }
+        // Idiom
+        let idiom = self.idiom().name
 
         return "\(self.name)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
     }

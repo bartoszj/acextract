@@ -106,6 +106,26 @@
             argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_ios.car"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_ipad.car"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_iphone.car"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_mac.car"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_tv.car"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_watch.car"
+            isEnabled = "NO">
+         </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>

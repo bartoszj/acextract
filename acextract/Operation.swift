@@ -72,19 +72,68 @@ struct PrintInformationOperation: Operation {
 
     private func printNameImageData(namedImage: CUINamedImage) {
         print("  \(namedImage.acImageName):")
-        print("    imageType: \(namedImage.imageType) (\(namedImage.imageType.rawValue))")
-        print("    idiom: \(namedImage.idiom()) (\(namedImage.idiom().rawValue))")
-        print("    subtype: \(namedImage.subtype()) (\(namedImage.subtype().rawValue))")
-        print("    scale: \(namedImage.scale)")
-        print("    size vlass horizontal: \(namedImage.sizeClassHorizontal()) (\(namedImage.sizeClassHorizontal().rawValue))")
-        print("    size vlass vertical: \(namedImage.sizeClassVertical()) (\(namedImage.sizeClassVertical().rawValue))")
+
+        // Image type
+        var imageType = "    imageType: \(namedImage.imageType) (\(namedImage.imageType.rawValue))"
+        if !namedImage.imageType.assertIncorrectValue() {
+            imageType += " INCORRECT!"
+        }
+        print(imageType)
+
+        // Idiom
+        var idiom = "    idiom: \(namedImage.idiom()) (\(namedImage.idiom().rawValue))"
+        if !namedImage.idiom().assertIncorrectValue() {
+            idiom += " INCORRECT!"
+        }
+        print(idiom)
+
+        // Subtype
+        var subtype = "    subtype: \(namedImage.subtype()) (\(namedImage.subtype().rawValue))"
+        if !namedImage.subtype().assertIncorrectValue() {
+            subtype += " INCORRECT!"
+        }
+        print(subtype)
+
+        // Scale
+        var scale = "    scale: \(namedImage.scale)"
+        if !namedImage.scale.assertIncorrectValue() {
+            scale += " INCORRECT!"
+        }
+        print(scale)
+
+        // Size class
+        var sizeClassHorizontal = "    size vlass horizontal: \(namedImage.sizeClassHorizontal()) (\(namedImage.sizeClassHorizontal().rawValue))"
+        if !namedImage.sizeClassHorizontal().assertIncorrectValue() {
+            sizeClassHorizontal += " INCORRECT!"
+        }
+        print(sizeClassHorizontal)
+
+        var sizeClassVertical = "    size vlass vertical: \(namedImage.sizeClassVertical()) (\(namedImage.sizeClassVertical().rawValue))"
+        if !namedImage.sizeClassVertical().assertIncorrectValue() {
+            sizeClassVertical += " INCORRECT!"
+        }
+        print(sizeClassVertical)
+
         print("    opacity: \(namedImage.opacity)")
         print("    size: \(namedImage.size)")
         print("    blend mode: \(namedImage.blendMode)")
-        print("    resizing mode: \(namedImage.resizingMode) (\(namedImage.resizingMode.rawValue))")
+
+        // Resizing mode
+        var resizingMode = "    resizing mode: \(namedImage.resizingMode) (\(namedImage.resizingMode.rawValue))"
+        if !namedImage.resizingMode.assertIncorrectValue() {
+            resizingMode += " INCORRECT!"
+        }
+        print(resizingMode)
+
         print("    is template: \(namedImage.isTemplate)")
         print("    vector based: \(namedImage.isVectorBased)")
-        print("    template rendering mode: \(namedImage.templateRenderingMode) (\(namedImage.templateRenderingMode))")
+
+        // Rendering mode
+        var templateRenderingMode = "    template rendering mode: \(namedImage.templateRenderingMode) (\(namedImage.templateRenderingMode.rawValue))"
+        if !namedImage.templateRenderingMode.assertIncorrectValue() {
+            templateRenderingMode += " INCORRECT!"
+        }
+        print(templateRenderingMode)
         print("    edge insets: \(namedImage.edgeInsets)")
         print("    alignment edge insets: \(namedImage.alignmentEdgeInsets)")
 //         print("    alignment rect: \(image.alignmentRect())")
