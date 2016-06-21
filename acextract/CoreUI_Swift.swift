@@ -25,6 +25,7 @@
 
 import Foundation
 
+// MARK: - Protocols
 protocol NameStringConvertible {
     var name: String { get }
 }
@@ -49,6 +50,7 @@ protocol AllValues {
     static var allValues: [Self] { get }
 }
 
+// MARK: - Custom types
 enum CoreUIError: ErrorType {
     case RenditionMissingData
     case RenditionMissingImage
@@ -57,12 +59,61 @@ enum CoreUIError: ErrorType {
     case CannotSaveImage
 }
 
+enum ScaleFactor {
+    case scale1x
+    case scale2x
+    case scale3x
+    case other(Double)
+}
+
+extension ScaleFactor: FloatLiteralConvertible {
+    init(floatLiteral value: Double) {
+        switch value {
+        case 1.0: self = .scale1x
+        case 2.0: self = .scale2x
+        case 3.0: self = .scale3x
+        default: self = .other(value)
+        }
+    }
+}
+
+extension ScaleFactor: NameStringConvertible {
+    var name: String {
+        switch self {
+        case .scale1x: return ""
+        case .scale2x: return "@2x"
+        case .scale3x: return "@3x"
+        case .other: return "other(\(self))"
+        }
+    }
+}
+
+extension ScaleFactor: ValueCorrectness {
+    var correct: Bool {
+        if case .other(_) = self {
+            return false
+        }
+        return true
+    }
+}
+
+extension ScaleFactor: IncorrectValueAssertion {
+    func assertIncorrectValue() -> Bool {
+        let c = correct
+        assert(c, "Incorrect value: \(self)")
+        return c
+    }
+}
+
+// MARK: - CoreUI Extensions
+// MARK: CUIImageInsets
 extension CUIImageInsets: CustomStringConvertible {
     public var description: String {
         return "(\(top),\(left),\(bottom),\(right))"
     }
 }
 
+// MARK: CUIDeviceIdiom
 extension CUIDeviceIdiom: NameStringConvertible {
     var name: String {
         // Idiom.
@@ -106,6 +157,7 @@ extension CUIDeviceIdiom: CustomStringConvertible {
     }
 }
 
+// MARK: CUISubtype
 extension CUISubtype: NameStringConvertible {
     var name: String {
         switch self {
@@ -139,6 +191,7 @@ extension CUISubtype: CustomStringConvertible {
     }
 }
 
+// MARK: CUIUserInterfaceSizeClass
 extension CUIUserInterfaceSizeClass: NameStringConvertible {
     var name: String {
         switch self {
@@ -169,6 +222,7 @@ extension CUIUserInterfaceSizeClass: CustomStringConvertible {
     }
 }
 
+// MARK: CUIRenderMode
 extension CUIRenderMode: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
@@ -189,6 +243,7 @@ extension CUIRenderMode: CustomStringConvertible {
     }
 }
 
+// MARK: CUIResizingMode
 extension CUIResizingMode: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
@@ -207,6 +262,7 @@ extension CUIResizingMode: CustomStringConvertible {
     }
 }
 
+// MARK: CUIImageType
 extension CUIImageType: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
@@ -229,35 +285,12 @@ extension CUIImageType: CustomStringConvertible {
     }
 }
 
-extension Double: NameStringConvertible {
-    var name: String {
-        switch self {
-        case 1.0: return ""
-        case 2.0: return "@2x"
-        case 3.0: return "@3x"
-        default: return ""
-        }
-    }
-}
-
-extension Double: ValueCorrectness {
-    var correct: Bool {
-        if self == 1.0 || self == 2.0 || self == 3.0 {
-            return true
-        }
-        return false
-    }
-}
-
-extension Double: IncorrectValueAssertion {
-    func assertIncorrectValue() -> Bool {
-        let c = correct
-        assert(c, "Incorrect value: \(self)")
-        return c
-    }
-}
-
+// MARK: CUINamedImage
 extension CUINamedImage {
+    var acScale: ScaleFactor {
+        return ScaleFactor(floatLiteral: scale)
+    }
+
     var acSizeClassString: String {
         switch (self.sizeClassHorizontal(), self.sizeClassVertical()) {
         case (.Any, .Any): return ""
@@ -284,7 +317,7 @@ extension CUINamedImage {
         let sizeClassSuffix = acSizeClassString
 
         // Scale
-        let scale = self.scale.name
+        let scale = self.acScale.name
 
         // File extension
         let fileExtension = acFileExtension

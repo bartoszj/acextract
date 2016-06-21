@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9603F7561D1719A4005EFB46 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603F7551D1719A4005EFB46 /* Operation.swift */; };
 		9603F7571D1719A4005EFB46 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603F7551D1719A4005EFB46 /* Operation.swift */; };
+		960594231D19D96C00325995 /* PrintInformationOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960594221D19D96C00325995 /* PrintInformationOperation.swift */; };
+		960594241D19D96C00325995 /* PrintInformationOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960594221D19D96C00325995 /* PrintInformationOperation.swift */; };
 		960CEF931A3F7C2C00F0B156 /* CommandLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF901A3F7C2C00F0B156 /* CommandLine.swift */; };
 		960CEF941A3F7C2C00F0B156 /* Option.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF911A3F7C2C00F0B156 /* Option.swift */; };
 		960CEF951A3F7C2C00F0B156 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 960CEF921A3F7C2C00F0B156 /* StringExtensions.swift */; };
@@ -117,6 +119,7 @@
 
 /* Begin PBXFileReference section */
 		9603F7551D1719A4005EFB46 /* Operation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		960594221D19D96C00325995 /* PrintInformationOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintInformationOperation.swift; sourceTree = "<group>"; };
 		960CEF861A3F7BF700F0B156 /* CommandLine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CommandLine.xcodeproj; path = CommandLine/CommandLine.xcodeproj; sourceTree = "<group>"; };
 		960CEF901A3F7C2C00F0B156 /* CommandLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CommandLine.swift; path = CommandLine/CommandLine/CommandLine.swift; sourceTree = SOURCE_ROOT; };
 		960CEF911A3F7C2C00F0B156 /* Option.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Option.swift; path = CommandLine/CommandLine/Option.swift; sourceTree = SOURCE_ROOT; };
@@ -213,6 +216,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		960594271D19D97000325995 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				9603F7551D1719A4005EFB46 /* Operation.swift */,
+				960594221D19D96C00325995 /* PrintInformationOperation.swift */,
+			);
+			name = Operation;
+			sourceTree = "<group>";
+		};
 		960CEF851A3F7BEB00F0B156 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -310,7 +322,7 @@
 				961A9EA11D171017009BFF62 /* CoreUI */,
 				960CEF961A3F828B00F0B156 /* ImageSet.swift */,
 				966A50351A3DEBE0002C814F /* main.swift */,
-				9603F7551D1719A4005EFB46 /* Operation.swift */,
+				960594271D19D97000325995 /* Operation */,
 			);
 			path = acextract;
 			sourceTree = "<group>";
@@ -677,6 +689,7 @@
 			files = (
 				960CEF971A3F828B00F0B156 /* ImageSet.swift in Sources */,
 				960CEF951A3F7C2C00F0B156 /* StringExtensions.swift in Sources */,
+				960594231D19D96C00325995 /* PrintInformationOperation.swift in Sources */,
 				966A50361A3DEBE0002C814F /* main.swift in Sources */,
 				960CEF941A3F7C2C00F0B156 /* Option.swift in Sources */,
 				9603F7561D1719A4005EFB46 /* Operation.swift in Sources */,
@@ -723,6 +736,7 @@
 				96E9F6B21D0DD454001588FF /* CoreUI_Swift.swift in Sources */,
 				96E9F6B41D0DD45C001588FF /* ImageSet.swift in Sources */,
 				96F446661D15DB7000F30964 /* DeviceTests.swift in Sources */,
+				960594241D19D96C00325995 /* PrintInformationOperation.swift in Sources */,
 				96D010831D173194000553B1 /* CorrectnessTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
