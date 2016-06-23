@@ -51,14 +51,6 @@ protocol AllValues {
 }
 
 // MARK: - Custom types
-enum CoreUIError: ErrorType {
-    case RenditionMissingData
-    case RenditionMissingImage
-    case RenditionMissingPDF
-    case CannotCreatePDFDocument
-    case CannotSaveImage
-}
-
 enum ScaleFactor {
     case scale1x
     case scale2x
@@ -329,58 +321,5 @@ extension CUINamedImage {
         let idiom = self.idiom().name
 
         return "\(self.name)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
-    }
-
-    private func acSaveAtPath(filePath: String) throws {
-        if self._rendition().pdfDocument() != nil {
-            try self.acSavePDFToDirectory(filePath)
-        } else if self._rendition().unslicedImage() != nil {
-            try self.acSaveImageToDirectory(filePath)
-        } else {
-            throw CoreUIError.RenditionMissingData
-        }
-    }
-
-    private func acSaveImageToDirectory(filePath: String) throws {
-        let filePathURL = NSURL(fileURLWithPath: filePath)
-        let cgImage = self._rendition().unslicedImage().takeUnretainedValue()
-        guard let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil) else {
-            throw CoreUIError.CannotSaveImage
-        }
-
-        CGImageDestinationAddImage(cgDestination, cgImage, nil)
-
-        if !CGImageDestinationFinalize(cgDestination) {
-            throw CoreUIError.CannotSaveImage
-        }
-    }
-
-    private func acSavePDFToDirectory(filePath: String) throws {
-        // Based on:
-        // http://stackoverflow.com/questions/3780745/saving-a-pdf-document-to-disk-using-quartz
-
-        let cgPDFDocument = self._rendition().pdfDocument().takeUnretainedValue()
-        // Create the pdf context
-        let cgPage = CGPDFDocumentGetPage(cgPDFDocument, 1)
-        var cgPageRect = CGPDFPageGetBoxRect(cgPage, .MediaBox)
-        let mutableData = NSMutableData()
-
-        let cgDataConsumer = CGDataConsumerCreateWithCFData(mutableData)
-        let cgPDFContext = CGPDFContextCreate(cgDataConsumer, &cgPageRect, nil)
-
-        if CGPDFDocumentGetNumberOfPages(cgPDFDocument) > 0 {
-            CGPDFContextBeginPage(cgPDFContext, nil)
-            CGContextDrawPDFPage(cgPDFContext, cgPage)
-            CGPDFContextEndPage(cgPDFContext)
-        } else {
-            throw CoreUIError.CannotCreatePDFDocument
-        }
-
-        CGPDFContextClose(cgPDFContext)
-
-        let success = mutableData.writeToFile(filePath, atomically: true)
-        if !success {
-            throw CoreUIError.CannotCreatePDFDocument
-        }
     }
 }

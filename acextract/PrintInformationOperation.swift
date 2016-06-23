@@ -76,9 +76,6 @@ extension CUIImageType: InformationPrintable { }
 extension ScaleFactor: InformationPrintable { }
 
 // MARK: - PrintInformationOperation
-private let escapeSeq = "\u{1b}"
-private let boldSeq = "[1m"
-private let resetSeq = "[0m"
 struct PrintInformationOperation: Operation {
     let verbose: Verbose
 

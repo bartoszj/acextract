@@ -88,7 +88,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-l"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-v"
@@ -129,6 +129,14 @@
          <CommandLineArgument
             argument = "~/Documents/OtherProjects/acextract/acextractTests/data/assets_watch.car"
             isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-o"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "~/Documents/OtherProjects/acextract/output"
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

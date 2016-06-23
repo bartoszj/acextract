@@ -66,16 +66,17 @@ else if let input = cliInput.value {
             default: verbose = .VeryVeryVerbose
             }
             let pi = PrintInformationOperation(verbose: verbose)
-            assetsCatalog.performOperation(pi)
+            try assetsCatalog.performOperation(pi)
         }
         // Extract to folder.
         if let output = cliOutput.value {
-            let extract = ExtractOperation(outputPath: output)
-            assetsCatalog.performOperation(extract)
+            let extract = ExtractOperation(path: output)
+            try assetsCatalog.performOperation(extract)
         }
     }
     // Cannot create catalog reader.
     catch {
+        print("Error: \(error)")
         cli.printUsage()
         exit(EX_USAGE)
     }
