@@ -41,11 +41,7 @@ struct AssetsCatalog {
      - returns: List of image sets.
      */
     var imageSets: [ImageSet] {
-        guard let imageNames = self.catalog.allImageNames() else {
-            return []
-        }
-
-        return imageNames.map(imageSet(withName:))
+        return self.catalog.allImageNames().map(imageSet(withName:))
     }
 
     // MARK: Initialization

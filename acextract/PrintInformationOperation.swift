@@ -186,12 +186,22 @@ struct PrintInformationOperation: Operation {
         printProperty("edge insets", value: namedImage.edgeInsets)
         printProperty("alignment edge insets", value: namedImage.alignmentEdgeInsets)
         printProperty("exifOrientation", value: namedImage.exifOrientation)
+        printProperty("image", value: namedImage.image)
+
+//        printProperty("base key", value: namedImage.baseKey())
+        printProperty("base key graphical class", value: namedImage.baseKey().themeGraphicsClass())
+        printProperty("base key memory class", value: namedImage.baseKey().themeGraphicsClass())
+
+//        printProperty("rendition key", value: namedImage.renditionKey())
+        printProperty("rendition key graphical class", value: namedImage.renditionKey().themeGraphicsClass())
+        printProperty("rendition key memory class", value: namedImage.renditionKey().themeGraphicsClass())
+
         printProperty("rendition name", value: namedImage._rendition().name())
+        printProperty("rendition type", value: namedImage._rendition().type())
+        printProperty("rendition subtype", value: namedImage._rendition().subtype())
+        printProperty("rendition UTI type", value: namedImage._rendition().utiType())
         printProperty("rendition data", value: namedImage._rendition().data())
         printProperty("rendition pdf", value: namedImage._rendition().pdfDocument())
         printProperty("rendition image", value: namedImage._rendition().unslicedImage())
-        printProperty("rendition UTI type", value: namedImage._rendition().utiType())
-        printProperty("rendition type", value: namedImage._rendition().type())
-        printProperty("rendition subtype", value: namedImage._rendition().subtype())
     }
 }

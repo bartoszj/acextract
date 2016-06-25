@@ -75,7 +75,7 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 
 @interface CUINamedImage : NSObject
 
-@property(copy, nonatomic) NSString *name;
+@property(copy, nonatomic, nonnull) NSString *name;
 @property(readonly, nonatomic) int exifOrientation;
 @property(readonly, nonatomic) CUIRenderMode templateRenderingMode;
 @property(readonly, nonatomic) BOOL isTemplate;
@@ -89,17 +89,17 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 @property(readonly, nonatomic) CUIImageType imageType;
 @property(readonly, nonatomic) double scale;
 @property(readonly, nonatomic) struct CGSize size;
-@property(readonly, nonatomic) struct CGImage *image;
+@property(readonly, nonatomic, nonnull) struct CGImage *image;
 - (CUIUserInterfaceSizeClass)sizeClassVertical;
 - (CUIUserInterfaceSizeClass)sizeClassHorizontal;
 - (CUISubtype)subtype;
 - (CUIDeviceIdiom)idiom;
 
-- (CUIRenditionKey *)baseKey;
+- (nonnull CUIRenditionKey *)baseKey;
 - (long long)graphicsClass;
 - (long long)memoryClass;
-- (CUIThemeRendition *)_rendition;
-- (CUIRenditionKey *)renditionKey;
+- (nonnull CUIThemeRendition *)_rendition;
+- (nonnull CUIRenditionKey *)renditionKey;
 
 @end
 
@@ -112,20 +112,20 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 
 @interface CUIThemeRendition : NSObject
 
-- (unsigned int)subtype;
-- (NSData *)data;
-- (CGPDFDocumentRef)pdfDocument;
-- (CGImageRef)unslicedImage;
-- (NSString *)utiType;
-- (NSString *)name;
+- (nonnull NSString *)name;
 - (NSInteger)type;
+- (unsigned int)subtype;
+- (nullable NSString *)utiType;
+- (nullable NSData *)data;
+- (nullable CGPDFDocumentRef)pdfDocument;
+- (nullable CGImageRef)unslicedImage;
 
 @end
 
 @interface CUICatalog : NSObject
 
-- (instancetype)initWithURL:(NSURL *)url error:(NSError * __autoreleasing *)error;
-- (NSArray<NSString *> *)allImageNames;
-- (NSArray<CUINamedImage *> *)imagesWithName:(NSString *)name;
+- (nullable instancetype)initWithURL:(nonnull NSURL *)url error:(NSError * _Nullable __autoreleasing *_Nullable)error;
+- (nonnull NSArray<NSString *> *)allImageNames;
+- (nonnull NSArray<CUINamedImage *> *)imagesWithName:(nonnull NSString *)name;
 
 @end

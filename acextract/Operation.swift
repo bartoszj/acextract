@@ -130,7 +130,9 @@ private extension CUINamedImage {
 
     func acSaveImage(filePath: String) throws {
         let filePathURL = NSURL(fileURLWithPath: filePath)
-        let cgImage = self._rendition().unslicedImage().takeUnretainedValue()
+        guard let cgImage = self._rendition().unslicedImage()?.takeUnretainedValue() else {
+            throw ExtractOperationError.CannotSaveImage
+        }
         guard let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil) else {
             throw ExtractOperationError.CannotSaveImage
         }
@@ -146,7 +148,9 @@ private extension CUINamedImage {
         // Based on:
         // http://stackoverflow.com/questions/3780745/saving-a-pdf-document-to-disk-using-quartz
 
-        let cgPDFDocument = self._rendition().pdfDocument().takeUnretainedValue()
+        guard let cgPDFDocument = self._rendition().pdfDocument()?.takeUnretainedValue() else {
+            throw ExtractOperationError.CannotCreatePDFDocument
+        }
         // Create the pdf context
         let cgPage = CGPDFDocumentGetPage(cgPDFDocument, 1)
         var cgPageRect = CGPDFPageGetBoxRect(cgPage, .MediaBox)
