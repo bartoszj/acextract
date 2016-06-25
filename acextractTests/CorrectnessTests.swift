@@ -10,52 +10,38 @@ import XCTest
 
 // Check correctness by printing verbose information
 class CorrectnessTests: XCTestCase {
-    var iOS: AssetsCatalog!
-    var iPad: AssetsCatalog!
-    var iPhone: AssetsCatalog!
-    var macOS: AssetsCatalog!
-    var tvOS: AssetsCatalog!
-    var watchOS: AssetsCatalog!
-    let printOperation = PrintInformationOperation(verbose: .VeryVerbose)
+    // MARK: Properties
+    var assetsContainer = AssetsContainer()
+    let printOperation = PrintInformationOperation(verbose: .VeryVeryVerbose)
 
-    // Setup
+    // MARK: Setup
     override func setUp() {
         super.setUp()
-
-        do {
-            iOS = try AssetsCatalog(path: Assets.iOS.path)
-            iPad = try AssetsCatalog(path: Assets.iPad.path)
-            iPhone = try AssetsCatalog(path: Assets.iPhone.path)
-            macOS = try AssetsCatalog(path: Assets.macOS.path)
-            tvOS = try AssetsCatalog(path: Assets.tvOS.path)
-            watchOS = try AssetsCatalog(path: Assets.watchOS.path)
-        } catch {
-            XCTFail("Cannot create assets")
-        }
+        assetsContainer = AssetsContainer()
     }
 
     // MARK: Test correctness
     func testIOSCorrectness() {
-        printOperation.read(iOS)
+        printOperation.read(assetsContainer.iOS)
     }
 
     func testIPadCorrectness() {
-        printOperation.read(iPad)
+        printOperation.read(assetsContainer.iPad)
     }
 
     func testIPhoneCorrectness() {
-        printOperation.read(iPhone)
+        printOperation.read(assetsContainer.iPhone)
     }
 
     func testMacCorrectness() {
-        printOperation.read(macOS)
+        printOperation.read(assetsContainer.macOS)
     }
 
-//    func testTVCorrectness() {
-//        printOperation.read(tvOS)
-//    }
+    func testTVCorrectness() {
+        printOperation.read(assetsContainer.tvOS)
+    }
 
     func testWatchCorrectness() {
-        printOperation.read(watchOS)
+        printOperation.read(assetsContainer.watchOS)
     }
 }

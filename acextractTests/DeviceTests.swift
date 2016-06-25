@@ -9,32 +9,18 @@
 import XCTest
 
 class DeviceTests: XCTestCase {
-    var iOS: AssetsCatalog!
-    var iPad: AssetsCatalog!
-    var iPhone: AssetsCatalog!
-    var macOS: AssetsCatalog!
-    var tvOS: AssetsCatalog!
-    var watchOS: AssetsCatalog!
+    // MARK: Properties
+    var assetsContainer = AssetsContainer()
 
-    // Setup
+    // MARK: Setup
     override func setUp() {
         super.setUp()
-
-        do {
-            iOS = try AssetsCatalog(path: Assets.iOS.path)
-            iPad = try AssetsCatalog(path: Assets.iPad.path)
-            iPhone = try AssetsCatalog(path: Assets.iPhone.path)
-            macOS = try AssetsCatalog(path: Assets.macOS.path)
-            tvOS = try AssetsCatalog(path: Assets.tvOS.path)
-            watchOS = try AssetsCatalog(path: Assets.watchOS.path)
-        } catch {
-            XCTFail("Cannot create assets")
-        }
+        assetsContainer = AssetsContainer()
     }
 
     // MARK: Assets count
     func testiOSAssetsCount() {
-        let assets = iOS.imageSets.map { $0.name }.filter { name in
+        let assets = assetsContainer.iOS.imageSets.map { $0.name }.filter { name in
             return name.hasPrefix("d_")
         }
         XCTAssertEqual(assets.count, 6)
@@ -47,7 +33,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testiPadAssetsCount() {
-        let assets = iPad.imageSets.map { $0.name }.filter { name in
+        let assets = assetsContainer.iPad.imageSets.map { $0.name }.filter { name in
             return name.hasPrefix("d_")
         }
         XCTAssertEqual(assets.count, 4)
@@ -58,7 +44,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testiPhoneAssetsCount() {
-        let assets = iPhone.imageSets.map { $0.name }.filter { name in
+        let assets = assetsContainer.iPhone.imageSets.map { $0.name }.filter { name in
             return name.hasPrefix("d_")
         }
         XCTAssertEqual(assets.count, 5)
@@ -70,7 +56,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testMacAssetsCount() {
-        let assets = macOS.imageSets.map { $0.name }.filter { name in
+        let assets = assetsContainer.macOS.imageSets.map { $0.name }.filter { name in
             return name.hasPrefix("d_")
         }
         XCTAssertEqual(assets.count, 4)
@@ -81,7 +67,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testTVAssetsCount() {
-        let assets = tvOS.imageSets.map { $0.name }.filter { name in
+        let assets = assetsContainer.tvOS.imageSets.map { $0.name }.filter { name in
             return name.hasPrefix("d_")
         }
         XCTAssertEqual(assets.count, 2)
@@ -90,7 +76,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testWatchAssetsCount() {
-        let assets = watchOS.imageSets.map { $0.name }.filter { name in
+        let assets = assetsContainer.watchOS.imageSets.map { $0.name }.filter { name in
             return name.hasPrefix("d_")
         }
         XCTAssertEqual(assets.count, 3)
@@ -101,7 +87,7 @@ class DeviceTests: XCTestCase {
 
     // MARK: Device images
     func testiPad() {
-        let imageSet = iPad.imageSet(withName: "d_ipad")
+        let imageSet = assetsContainer.iPad.imageSet(withName: "d_ipad")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 2)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
@@ -126,7 +112,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testiPhone() {
-        let imageSet = iPhone.imageSet(withName: "d_iphone")
+        let imageSet = assetsContainer.iPhone.imageSet(withName: "d_iphone")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
@@ -161,7 +147,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testiPhone4() {
-        let imageSet = iPhone.imageSet(withName: "d_iphone4")
+        let imageSet = assetsContainer.iPhone.imageSet(withName: "d_iphone4")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 2)
         if let image = images.filter({ return $0.subtype() == .Normal }).first {
@@ -186,7 +172,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testMac() {
-        let imageSet = macOS.imageSet(withName: "d_mac")
+        let imageSet = assetsContainer.macOS.imageSet(withName: "d_mac")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 2)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
@@ -211,7 +197,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testTv() {
-        let imageSet = tvOS.imageSet(withName: "d_tv")
+        let imageSet = assetsContainer.tvOS.imageSet(withName: "d_tv")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 1)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
@@ -226,7 +212,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testUniversal() {
-        let imageSet = tvOS.imageSet(withName: "d_universal")
+        let imageSet = assetsContainer.tvOS.imageSet(withName: "d_universal")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
@@ -261,7 +247,7 @@ class DeviceTests: XCTestCase {
     }
 
     func testWatch() {
-        let imageSet = watchOS.imageSet(withName: "d_watch")
+        let imageSet = assetsContainer.watchOS.imageSet(withName: "d_watch")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.subtype() == .Normal }).first {

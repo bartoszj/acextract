@@ -8,35 +8,12 @@
 
 import XCTest
 
-enum Assets: String {
-    case iOS = "data/assets_ios"
-    case iPhone = "data/assets_iphone"
-    case iPad = "data/assets_ipad"
-    case macOS = "data/assets_mac"
-    case tvOS = "data/assets_tv"
-    case watchOS = "data/assets_watch"
-
-    var path: String {
-        guard let bundle = NSBundle(identifier: "com.bjanda.acextractTests") else {
-            XCTFail("Missing bundle")
-            preconditionFailure()
-        }
-
-        guard let path = bundle.pathForResource(self.rawValue, ofType: "car") else {
-            XCTFail("Missing car file")
-            preconditionFailure()
-        }
-
-        return path
-    }
-}
-
 class AcextractTests: XCTestCase {
 
     // MARK: Tests
     func testCreateAssetsCatalog_Success() {
         do {
-            _ = try AssetsCatalog(path: Assets.iOS.path)
+            _ = try AssetsCatalog(path: Asset.iOS.path)
         } catch {
             XCTFail("Cannot create AssetsCatalog object")
         }
