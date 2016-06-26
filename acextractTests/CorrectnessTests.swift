@@ -11,14 +11,7 @@ import XCTest
 // Check correctness by printing verbose information
 class CorrectnessTests: XCTestCase {
     // MARK: Properties
-    var assetsContainer = AssetsContainer()
     let printOperation = PrintInformationOperation(verbose: .VeryVeryVerbose)
-
-    // MARK: Setup
-    override func setUp() {
-        super.setUp()
-        assetsContainer = AssetsContainer()
-    }
 
     // MARK: Test correctness
     func testIOSCorrectness() {

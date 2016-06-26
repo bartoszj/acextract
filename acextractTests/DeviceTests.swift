@@ -9,15 +9,6 @@
 import XCTest
 
 class DeviceTests: XCTestCase {
-    // MARK: Properties
-    var assetsContainer = AssetsContainer()
-
-    // MARK: Setup
-    override func setUp() {
-        super.setUp()
-        assetsContainer = AssetsContainer()
-    }
-
     // MARK: Assets count
     func testiOSAssetsCount() {
         let assets = assetsContainer.iOS.imageSets.map { $0.name }.filter { name in

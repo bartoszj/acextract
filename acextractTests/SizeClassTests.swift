@@ -9,15 +9,6 @@
 import XCTest
 
 class SizeClassTests: XCTestCase {
-    // MARK: Properties
-    var assetsContainer = AssetsContainer()
-
-    // MARK: Setup
-    override func setUp() {
-        super.setUp()
-        assetsContainer = AssetsContainer()
-    }
-
     // MARK: Size classes
     func testAnyCompact() {
         let imageSet = assetsContainer.iOS.imageSet(withName: "sc_w_a&c")
@@ -163,7 +154,7 @@ class SizeClassTests: XCTestCase {
         }
     }
 
-    func testAnyRegularCompact() {
+    func testAnyRegularCompact_01() {
         let imageSet = assetsContainer.iOS.imageSet(withName: "sc_wh_a&r&c")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 12)
@@ -235,6 +226,12 @@ class SizeClassTests: XCTestCase {
         } else {
             XCTFail("Cannot find image")
         }
+    }
+
+    func testAnyRegularCompact_02() {
+        let imageSet = assetsContainer.iOS.imageSet(withName: "sc_wh_a&r&c")
+        let images = imageSet.namedImages
+        XCTAssertEqual(images.count, 12)
 
         // Regular Any 1x
         let raImages = images.filter({ $0.sizeClassHorizontal() == .Regular && $0.sizeClassVertical() == .Any })
@@ -282,7 +279,7 @@ class SizeClassTests: XCTestCase {
             XCTFail("Cannot find image")
         }
 
-        // Regular Any 2x
+        // Regular Compact 2x
         if let image = rcImages.filter({ return $0.scale == 2.0 }).first {
             XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Regular)
             XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Compact)
@@ -293,7 +290,7 @@ class SizeClassTests: XCTestCase {
             XCTFail("Cannot find image")
         }
 
-        // Regular Any 3x
+        // Regular Compact 3x
         if let image = rcImages.filter({ return $0.scale == 3.0 }).first {
             XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Regular)
             XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Compact)

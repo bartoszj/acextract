@@ -42,7 +42,7 @@ or
 
 ## Todo:
 - [x] Size class
-- [ ] Rendering
+- [x] Rendering
 - [ ] Alignment
 - [ ] Slicing
 - [ ] Memory

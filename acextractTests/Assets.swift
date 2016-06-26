@@ -53,3 +53,5 @@ struct AssetsContainer {
         }
     }
 }
+
+let assetsContainer = AssetsContainer()
