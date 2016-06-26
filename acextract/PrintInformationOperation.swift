@@ -37,7 +37,6 @@ extension ScaleFactor: InformationNameStringConvertible {
         case .scale1x: return "@1x"
         case .scale2x: return "@2x"
         case .scale3x: return "@3x"
-        case .other(let scale): return "@\(scale)"
         }
     }
 }
@@ -73,7 +72,6 @@ extension CUIUserInterfaceSizeClass: InformationPrintable { }
 extension CUIRenderMode: InformationPrintable { }
 extension CUIResizingMode: InformationPrintable { }
 extension CUIImageType: InformationPrintable { }
-extension ScaleFactor: InformationPrintable { }
 
 // MARK: - PrintInformationOperation
 struct PrintInformationOperation: Operation {
@@ -172,7 +170,7 @@ struct PrintInformationOperation: Operation {
         namedImage.imageType.printWithLabel("imageType")
         namedImage.idiom().printWithLabel("idiom")
         namedImage.subtype().printWithLabel("subtype")
-        namedImage.acScale.printWithLabel("scale")
+        printProperty("scale", value: namedImage.acScale.informationName)
         namedImage.sizeClassHorizontal().printWithLabel("size vlass horizontal")
         namedImage.sizeClassVertical().printWithLabel("size vlass vertical")
         printProperty("opacity", value: namedImage.opacity)

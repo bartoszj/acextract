@@ -55,7 +55,6 @@ enum ScaleFactor {
     case scale1x
     case scale2x
     case scale3x
-    case other(Double)
 }
 
 extension ScaleFactor: FloatLiteralConvertible {
@@ -64,7 +63,7 @@ extension ScaleFactor: FloatLiteralConvertible {
         case 1.0: self = .scale1x
         case 2.0: self = .scale2x
         case 3.0: self = .scale3x
-        default: self = .other(value)
+        default: fatalError()
         }
     }
 }
@@ -75,25 +74,7 @@ extension ScaleFactor: NameStringConvertible {
         case .scale1x: return ""
         case .scale2x: return "@2x"
         case .scale3x: return "@3x"
-        case .other: return "other(\(self))"
         }
-    }
-}
-
-extension ScaleFactor: ValueCorrectness {
-    var correct: Bool {
-        if case .other(_) = self {
-            return false
-        }
-        return true
-    }
-}
-
-extension ScaleFactor: IncorrectValueAssertion {
-    func assertIncorrectValue() -> Bool {
-        let c = correct
-        assert(c, "Incorrect value: \(self)")
-        return c
     }
 }
 

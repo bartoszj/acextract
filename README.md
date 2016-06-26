@@ -41,7 +41,7 @@ or
     acextract -i ~/Assets.car -o ~/AssetsOutput
 
 ## Todo:
-- [ ] Size class
+- [x] Size class
 - [ ] Rendering
 - [ ] Alignment
 - [ ] Slicing
