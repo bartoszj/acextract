@@ -43,7 +43,7 @@ or
 ## Todo:
 - [x] Size class
 - [x] Rendering
-- [ ] Alignment
+- [x] Alignment
 - [ ] Slicing
 - [ ] Memory
 - [ ] Graphics

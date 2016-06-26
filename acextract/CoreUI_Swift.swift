@@ -79,11 +79,12 @@ extension ScaleFactor: NameStringConvertible {
 }
 
 // MARK: - CoreUI Extensions
-// MARK: CUIImageInsets
-extension CUIImageInsets: CustomStringConvertible {
-    public var description: String {
-        return "(\(top),\(left),\(bottom),\(right))"
-    }
+extension NSEdgeInsets: Equatable { }
+public func == (lhs: NSEdgeInsets, rhs: NSEdgeInsets) -> Bool {
+    return lhs.top == rhs.top
+        && lhs.left == rhs.left
+        && lhs.bottom == rhs.bottom
+        && lhs.right == rhs.right
 }
 
 // MARK: CUIDeviceIdiom

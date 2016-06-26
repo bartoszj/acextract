@@ -23,14 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //  SOFTWARE.
 
-#import <Foundation/Foundation.h>
-
-typedef struct CUIImageInsets {
-    CGFloat bottom;
-    CGFloat left;
-    CGFloat top;
-    CGFloat right;
-} CUIImageInsets;
+@import Foundation;
 
 typedef NS_ENUM(NSInteger, CUIDeviceIdiom) {
     CUIDeviceIdiomUniversal  = 0,
@@ -84,8 +77,8 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 @property(readonly, nonatomic) CUIResizingMode resizingMode;
 @property(readonly, nonatomic) int blendMode;
 @property(readonly, nonatomic) double opacity;
-@property(readonly, nonatomic) CUIImageInsets alignmentEdgeInsets;
-@property(readonly, nonatomic) CUIImageInsets edgeInsets;
+@property(readonly, nonatomic) NSEdgeInsets alignmentEdgeInsets;
+@property(readonly, nonatomic) NSEdgeInsets edgeInsets;
 @property(readonly, nonatomic) CUIImageType imageType;
 @property(readonly, nonatomic) double scale;
 @property(readonly, nonatomic) struct CGSize size;

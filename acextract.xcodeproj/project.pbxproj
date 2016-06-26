@@ -31,6 +31,7 @@
 		966A50361A3DEBE0002C814F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A50351A3DEBE0002C814F /* main.swift */; };
 		966A504F1A3DF14C002C814F /* AssetsCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966A504E1A3DF14C002C814F /* AssetsCatalog.swift */; };
 		966A50521A3E13B2002C814F /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966A50511A3E13B2002C814F /* CoreUI.framework */; };
+		9673B97A1D205CE900F3C684 /* AlignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9673B9791D205CE900F3C684 /* AlignmentTests.swift */; };
 		96856B8A1D0DE62F0053B1B8 /* data in Resources */ = {isa = PBXBuildFile; fileRef = 96856B891D0DE62F0053B1B8 /* data */; };
 		968FAAC41A48C1500083A943 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968FAAC31A48C1500083A943 /* AppDelegate.swift */; };
 		968FAAC61A48C1500083A943 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968FAAC51A48C1500083A943 /* ViewController.swift */; };
@@ -147,6 +148,7 @@
 		966A504E1A3DF14C002C814F /* AssetsCatalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssetsCatalog.swift; sourceTree = "<group>"; };
 		966A50501A3E0E3F002C814F /* CoreUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreUI.h; sourceTree = "<group>"; };
 		966A50511A3E13B2002C814F /* CoreUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreUI.framework; path = /System/Library/PrivateFrameworks/CoreUI.framework; sourceTree = "<absolute>"; };
+		9673B9791D205CE900F3C684 /* AlignmentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlignmentTests.swift; sourceTree = "<group>"; };
 		96856B891D0DE62F0053B1B8 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 		968FAABF1A48C1500083A943 /* iOSTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		968FAAC21A48C1500083A943 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 		96A93BE71D1FFF45004280E2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				9673B9791D205CE900F3C684 /* AlignmentTests.swift */,
 				96E9F6A91D0DD320001588FF /* AssetsCatalogTests.swift */,
 				96D010821D173194000553B1 /* CorrectnessTests.swift */,
 				96F446651D15DB6F00F30964 /* DeviceTests.swift */,
@@ -766,6 +769,7 @@
 				96E9F6B41D0DD45C001588FF /* ImageSet.swift in Sources */,
 				96F446661D15DB7000F30964 /* DeviceTests.swift in Sources */,
 				960594241D19D96C00325995 /* PrintInformationOperation.swift in Sources */,
+				9673B97A1D205CE900F3C684 /* AlignmentTests.swift in Sources */,
 				96D010831D173194000553B1 /* CorrectnessTests.swift in Sources */,
 				961427121D1F1186005831AA /* Assets.swift in Sources */,
 			);

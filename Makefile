@@ -58,6 +58,7 @@ ios:
 		--target-device iphone \
 		--compile $(PWD) \
 		Images.xcassets
+	cp $(ASSETS) $(DATA)/assets.car
 	mv $(ASSETS) $(DATA)/assets_ios.car
 
 mac:

@@ -8,27 +8,33 @@
 
 import Foundation
 
-let testBundleIdentifer = "com.bjanda.acextractTests"
-let testBundle = NSBundle(identifier: testBundleIdentifer)
-
 enum Asset: String {
+    // MARK: Cases
     case iOS = "data/assets_ios"
     case iPhone = "data/assets_iphone"
     case iPad = "data/assets_ipad"
     case macOS = "data/assets_mac"
     case tvOS = "data/assets_tv"
     case watchOS = "data/assets_watch"
+    case assets = "data/assets"
 
+    // MARK: Properties
     var path: String {
-        guard let bundle = testBundle else {
-            fatalError("Missing bundle")
-        }
-
-        guard let path = bundle.pathForResource(self.rawValue, ofType: "car") else {
+        guard let path = Asset.path(catalog: self) else {
             fatalError("Missing car file")
         }
 
         return path
+    }
+
+    // MARK: Static
+    static let bundleIdentifer = "com.bjanda.acextractTests"
+    static let bundle = NSBundle(identifier: bundleIdentifer)!
+    static func path(name name: String) -> String? {
+        return bundle.pathForResource(name, ofType: "car")
+    }
+    static func path(catalog catalog: Asset) -> String? {
+        return path(name: catalog.rawValue)
     }
 }
 

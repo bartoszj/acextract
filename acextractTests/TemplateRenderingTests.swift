@@ -46,14 +46,14 @@ class TemplateRenderingTests: XCTestCase {
         } else {
             XCTFail("Cannot find image")
         }
-        
+
         if let image = images.filter({ return $0.scale == 2.0 }).first {
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Original)
             XCTAssertEqual(image.acImageName, "r_original@2x.png")
         } else {
             XCTFail("Cannot find image")
         }
-        
+
         if let image = images.filter({ return $0.scale == 3.0 }).first {
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Original)
             XCTAssertEqual(image.acImageName, "r_original@3x.png")
@@ -61,7 +61,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTFail("Cannot find image")
         }
     }
-    
+
     func testTemplate() {
         let imageSet = assetsContainer.iOS.imageSet(withName: "r_template")
         let images = imageSet.namedImages
@@ -72,14 +72,14 @@ class TemplateRenderingTests: XCTestCase {
         } else {
             XCTFail("Cannot find image")
         }
-        
+
         if let image = images.filter({ return $0.scale == 2.0 }).first {
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Template)
             XCTAssertEqual(image.acImageName, "r_template@2x.png")
         } else {
             XCTFail("Cannot find image")
         }
-        
+
         if let image = images.filter({ return $0.scale == 3.0 }).first {
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Template)
             XCTAssertEqual(image.acImageName, "r_template@3x.png")
