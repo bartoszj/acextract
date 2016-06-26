@@ -51,6 +51,7 @@
 		96E9F6B51D0DD4A3001588FF /* CoreUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966A50511A3E13B2002C814F /* CoreUI.framework */; };
 		96F446661D15DB7000F30964 /* DeviceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F446651D15DB6F00F30964 /* DeviceTests.swift */; };
 		96F49FCD1A40C2E700F54148 /* CoreUI_Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */; };
+		96F52BFC1D1FFB89006CAD7B /* SizeClassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F52BFB1D1FFB89006CAD7B /* SizeClassTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,7 @@
 		96E9F6B61D0DD4ED001588FF /* acextractTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "acextractTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		96F446651D15DB6F00F30964 /* DeviceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTests.swift; sourceTree = "<group>"; };
 		96F49FCC1A40C2E700F54148 /* CoreUI_Swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreUI_Swift.swift; sourceTree = "<group>"; };
+		96F52BFB1D1FFB89006CAD7B /* SizeClassTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeClassTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,16 +384,33 @@
 			path = tvTestApp;
 			sourceTree = "<group>";
 		};
-		96E9F6A81D0DD31F001588FF /* acextractTests */ = {
+		96A93BE71D1FFF45004280E2 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				96E9F6A91D0DD320001588FF /* AssetsCatalogTests.swift */,
+				96D010821D173194000553B1 /* CorrectnessTests.swift */,
+				96F446651D15DB6F00F30964 /* DeviceTests.swift */,
+				96F52BFB1D1FFB89006CAD7B /* SizeClassTests.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		96A93BEA1D1FFF54004280E2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
 				96E9F6B61D0DD4ED001588FF /* acextractTests-Bridging-Header.h */,
-				961427111D1F1186005831AA /* Assets.swift */,
-				96E9F6A91D0DD320001588FF /* AssetsCatalogTests.swift */,
-				96D010821D173194000553B1 /* CorrectnessTests.swift */,
-				96856B891D0DE62F0053B1B8 /* data */,
-				96F446651D15DB6F00F30964 /* DeviceTests.swift */,
 				96E9F6AB1D0DD320001588FF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		96E9F6A81D0DD31F001588FF /* acextractTests */ = {
+			isa = PBXGroup;
+			children = (
+				961427111D1F1186005831AA /* Assets.swift */,
+				96856B891D0DE62F0053B1B8 /* data */,
+				96A93BEA1D1FFF54004280E2 /* Supporting Files */,
+				96A93BE71D1FFF45004280E2 /* Tests */,
 			);
 			path = acextractTests;
 			sourceTree = "<group>";
@@ -736,6 +755,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				96E9F6B11D0DD450001588FF /* AssetsCatalog.swift in Sources */,
+				96F52BFC1D1FFB89006CAD7B /* SizeClassTests.swift in Sources */,
 				9603F7571D1719A4005EFB46 /* Operation.swift in Sources */,
 				96E9F6AA1D0DD320001588FF /* AssetsCatalogTests.swift in Sources */,
 				96E9F6B21D0DD454001588FF /* CoreUI_Swift.swift in Sources */,
