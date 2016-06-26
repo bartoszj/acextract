@@ -8,6 +8,9 @@
 
 import Foundation
 
+let testBundleIdentifer = "com.bjanda.acextractTests"
+let testBundle = NSBundle(identifier: testBundleIdentifer)
+
 enum Asset: String {
     case iOS = "data/assets_ios"
     case iPhone = "data/assets_iphone"
@@ -17,7 +20,7 @@ enum Asset: String {
     case watchOS = "data/assets_watch"
 
     var path: String {
-        guard let bundle = NSBundle(identifier: "com.bjanda.acextractTests") else {
+        guard let bundle = testBundle else {
             fatalError("Missing bundle")
         }
 
