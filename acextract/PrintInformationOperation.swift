@@ -167,6 +167,8 @@ struct PrintInformationOperation: Operation {
         }
 
         print("  \(namedImage.acImageName):")
+        printProperty("name", value: namedImage.name)
+        printProperty("renditionName", value: namedImage.renditionName())
         namedImage.imageType.printWithLabel("imageType")
         namedImage.idiom().printWithLabel("idiom")
         namedImage.subtype().printWithLabel("subtype")
@@ -179,6 +181,7 @@ struct PrintInformationOperation: Operation {
         namedImage.resizingMode.printWithLabel("resizing mode")
         printProperty("is template", value: namedImage.isTemplate)
         printProperty("vector based", value: namedImage.isVectorBased)
+        printProperty("hasAlignmentInformation", value: namedImage.hasAlignmentInformation)
         printProperty("hasSliceInformation", value: namedImage.hasSliceInformation)
         namedImage.templateRenderingMode.printWithLabel("template rendering mode")
         printProperty("edge insets", value: namedImage.edgeInsets)
@@ -195,11 +198,18 @@ struct PrintInformationOperation: Operation {
         printProperty("rendition key memory class", value: namedImage.renditionKey().themeGraphicsClass())
 
         printProperty("rendition name", value: namedImage._rendition().name())
-        printProperty("rendition type", value: namedImage._rendition().type())
+        namedImage._rendition().type().printWithLabel("rendition type")
         printProperty("rendition subtype", value: namedImage._rendition().subtype())
         printProperty("rendition UTI type", value: namedImage._rendition().utiType())
         printProperty("rendition data", value: namedImage._rendition().data())
         printProperty("rendition pdf", value: namedImage._rendition().pdfDocument())
         printProperty("rendition image", value: namedImage._rendition().unslicedImage())
+
+//        printProperty("rendition slice information", value: namedImage._rendition().sliceInformation()?.description())
+        printProperty("rendition slice edgeInsets", value: namedImage._rendition().sliceInformation()?.edgeInsets)
+        printProperty("rendition slice destinationRect", value: namedImage._rendition().sliceInformation()?.destinationRect)
+        namedImage._rendition().sliceInformation()?.renditionType.printWithLabel("rendition slice renditionType")
+        printProperty("rendition slice _bottomRightCapSize", value: namedImage._rendition().sliceInformation()?._bottomRightCapSize())
+        printProperty("rendition slice _topLeftCapSize", value: namedImage._rendition().sliceInformation()?._topLeftCapSize())
     }
 }

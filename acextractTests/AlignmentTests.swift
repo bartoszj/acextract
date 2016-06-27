@@ -15,6 +15,7 @@ class AlignmentTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
+            XCTAssertFalse(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets())
             XCTAssertEqual(image.acImageName, "a_no.png")
         } else {
@@ -22,6 +23,7 @@ class AlignmentTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 2.0 }).first {
+            XCTAssertFalse(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets())
             XCTAssertEqual(image.acImageName, "a_no@2x.png")
         } else {
@@ -29,6 +31,7 @@ class AlignmentTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 3.0 }).first {
+            XCTAssertFalse(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets())
             XCTAssertEqual(image.acImageName, "a_no@3x.png")
         } else {
@@ -41,6 +44,7 @@ class AlignmentTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
+            XCTAssertTrue(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets(top: 5, left: 10, bottom: 15, right: 20))
             XCTAssertEqual(image.acImageName, "a_any.png")
         } else {
@@ -48,6 +52,7 @@ class AlignmentTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 2.0 }).first {
+            XCTAssertTrue(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets(top: 3, left: 6, bottom: 9, right: 12))
             XCTAssertEqual(image.acImageName, "a_any@2x.png")
         } else {
@@ -55,6 +60,7 @@ class AlignmentTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 3.0 }).first {
+            XCTAssertTrue(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets(top: 4, left: 8, bottom: 12, right: 16))
             XCTAssertEqual(image.acImageName, "a_any@3x.png")
         } else {

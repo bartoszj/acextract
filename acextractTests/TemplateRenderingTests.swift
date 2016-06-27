@@ -15,6 +15,7 @@ class TemplateRenderingTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
+            XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Default)
             XCTAssertEqual(image.acImageName, "r_default.png")
         } else {
@@ -22,6 +23,7 @@ class TemplateRenderingTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 2.0 }).first {
+            XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Default)
             XCTAssertEqual(image.acImageName, "r_default@2x.png")
         } else {
@@ -29,6 +31,7 @@ class TemplateRenderingTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 3.0 }).first {
+            XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Default)
             XCTAssertEqual(image.acImageName, "r_default@3x.png")
         } else {
@@ -41,6 +44,7 @@ class TemplateRenderingTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
+            XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Original)
             XCTAssertEqual(image.acImageName, "r_original.png")
         } else {
@@ -48,6 +52,7 @@ class TemplateRenderingTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 2.0 }).first {
+            XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Original)
             XCTAssertEqual(image.acImageName, "r_original@2x.png")
         } else {
@@ -55,6 +60,7 @@ class TemplateRenderingTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 3.0 }).first {
+            XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Original)
             XCTAssertEqual(image.acImageName, "r_original@3x.png")
         } else {
@@ -67,6 +73,7 @@ class TemplateRenderingTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
+            XCTAssertTrue(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Template)
             XCTAssertEqual(image.acImageName, "r_template.png")
         } else {
@@ -74,6 +81,7 @@ class TemplateRenderingTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 2.0 }).first {
+            XCTAssertTrue(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Template)
             XCTAssertEqual(image.acImageName, "r_template@2x.png")
         } else {
@@ -81,6 +89,7 @@ class TemplateRenderingTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 3.0 }).first {
+            XCTAssertTrue(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Template)
             XCTAssertEqual(image.acImageName, "r_template@3x.png")
         } else {

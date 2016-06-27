@@ -44,7 +44,7 @@ or
 - [x] Size class
 - [x] Rendering
 - [x] Alignment
-- [ ] Slicing
+- [x] Slicing
 - [ ] Memory
 - [ ] Graphics
 - [ ] Data
