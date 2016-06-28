@@ -67,3 +67,4 @@ fastlane/test_output
 
 *.xcarchive
 acextract.bin
+acextract.zip

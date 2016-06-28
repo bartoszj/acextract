@@ -1,7 +1,8 @@
 .PHONY: \
 	iphone ipad ios mac tv watch \
 	assets \
-	build
+	build test \
+	zip release
 
 define ACTOOL
 xcrun actool \
@@ -14,7 +15,8 @@ ASSETS := "Assets.car"
 DATA := "acextractTests/data"
 
 all:
-	
+
+# Builad assets
 assets: iphone ipad ios mac tv watch
 
 iphone:
@@ -100,12 +102,32 @@ watch:
 	mv $(ASSETS) $(DATA)/assets_watch.car
 
 # Build app
+PROJECT := acextract.xcodeproj
+SCHEME := acextract
 ARCHIVE := acextract.xcarchive
+ACEXTRACT_BIN_PATH := $(ARCHIVE)/Products/usr/local/bin/acextract
 build:
-	-rm -r ${ARCHIVE}
+	-rm -r $(ARCHIVE)
 	xcodebuild \
-		-project acextract.xcodeproj \
-		-scheme acextract \
-		-archivePath ${PWD}/$(ARCHIVE) \
+		-project $(PROJECT) \
+		-scheme $(SCHEME) \
+		-archivePath $(PWD)/$(ARCHIVE) \
 		archive | xcpretty -c
-	cp $(ARCHIVE)/Products/usr/local/bin/acextract ${PWD}/acextract.bin
+	-rm $(PWD)/acextract.bin
+	cp $(ACEXTRACT_BIN_PATH) $(PWD)/acextract.bin
+
+# Run unit tests
+test:
+	xcodebuild \
+		-project $(PROJECT) \
+		-scheme $(SCHEME) \
+		test | xcpretty -c
+
+# Build and prepare ZIP file for release
+ZIP := acextract.zip
+zip: build
+	-rm $(ZIP)
+	zip -j $(ZIP) $(ACEXTRACT_BIN_PATH)
+
+# Release shourtcut
+release: test zip
