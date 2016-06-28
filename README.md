@@ -21,6 +21,14 @@ Support Mac, iOS and AppleWatch assets. Can extract PNG and PDF files.
 
 ## Installation:
 
+### From archive
+
+- download the newest [version](https://github.com/bartoszj/acextract/releases/latest) from GitHub
+- extract archive
+- copy `acextract` to `/usr/local/bin/` folder
+
+### Manual compilation
+
     git clone https://github.com/bartoszj/acextract.git --recursive
 
 or
@@ -45,11 +53,11 @@ or
 - [x] Rendering
 - [x] Alignment
 - [x] Slicing
-- [ ] Memory
-- [ ] Graphics
-- [ ] Data
+- [ ] Memory class
+- [ ] Graphics class
+- [ ] NSData
 - [ ] PDF
-- [ ] Atlas
+- [ ] SpriteKit Atlas
 - [ ] Apple TV Image stack
 
 ## Similar tools:
