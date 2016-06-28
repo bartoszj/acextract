@@ -2,7 +2,7 @@
 	iphone ipad ios mac tv watch \
 	assets \
 	build test \
-	zip release
+	zip release clean 
 
 define ACTOOL
 xcrun actool \
@@ -121,7 +121,7 @@ test:
 	xcodebuild \
 		-project $(PROJECT) \
 		-scheme $(SCHEME) \
-		test | xcpretty -c
+		clean test | xcpretty -c
 
 # Build and prepare ZIP file for release
 ZIP := acextract.zip
@@ -131,3 +131,10 @@ zip: build
 
 # Release shourtcut
 release: test zip
+
+# Clean files
+clean:
+	-rm -r $(ARCHIVE)
+	-rm $(PWD)/acextract.bin
+	-rm $(ZIP)
+	-rm -r output
