@@ -22,6 +22,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -33,6 +34,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -44,6 +46,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -55,6 +58,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "-")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c-*.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -66,6 +70,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "-")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c-*@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -77,6 +82,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "-")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c-*@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -94,6 +100,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_h_a&r.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -105,6 +112,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_h_a&r@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -116,6 +124,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_h_a&r@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -127,6 +136,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "+")
             XCTAssertEqual(image.acImageName, "sc_h_a&r*+.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -138,6 +148,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "+")
             XCTAssertEqual(image.acImageName, "sc_h_a&r*+@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -149,6 +160,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "+")
             XCTAssertEqual(image.acImageName, "sc_h_a&r*+@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -167,6 +179,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -178,6 +191,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -189,6 +203,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -201,6 +216,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c*-.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -212,6 +228,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c*-@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -223,6 +240,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c*-@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -241,6 +259,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+*.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -252,6 +271,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+*@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -263,6 +283,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+*@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -275,6 +296,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+-.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -286,6 +308,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+-@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -297,6 +320,7 @@ class SizeClassTests: XCTestCase {
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+-@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }

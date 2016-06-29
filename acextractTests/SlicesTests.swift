@@ -21,6 +21,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image.imageType, CUIImageType.None)
             XCTAssertEqual(image._rendition().type(), CUIImageType.None)
             XCTAssertEqual(image.acImageName, "s_none.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -31,6 +32,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image.imageType, CUIImageType.None)
             XCTAssertEqual(image._rendition().type(), CUIImageType.None)
             XCTAssertEqual(image.acImageName, "s_none@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -41,6 +43,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image.imageType, CUIImageType.None)
             XCTAssertEqual(image._rendition().type(), CUIImageType.None)
             XCTAssertEqual(image.acImageName, "s_none@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -58,6 +61,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image._rendition().sliceInformation()?.renditionType, CUIImageType.Vertical)
             XCTAssertEqual(image._rendition().sliceInformation()?.edgeInsets, NSEdgeInsets(top: 10, left: 0, bottom: 10, right: 0))
             XCTAssertEqual(image.acImageName, "s_vertical.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -70,6 +74,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image._rendition().sliceInformation()?.renditionType, CUIImageType.Vertical)
             XCTAssertEqual(image._rendition().sliceInformation()?.edgeInsets, NSEdgeInsets(top: 20, left: 0, bottom: 20, right: 0))
             XCTAssertEqual(image.acImageName, "s_vertical@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -82,6 +87,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image._rendition().sliceInformation()?.renditionType, CUIImageType.Vertical)
             XCTAssertEqual(image._rendition().sliceInformation()?.edgeInsets, NSEdgeInsets(top: 29, left: 0, bottom: 29, right: 0))
             XCTAssertEqual(image.acImageName, "s_vertical@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -99,6 +105,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image._rendition().sliceInformation()?.renditionType, CUIImageType.Horizontal)
             XCTAssertEqual(image._rendition().sliceInformation()?.edgeInsets, NSEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
             XCTAssertEqual(image.acImageName, "s_horizontal.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -111,6 +118,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image._rendition().sliceInformation()?.renditionType, CUIImageType.Horizontal)
             XCTAssertEqual(image._rendition().sliceInformation()?.edgeInsets, NSEdgeInsets(top: 0, left: 20, bottom: 0, right: 19))
             XCTAssertEqual(image.acImageName, "s_horizontal@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -123,6 +131,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image._rendition().sliceInformation()?.renditionType, CUIImageType.Horizontal)
             XCTAssertEqual(image._rendition().sliceInformation()?.edgeInsets, NSEdgeInsets(top: 0, left: 29, bottom: 0, right: 29))
             XCTAssertEqual(image.acImageName, "s_horizontal@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -140,6 +149,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image._rendition().sliceInformation()?.renditionType, CUIImageType.HorizontalAndVertical)
             XCTAssertEqual(image._rendition().sliceInformation()?.edgeInsets, NSEdgeInsets(top: 10, left: 11, bottom: 12, right: 13))
             XCTAssertEqual(image.acImageName, "s_horizontal_vertical.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -152,6 +162,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image._rendition().sliceInformation()?.renditionType, CUIImageType.HorizontalAndVertical)
             XCTAssertEqual(image._rendition().sliceInformation()?.edgeInsets, NSEdgeInsets(top: 20, left: 20, bottom: 20, right: 19))
             XCTAssertEqual(image.acImageName, "s_horizontal_vertical@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -164,6 +175,7 @@ class SlicesTests: XCTestCase {
             XCTAssertEqual(image._rendition().sliceInformation()?.renditionType, CUIImageType.HorizontalAndVertical)
             XCTAssertEqual(image._rendition().sliceInformation()?.edgeInsets, NSEdgeInsets(top: 30, left: 30, bottom: 30, right: 29))
             XCTAssertEqual(image.acImageName, "s_horizontal_vertical@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }

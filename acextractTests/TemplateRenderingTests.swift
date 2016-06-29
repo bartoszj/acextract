@@ -18,6 +18,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Default)
             XCTAssertEqual(image.acImageName, "r_default.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -26,6 +27,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Default)
             XCTAssertEqual(image.acImageName, "r_default@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -34,6 +36,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Default)
             XCTAssertEqual(image.acImageName, "r_default@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -47,6 +50,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Original)
             XCTAssertEqual(image.acImageName, "r_original.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -55,6 +59,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Original)
             XCTAssertEqual(image.acImageName, "r_original@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -63,6 +68,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTAssertFalse(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Original)
             XCTAssertEqual(image.acImageName, "r_original@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -76,6 +82,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTAssertTrue(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Template)
             XCTAssertEqual(image.acImageName, "r_template.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -84,6 +91,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTAssertTrue(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Template)
             XCTAssertEqual(image.acImageName, "r_template@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -92,6 +100,7 @@ class TemplateRenderingTests: XCTestCase {
             XCTAssertTrue(image.isTemplate)
             XCTAssertEqual(image.templateRenderingMode, CUIRenderMode.Template)
             XCTAssertEqual(image.acImageName, "r_template@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }

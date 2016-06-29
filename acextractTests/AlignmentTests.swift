@@ -18,6 +18,7 @@ class AlignmentTests: XCTestCase {
             XCTAssertFalse(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets())
             XCTAssertEqual(image.acImageName, "a_no.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -26,6 +27,7 @@ class AlignmentTests: XCTestCase {
             XCTAssertFalse(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets())
             XCTAssertEqual(image.acImageName, "a_no@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -34,6 +36,7 @@ class AlignmentTests: XCTestCase {
             XCTAssertFalse(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets())
             XCTAssertEqual(image.acImageName, "a_no@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -47,6 +50,7 @@ class AlignmentTests: XCTestCase {
             XCTAssertTrue(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets(top: 5, left: 10, bottom: 15, right: 20))
             XCTAssertEqual(image.acImageName, "a_any.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -55,6 +59,7 @@ class AlignmentTests: XCTestCase {
             XCTAssertTrue(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets(top: 3, left: 6, bottom: 9, right: 12))
             XCTAssertEqual(image.acImageName, "a_any@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -63,6 +68,7 @@ class AlignmentTests: XCTestCase {
             XCTAssertTrue(image.hasAlignmentInformation)
             XCTAssertEqual(image.alignmentEdgeInsets, NSEdgeInsets(top: 4, left: 8, bottom: 12, right: 16))
             XCTAssertEqual(image.acImageName, "a_any@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }

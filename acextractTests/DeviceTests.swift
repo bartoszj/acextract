@@ -87,6 +87,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_ipad~ipad.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -97,6 +98,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_ipad@2x~ipad.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -112,6 +114,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone~iphone.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -122,6 +125,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone@2x~iphone.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -132,6 +136,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@3x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone@3x~iphone.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -147,6 +152,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone4@2x~iphone.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -157,6 +163,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone4-568h@2x~iphone.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -172,6 +179,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_mac.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -182,6 +190,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_mac@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -197,6 +206,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_tv~tv.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -212,6 +222,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_universal.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -222,6 +233,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_universal@2x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -232,6 +244,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@3x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_universal@3x.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -247,6 +260,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_watch@2x~watch.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -257,6 +271,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_watch-38@2x~watch.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }
@@ -267,6 +282,7 @@ class DeviceTests: XCTestCase {
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_watch-42@2x~watch.png")
+            XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
             XCTFail("Cannot find image")
         }

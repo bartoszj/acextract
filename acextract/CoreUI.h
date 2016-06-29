@@ -77,6 +77,9 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 @end
 
 @interface CUINamedImage : CUINamedLookup
+// Image:
+// - _rendition().unslicedImage()
+//
 // Device idiom:
 // - idiom()
 // - subtype()

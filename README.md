@@ -48,17 +48,24 @@ or
     mkdir -p ~/AssetsOutput
     acextract -i ~/Assets.car -o ~/AssetsOutput
 
-## Todo:
-- [x] Size class
-- [x] Rendering
-- [x] Alignment
-- [x] Slicing
-- [ ] Memory class
-- [ ] Graphics class
-- [ ] NSData
-- [ ] PDF
-- [ ] SpriteKit Atlas
-- [ ] Apple TV Image stack
+## Features
+
+| Feature              | Status |
+| -------------------- | :----: |
+| iOS / iPhone / iPad  | ✔     |
+| macOS                | ✔     |
+| tvOS                 | ✔     |
+| watchOS              | ✔     |
+| 4 inch iPhone        | ✔     |
+| Size classes         | ✔     |
+| Slicing              | ✔     |
+| Memory class         | ✘      |
+| Graphics class       | ✘      |
+| Data                 | ✘      |
+| PDF                  | ✘      |
+| SpriteKit Atlas      | ✘      |
+| AppleTV image stack  | ✘      |
+| iMessage stickers    | ✘      | 
 
 ## Similar tools:
 - [iOS-Asset-Extractor](https://github.com/Marxon13/iOS-Asset-Extractor)
