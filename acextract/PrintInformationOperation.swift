@@ -72,6 +72,7 @@ extension CUIUserInterfaceSizeClass: InformationPrintable { }
 extension CUIRenderMode: InformationPrintable { }
 extension CUIResizingMode: InformationPrintable { }
 extension CUIImageType: InformationPrintable { }
+extension CUIGraphicalClass: InformationPrintable { }
 
 // MARK: - PrintInformationOperation
 struct PrintInformationOperation: Operation {
@@ -167,36 +168,17 @@ struct PrintInformationOperation: Operation {
         }
 
         print("  \(namedImage.acImageName):")
+        //
+        // CUINamedLookup
         printProperty("name", value: namedImage.name)
         printProperty("renditionName", value: namedImage.renditionName())
-        namedImage.imageType.printWithLabel("imageType")
-        namedImage.idiom().printWithLabel("idiom")
-        namedImage.subtype().printWithLabel("subtype")
-        printProperty("scale", value: namedImage.acScale.informationName)
-        namedImage.sizeClassHorizontal().printWithLabel("size vlass horizontal")
-        namedImage.sizeClassVertical().printWithLabel("size vlass vertical")
-        printProperty("opacity", value: namedImage.opacity)
-        printProperty("size", value: namedImage.size)
-        printProperty("blend mode", value: namedImage.blendMode)
-        namedImage.resizingMode.printWithLabel("resizing mode")
-        printProperty("is template", value: namedImage.isTemplate)
-        printProperty("vector based", value: namedImage.isVectorBased)
-        printProperty("hasAlignmentInformation", value: namedImage.hasAlignmentInformation)
-        printProperty("hasSliceInformation", value: namedImage.hasSliceInformation)
-        namedImage.templateRenderingMode.printWithLabel("template rendering mode")
-        printProperty("edge insets", value: namedImage.edgeInsets)
-        printProperty("alignment edge insets", value: namedImage.alignmentEdgeInsets)
-        printProperty("exifOrientation", value: namedImage.exifOrientation)
-        printProperty("image", value: namedImage.image)
 
-//        printProperty("base key", value: namedImage.baseKey())
-        printProperty("base key graphical class", value: namedImage.baseKey().themeGraphicsClass())
-        printProperty("base key memory class", value: namedImage.baseKey().themeGraphicsClass())
-
+        // renditionKey() -> CUIRenditionKey
 //        printProperty("rendition key", value: namedImage.renditionKey())
-        printProperty("rendition key graphical class", value: namedImage.renditionKey().themeGraphicsClass())
-        printProperty("rendition key memory class", value: namedImage.renditionKey().themeGraphicsClass())
+        namedImage.renditionKey().themeGraphicsClass().printWithLabel("rendition key graphical class")
+        printProperty("rendition key memory class", value: namedImage.renditionKey().themeMemoryClass())
 
+        // _rendition() -> CUIThemeRendition
         printProperty("rendition name", value: namedImage._rendition().name())
         namedImage._rendition().type().printWithLabel("rendition type")
         printProperty("rendition subtype", value: namedImage._rendition().subtype())
@@ -211,5 +193,35 @@ struct PrintInformationOperation: Operation {
         namedImage._rendition().sliceInformation()?.renditionType.printWithLabel("rendition slice renditionType")
         printProperty("rendition slice _bottomRightCapSize", value: namedImage._rendition().sliceInformation()?._bottomRightCapSize())
         printProperty("rendition slice _topLeftCapSize", value: namedImage._rendition().sliceInformation()?._topLeftCapSize())
+
+        //
+        // CUINamedImage
+        namedImage.imageType.printWithLabel("imageType")
+        namedImage.idiom().printWithLabel("idiom")
+        namedImage.subtype().printWithLabel("subtype")
+        printProperty("scale", value: namedImage.acScale.informationName)
+        namedImage.sizeClassHorizontal().printWithLabel("size vlass horizontal")
+        namedImage.sizeClassVertical().printWithLabel("size vlass vertical")
+        namedImage.graphicsClass().printWithLabel("graphics Class")
+        printProperty("memory Class", value: namedImage.memoryClass())
+        printProperty("opacity", value: namedImage.opacity)
+        printProperty("size", value: namedImage.size)
+        printProperty("blend mode", value: namedImage.blendMode)
+        namedImage.resizingMode.printWithLabel("resizing mode")
+        printProperty("is template", value: namedImage.isTemplate)
+        printProperty("vector based", value: namedImage.isVectorBased)
+        printProperty("hasAlignmentInformation", value: namedImage.hasAlignmentInformation)
+        printProperty("hasSliceInformation", value: namedImage.hasSliceInformation)
+        namedImage.templateRenderingMode.printWithLabel("template rendering mode")
+        printProperty("edge insets", value: namedImage.edgeInsets)
+        printProperty("alignment edge insets", value: namedImage.alignmentEdgeInsets)
+        printProperty("exifOrientation", value: namedImage.exifOrientation)
+        printProperty("image", value: namedImage.image)
+
+        // baseKey -> CUIRenditionKey
+//        printProperty("base key", value: namedImage.baseKey())
+        printProperty("base key graphical class", value: namedImage.baseKey().themeGraphicsClass())
+        printProperty("base key memory class", value: namedImage.baseKey().themeMemoryClass())
+
     }
 }

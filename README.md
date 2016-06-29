@@ -5,6 +5,25 @@ A tool to list and extract content from Assets.car files.
 
 Support Mac, iOS and AppleWatch assets. Can extract PNG and PDF files.
 
+## Features
+
+| Feature              | Status |
+| -------------------- | :----: |
+| iOS / iPhone / iPad  | ✔     |
+| macOS                | ✔     |
+| tvOS                 | ✔     |
+| watchOS              | ✔     |
+| 4 inch iPhone        | ✔     |
+| Size classes         | ✔     |
+| Slicing              | ✔     |
+| Memory class         | ✘      |
+| Graphics class       | ✔     |
+| Data                 | ✘      |
+| PDF                  | ✘      |
+| SpriteKit Atlas      | ✘      |
+| AppleTV image stack  | ✘      |
+| iMessage stickers    | ✘      |
+
 ## Usage:
     input is required
     Usage: ./acextract [options]
@@ -47,25 +66,6 @@ or
 
     mkdir -p ~/AssetsOutput
     acextract -i ~/Assets.car -o ~/AssetsOutput
-
-## Features
-
-| Feature              | Status |
-| -------------------- | :----: |
-| iOS / iPhone / iPad  | ✔     |
-| macOS                | ✔     |
-| tvOS                 | ✔     |
-| watchOS              | ✔     |
-| 4 inch iPhone        | ✔     |
-| Size classes         | ✔     |
-| Slicing              | ✔     |
-| Memory class         | ✘      |
-| Graphics class       | ✘      |
-| Data                 | ✘      |
-| PDF                  | ✘      |
-| SpriteKit Atlas      | ✘      |
-| AppleTV image stack  | ✘      |
-| iMessage stickers    | ✘      | 
 
 ## Similar tools:
 - [iOS-Asset-Extractor](https://github.com/Marxon13/iOS-Asset-Extractor)

@@ -82,9 +82,9 @@ extension ScaleFactor: NameStringConvertible {
 extension NSEdgeInsets: Equatable { }
 public func == (lhs: NSEdgeInsets, rhs: NSEdgeInsets) -> Bool {
     return lhs.top == rhs.top
-        && lhs.left == rhs.left
-        && lhs.bottom == rhs.bottom
-        && lhs.right == rhs.right
+    && lhs.left == rhs.left
+    && lhs.bottom == rhs.bottom
+    && lhs.right == rhs.right
 }
 
 // MARK: CUIDeviceIdiom
@@ -259,6 +259,40 @@ extension CUIImageType: CustomStringConvertible {
     }
 }
 
+// MARK: CUIGraphicalClass
+extension CUIGraphicalClass: NameStringConvertible {
+    var name: String {
+        switch self {
+        case .Default: return ""
+        case .Metal1v2: return "1v2"
+        case .Metal2v2: return "2v2"
+        case .Metal3v1: return "3v1"
+        }
+    }
+}
+
+extension CUIGraphicalClass: ValueCorrectness, IncorrectValueAssertion {
+    var correct: Bool {
+        switch self {
+        case .Default: return rawValue == Default.rawValue
+        case .Metal1v2: return rawValue == Metal1v2.rawValue
+        case .Metal2v2: return rawValue == Metal2v2.rawValue
+        case .Metal3v1: return rawValue == Metal3v1.rawValue
+        }
+    }
+}
+
+extension CUIGraphicalClass: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .Default: return "default"
+        case .Metal1v2: return "Metal 1v2"
+        case .Metal2v2: return "Metal 2v2"
+        case .Metal3v1: return "Metal 3v1"
+        }
+    }
+}
+
 // MARK: CUINamedImage
 extension CUINamedImage {
     var acScale: ScaleFactor {
@@ -287,21 +321,24 @@ extension CUINamedImage {
     }
 
     var acImageName: String {
+        // Graphical class
+        let graphics = self.graphicsClass().name
+
         // Size class suffix
         let sizeClassSuffix = acSizeClassString
-
-        // Scale
-        let scale = self.acScale.name
-
-        // File extension
-        let fileExtension = acFileExtension
 
         // Subtype (4 inch)
         let subtype = self.subtype().name
 
+        // Scale
+        let scale = self.acScale.name
+
         // Idiom
         let idiom = self.idiom().name
 
-        return "\(self.name)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
+        // File extension
+        let fileExtension = acFileExtension
+
+        return "\(self.name)\(graphics)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
     }
 }

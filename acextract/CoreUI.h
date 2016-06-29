@@ -25,6 +25,18 @@
 
 @import Foundation;
 
+// Hierarchy:
+// - CUICatalog:
+//   - imagesWithName (CUINamedLookup, CUINamedImage); wrapper around CUIRenditionKey and CUIThemeRendition?
+//     - _rendition (CUIThemeRendition)
+//       - sliceInformation (CUIRenditionSliceInformation)
+//       - unslicedImage (CGImageRef)
+//       - pdfDocument (CGPDFDocument)
+//       - data (NSData)
+//     - renditionKey (CUIRenditionKey); contains usefull numerical information
+//
+//     - baseKey (CUIRenditionKey)
+
 typedef NS_ENUM(NSInteger, CUIDeviceIdiom) {
     CUIDeviceIdiomUniversal  = 0,
     CUIDeviceIdiomIPhone     = 1,
@@ -64,7 +76,45 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
     CUIImageTypeHorizontalAndVertical = 3,
 };
 
-@class CUIRenditionKey, CUIThemeRendition, CUIRenditionSliceInformation;
+typedef NS_ENUM(NSInteger, CUIGraphicalClass) {
+    CUIGraphicalClassDefault  = 0,
+    CUIGraphicalClassMetal1v2 = 1,
+    CUIGraphicalClassMetal2v2 = 2,
+    CUIGraphicalClassMetal3v1 = 3,
+};
+
+@class CUIRenditionSliceInformation;
+
+@interface CUIRenditionKey : NSObject <NSCopying, NSCoding>
+
+- (CUIGraphicalClass)themeGraphicsClass;
+- (long long)themeMemoryClass;
+
+@end
+
+@interface CUIThemeRendition : NSObject
+
+- (nonnull NSString *)name;
+- (CUIImageType)type;
+- (unsigned int)subtype;
+- (nullable NSString *)utiType;
+- (nullable NSData *)data;
+- (nullable CGPDFDocumentRef)pdfDocument;
+- (nullable CUIRenditionSliceInformation *)sliceInformation;
+- (nullable CGImageRef)unslicedImage;
+
+@end
+
+@interface CUIRenditionSliceInformation : NSObject <NSCopying>
+
+@property(readonly, nonatomic) NSEdgeInsets edgeInsets;
+@property(readonly, nonatomic) struct CGRect destinationRect;
+@property(readonly, nonatomic) CUIImageType renditionType;
+- (struct CGSize)_bottomRightCapSize;
+- (struct CGSize)_topLeftCapSize;
+- (nonnull NSString *)description;
+
+@end
 
 @interface CUINamedLookup : NSObject
 
@@ -88,6 +138,11 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 // Size class:
 // - sizeClassVertical()
 // - sizeClassHorizontal()
+//
+// Graphical class:
+// - graphicsClass()
+// - baseKey().themeGraphicsClass()
+// - renditionKey().themeGraphicsClass()
 //
 // Alignment:
 // - hasAlignmentInformation
@@ -126,40 +181,9 @@ typedef NS_ENUM(NSInteger, CUIImageType) {
 - (CUIDeviceIdiom)idiom;
 
 - (nonnull CUIRenditionKey *)baseKey;
-- (long long)graphicsClass;
+- (CUIGraphicalClass)graphicsClass;
 - (long long)memoryClass;
 
-
-@end
-
-@interface CUIRenditionKey : NSObject <NSCopying, NSCoding>
-
-- (long long)themeGraphicsClass;
-- (long long)themeMemoryClass;
-
-@end
-
-@interface CUIThemeRendition : NSObject
-
-- (nonnull NSString *)name;
-- (CUIImageType)type;
-- (unsigned int)subtype;
-- (nullable NSString *)utiType;
-- (nullable NSData *)data;
-- (nullable CGPDFDocumentRef)pdfDocument;
-- (nullable CUIRenditionSliceInformation *)sliceInformation;
-- (nullable CGImageRef)unslicedImage;
-
-@end
-
-@interface CUIRenditionSliceInformation : NSObject <NSCopying>
-
-@property(readonly, nonatomic) NSEdgeInsets edgeInsets;
-@property(readonly, nonatomic) struct CGRect destinationRect;
-@property(readonly, nonatomic) CUIImageType renditionType;
-- (struct CGSize)_bottomRightCapSize;
-- (struct CGSize)_topLeftCapSize;
-- (nonnull NSString *)description;
 
 @end
 
