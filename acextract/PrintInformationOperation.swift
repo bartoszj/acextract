@@ -73,6 +73,7 @@ extension CUIRenderMode: InformationPrintable { }
 extension CUIResizingMode: InformationPrintable { }
 extension CUIImageType: InformationPrintable { }
 extension CUIGraphicalClass: InformationPrintable { }
+extension CUIMemoryClass: InformationPrintable { }
 
 // MARK: - PrintInformationOperation
 struct PrintInformationOperation: Operation {
@@ -176,7 +177,7 @@ struct PrintInformationOperation: Operation {
         // renditionKey() -> CUIRenditionKey
 //        printProperty("rendition key", value: namedImage.renditionKey())
         namedImage.renditionKey().themeGraphicsClass().printWithLabel("rendition key graphical class")
-        printProperty("rendition key memory class", value: namedImage.renditionKey().themeMemoryClass())
+        namedImage.renditionKey().themeMemoryClass().printWithLabel("rendition key memory class")
 
         // _rendition() -> CUIThemeRendition
         printProperty("rendition name", value: namedImage._rendition().name())
@@ -202,8 +203,8 @@ struct PrintInformationOperation: Operation {
         printProperty("scale", value: namedImage.acScale.informationName)
         namedImage.sizeClassHorizontal().printWithLabel("size vlass horizontal")
         namedImage.sizeClassVertical().printWithLabel("size vlass vertical")
-        namedImage.graphicsClass().printWithLabel("graphics Class")
-        printProperty("memory Class", value: namedImage.memoryClass())
+        namedImage.graphicsClass().printWithLabel("graphics class")
+        namedImage.memoryClass().printWithLabel("memory class")
         printProperty("opacity", value: namedImage.opacity)
         printProperty("size", value: namedImage.size)
         printProperty("blend mode", value: namedImage.blendMode)
@@ -220,8 +221,7 @@ struct PrintInformationOperation: Operation {
 
         // baseKey -> CUIRenditionKey
 //        printProperty("base key", value: namedImage.baseKey())
-        printProperty("base key graphical class", value: namedImage.baseKey().themeGraphicsClass())
-        printProperty("base key memory class", value: namedImage.baseKey().themeMemoryClass())
-
+        namedImage.baseKey().themeGraphicsClass().printWithLabel("base key graphical class")
+        namedImage.baseKey().themeMemoryClass().printWithLabel("base key memory class")
     }
 }

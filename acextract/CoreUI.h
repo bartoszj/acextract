@@ -83,12 +83,19 @@ typedef NS_ENUM(NSInteger, CUIGraphicalClass) {
     CUIGraphicalClassMetal3v1 = 3,
 };
 
+typedef NS_ENUM(NSInteger, CUIMemoryClass) {
+    CUIMemoryClassDefault  = 0,
+    CUIMemoryClassMemory1GB = 1,
+    CUIMemoryClassMemory2GB = 2,
+    CUIMemoryClassMemory4GB = 3,
+};
+
 @class CUIRenditionSliceInformation;
 
 @interface CUIRenditionKey : NSObject <NSCopying, NSCoding>
 
 - (CUIGraphicalClass)themeGraphicsClass;
-- (long long)themeMemoryClass;
+- (CUIMemoryClass)themeMemoryClass;
 
 @end
 
@@ -182,7 +189,7 @@ typedef NS_ENUM(NSInteger, CUIGraphicalClass) {
 
 - (nonnull CUIRenditionKey *)baseKey;
 - (CUIGraphicalClass)graphicsClass;
-- (long long)memoryClass;
+- (CUIMemoryClass)memoryClass;
 
 
 @end

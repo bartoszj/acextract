@@ -293,6 +293,40 @@ extension CUIGraphicalClass: CustomStringConvertible {
     }
 }
 
+// MARK: CUIMemoryClass
+extension CUIMemoryClass: NameStringConvertible {
+    var name: String {
+        switch self {
+        case .Default: return ""
+        case .Memory1GB: return "1gb"
+        case .Memory2GB: return "2gb"
+        case .Memory4GB: return "4gb"
+        }
+    }
+}
+
+extension CUIMemoryClass: ValueCorrectness, IncorrectValueAssertion {
+    var correct: Bool {
+        switch self {
+        case .Default: return rawValue == Default.rawValue
+        case .Memory1GB: return rawValue == Memory1GB.rawValue
+        case .Memory2GB: return rawValue == Memory2GB.rawValue
+        case .Memory4GB: return rawValue == Memory4GB.rawValue
+        }
+    }
+}
+
+extension CUIMemoryClass: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .Default: return "default"
+        case .Memory1GB: return "1GB"
+        case .Memory2GB: return "2GB"
+        case .Memory4GB: return "4GB"
+        }
+    }
+}
+
 // MARK: CUINamedImage
 extension CUINamedImage {
     var acScale: ScaleFactor {
@@ -324,6 +358,9 @@ extension CUINamedImage {
         // Graphical class
         let graphics = self.graphicsClass().name
 
+        // Memory class
+        let memory = self.memoryClass().name
+
         // Size class suffix
         let sizeClassSuffix = acSizeClassString
 
@@ -339,6 +376,6 @@ extension CUINamedImage {
         // File extension
         let fileExtension = acFileExtension
 
-        return "\(self.name)\(graphics)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
+        return "\(self.name)\(graphics)\(memory)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
     }
 }

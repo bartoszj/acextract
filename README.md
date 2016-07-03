@@ -16,7 +16,7 @@ Support Mac, iOS and AppleWatch assets. Can extract PNG and PDF files.
 | 4 inch iPhone        | ✔     |
 | Size classes         | ✔     |
 | Slicing              | ✔     |
-| Memory class         | ✘      |
+| Memory class         | ✔     |
 | Graphics class       | ✔     |
 | Data                 | ✘      |
 | PDF                  | ✘      |
