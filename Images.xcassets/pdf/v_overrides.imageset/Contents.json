@@ -1,6 +1,25 @@
 {
   "images" : [
     {
+      "idiom" : "universal",
+      "filename" : "facebook-2.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "blue.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "blue@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "blue@3x.png",
+      "scale" : "3x"
+    },
+    {
       "idiom" : "iphone",
       "filename" : "facebook.pdf"
     },
@@ -45,14 +64,17 @@
       "scale" : "2x"
     },
     {
-      "idiom" : "watch"
+      "idiom" : "watch",
+      "filename" : "facebook-3.pdf"
     },
     {
       "idiom" : "watch",
+      "filename" : "facebook-4.pdf",
       "screen-width" : "<=145"
     },
     {
       "idiom" : "watch",
+      "filename" : "facebook-5.pdf",
       "screen-width" : ">145"
     },
     {
@@ -71,6 +93,15 @@
       "filename" : "cyan@3x.png",
       "screen-width" : ">145",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "tv",
+      "filename" : "facebook-6.pdf"
+    },
+    {
+      "idiom" : "tv",
+      "filename" : "image.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "mac",

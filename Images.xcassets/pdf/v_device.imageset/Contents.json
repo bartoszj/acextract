@@ -1,0 +1,47 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "facebook-2.pdf"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "facebook.pdf"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "facebook-1.pdf",
+      "subtype" : "retina4"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "facebook-1-1.pdf"
+    },
+    {
+      "idiom" : "watch",
+      "filename" : "facebook-3.pdf"
+    },
+    {
+      "idiom" : "watch",
+      "filename" : "facebook-4.pdf",
+      "screen-width" : "<=145"
+    },
+    {
+      "idiom" : "watch",
+      "filename" : "facebook-5.pdf",
+      "screen-width" : ">145"
+    },
+    {
+      "idiom" : "tv",
+      "filename" : "facebook-6.pdf"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "facebook-1-1-1.pdf"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

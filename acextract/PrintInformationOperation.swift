@@ -56,16 +56,6 @@ private extension InformationPrintable where Self: protocol<RawRepresentable, In
     }
 }
 
-private extension InformationPrintable where Self: protocol<InformationNameStringConvertible, IncorrectValueAssertion> {
-    func printWithLabel(label: String) {
-        var text = "    \(label): \(self.informationName)"
-        if !self.assertIncorrectValue() {
-            text += " INCORRECT!"
-        }
-        print(text)
-    }
-}
-
 extension CUIDeviceIdiom: InformationPrintable { }
 extension CUISubtype: InformationPrintable { }
 extension CUIUserInterfaceSizeClass: InformationPrintable { }
@@ -180,6 +170,7 @@ struct PrintInformationOperation: Operation {
         namedImage.renditionKey().themeMemoryClass().printWithLabel("rendition key memory class")
 
         // _rendition() -> CUIThemeRendition
+//        printProperty("rendition", value: namedImage._rendition().description)
         printProperty("rendition name", value: namedImage._rendition().name())
         namedImage._rendition().type().printWithLabel("rendition type")
         printProperty("rendition subtype", value: namedImage._rendition().subtype())
@@ -188,6 +179,7 @@ struct PrintInformationOperation: Operation {
         printProperty("rendition pdf", value: namedImage._rendition().pdfDocument())
         printProperty("rendition image", value: namedImage._rendition().unslicedImage())
 
+        // _rendition().sliceInformation() -> CUIRenditionSliceInformation
 //        printProperty("rendition slice information", value: namedImage._rendition().sliceInformation()?.description())
         printProperty("rendition slice edgeInsets", value: namedImage._rendition().sliceInformation()?.edgeInsets)
         printProperty("rendition slice destinationRect", value: namedImage._rendition().sliceInformation()?.destinationRect)
