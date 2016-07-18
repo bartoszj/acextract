@@ -37,15 +37,15 @@ class CorrectnessTests: XCTestCase {
     func testWatchCorrectness() {
         printOperation.read(assetsContainer.watchOS)
     }
-    
+
     func testPrintInformationName() {
         PrintInformationOperation(verbose: .Name).read(assetsContainer.iOS)
     }
-    
+
     func testPrintInformationVerbose() {
         PrintInformationOperation(verbose: .Verbose).read(assetsContainer.iOS)
     }
-    
+
     func testPrintInformationVeryVerbose() {
         PrintInformationOperation(verbose: .VeryVerbose).read(assetsContainer.iOS)
     }

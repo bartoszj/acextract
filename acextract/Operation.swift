@@ -27,15 +27,15 @@ import Foundation
 
 // MARK: - Protocols
 protocol Operation {
-    func read(catalg: AssetsCatalog) throws -> Void
+    func read(catalog: AssetsCatalog) throws -> Void
 }
 
 struct CompoundOperation: Operation {
     let operations: [Operation]
 
-    func read(catalg: AssetsCatalog) throws {
+    func read(catalog: AssetsCatalog) throws {
         for operation in operations {
-            try operation.read(catalg)
+            try operation.read(catalog)
         }
     }
 }
@@ -65,11 +65,11 @@ struct ExtractOperation: Operation {
     }
 
     // MARK: Methods
-    func read(catalg: AssetsCatalog) throws {
+    func read(catalog: AssetsCatalog) throws {
         // Create output folder if needed
         try checkAndCreateFolder()
         // For every image set and every named image.
-        for imageSet in catalg.imageSets {
+        for imageSet in catalog.imageSets {
             for namedImage in imageSet.namedImages {
                 // Save image to file.
                 extractNamedImage(namedImage)
@@ -119,10 +119,10 @@ private extension CUINamedImage {
      - throws: Thorws if there is no image data.
      */
     func acSaveAtPath(filePath: String) throws {
-        if self._rendition().pdfDocument() != nil {
-            try self.acSavePDF(filePath)
-        } else if self._rendition().unslicedImage() != nil {
-            try self.acSaveImage(filePath)
+        if _rendition().pdfDocument() != nil {
+            try acSavePDF(filePath)
+        } else if _rendition().unslicedImage() != nil {
+            try acSaveImage(filePath)
         } else {
             throw ExtractOperationError.RenditionMissingData
         }
@@ -130,7 +130,7 @@ private extension CUINamedImage {
 
     func acSaveImage(filePath: String) throws {
         let filePathURL = NSURL(fileURLWithPath: filePath)
-        guard let cgImage = self._rendition().unslicedImage()?.takeUnretainedValue() else {
+        guard let cgImage = _rendition().unslicedImage()?.takeUnretainedValue() else {
             throw ExtractOperationError.CannotSaveImage
         }
         guard let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil) else {
@@ -148,7 +148,7 @@ private extension CUINamedImage {
         // Based on:
         // http://stackoverflow.com/questions/3780745/saving-a-pdf-document-to-disk-using-quartz
 
-        guard let cgPDFDocument = self._rendition().pdfDocument()?.takeUnretainedValue() else {
+        guard let cgPDFDocument = _rendition().pdfDocument()?.takeUnretainedValue() else {
             throw ExtractOperationError.CannotCreatePDFDocument
         }
         // Create the pdf context

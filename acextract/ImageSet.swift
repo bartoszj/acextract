@@ -29,12 +29,6 @@ struct ImageSet {
     // MARK: Properties
     let name: String
     let namedImages: [CUINamedImage]
-
-    // MARK: Initialization
-    init(name: String, namedImages: [CUINamedImage]) {
-        self.name = name
-        self.namedImages = namedImages
-    }
 }
 
 extension ImageSet: CustomStringConvertible {

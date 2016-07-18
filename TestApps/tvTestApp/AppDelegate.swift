@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  iOSTestApp
+//  tvTestApp
 //
-//  Created by Bartosz Janda on 22.12.2014.
-//  Copyright (c) 2014 Bartosz Janda. All rights reserved.
+//  Created by Bartosz Janda on 12.06.2016.
+//  Copyright © 2016 Bartosz Janda. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,6 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -40,7 +39,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
-

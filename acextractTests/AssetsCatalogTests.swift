@@ -11,7 +11,7 @@ import XCTest
 class FakeOperation: Operation {
     var executed = false
 
-    func read(catalg: AssetsCatalog) throws {
+    func read(catalog: AssetsCatalog) throws {
         executed = true
     }
 }

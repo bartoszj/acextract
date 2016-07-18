@@ -334,32 +334,26 @@ extension CUINamedImage {
     }
 
     var acSizeClassString: String {
-        switch (self.sizeClassHorizontal(), self.sizeClassVertical()) {
+        switch (sizeClassHorizontal(), sizeClassVertical()) {
         case (.Any, .Any): return ""
         case let (horizontal, vertical): return "\(horizontal.name)\(vertical.name)"
         }
     }
 
     private var acFileExtension: String {
-        if acIsPDF {
-            return "pdf"
-        }
-        return "png"
+        return acIsPDF ? "pdf" : "png"
     }
 
     var acIsPDF: Bool {
-        if self.isVectorBased && self.size == CGSize.zero {
-            return true
-        }
-        return false
+        return isVectorBased && size == CGSize.zero
     }
 
     var acImageName: String {
         // Graphical class
-        let graphics = self.graphicsClass().name
+        let graphics = graphicsClass().name
 
         // Memory class
-        let memory = self.memoryClass().name
+        let memory = memoryClass().name
 
         // Size class suffix
         let sizeClassSuffix = acSizeClassString
@@ -368,7 +362,7 @@ extension CUINamedImage {
         let subtype = self.subtype().name
 
         // Scale
-        let scale = self.acScale.name
+        let scale = acScale.name
 
         // Idiom
         let idiom = self.idiom().name
@@ -376,6 +370,6 @@ extension CUINamedImage {
         // File extension
         let fileExtension = acFileExtension
 
-        return "\(self.name)\(graphics)\(memory)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
+        return "\(name)\(graphics)\(memory)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
     }
 }

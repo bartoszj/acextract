@@ -7,11 +7,7 @@ disabled_rules: # rule identifiers to exclude from running
 #  - force_unwrapping
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - CommandLine
-  - iOSTestApp
-  - macTestApp
-  - tvTestApp
-  - watchTestApp
-  - watchTestApp Extension
+  - TestApps
 type_name:
   excluded:
     - OK

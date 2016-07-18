@@ -48,8 +48,8 @@ private protocol InformationPrintable {
 
 private extension InformationPrintable where Self: protocol<RawRepresentable, IncorrectValueAssertion> {
     func printWithLabel(label: String) {
-        var text = "    \(label): \(self) (\(self.rawValue))"
-        if !self.assertIncorrectValue() {
+        var text = "    \(label): \(self) (\(rawValue))"
+        if !assertIncorrectValue() {
             text += " INCORRECT!"
         }
         print(text)
@@ -76,9 +76,9 @@ struct PrintInformationOperation: Operation {
         case VeryVeryVerbose
     }
 
-    func read(catalg: AssetsCatalog) {
-        print("Assets catalog: \(catalg.filePath)")
-        for imageSet in catalg.imageSets {
+    func read(catalog: AssetsCatalog) {
+        print("Assets catalog: \(catalog.filePath)")
+        for imageSet in catalog.imageSets {
             printImageSetData(imageSet)
         }
     }

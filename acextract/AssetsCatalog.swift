@@ -41,21 +41,21 @@ struct AssetsCatalog {
      - returns: List of image sets.
      */
     var imageSets: [ImageSet] {
-        return self.catalog.allImageNames().map(imageSet(withName:))
+        return catalog.allImageNames().map(imageSet(withName:))
     }
 
     // MARK: Initialization
     init(path: String) throws {
-        let fp = (path as NSString).stringByExpandingTildeInPath
-        guard NSFileManager.defaultManager().fileExistsAtPath(fp) else {
+        let filePath = (path as NSString).stringByExpandingTildeInPath
+        guard NSFileManager.defaultManager().fileExistsAtPath(filePath) else {
             throw AssetsCatalogError.FileDoesntExists
         }
 
-        let url = NSURL(fileURLWithPath: fp)
-        self.filePath = fp
+        self.filePath = filePath
+        let url = NSURL(fileURLWithPath: filePath)
 
         do {
-            self.catalog = try CUICatalog(URL: url)
+            catalog = try CUICatalog(URL: url)
         } catch {
             throw AssetsCatalogError.CannotOpenAssetsCatalog
         }
@@ -70,7 +70,7 @@ struct AssetsCatalog {
      - returns: Image set with given name.
      */
     func imageSet(withName name: String) -> ImageSet {
-        let images = self.catalog.imagesWithName(name)
+        let images = catalog.imagesWithName(name)
         return ImageSet(name: name, namedImages: images)
     }
 }
