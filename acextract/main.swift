@@ -26,7 +26,7 @@
 import Foundation
 
 // Command line.
-let cli = CommandLine()
+let cli = CommandLineTool()
 let cliHelp = BoolOption(shortFlag: "h", longFlag: "help", helpMessage: "Show help message.")
 let cliList = BoolOption(shortFlag: "l", longFlag: "list", helpMessage: "Print content of the CAR file without extracting.")
 let cliVerbose = CounterOption(shortFlag: "v", longFlag: "verbose", helpMessage: "Print more detail. You can use -vv or -vvv for more info.")
@@ -66,12 +66,12 @@ else if let input = cliInput.value {
             default: verbose = .VeryVeryVerbose
             }
             let pi = PrintInformationOperation(verbose: verbose)
-            try assetsCatalog.performOperation(pi)
+            try assetsCatalog.performOperation(operation: pi)
         }
         // Extract to folder.
         if let output = cliOutput.value {
             let extract = ExtractOperation(path: output)
-            try assetsCatalog.performOperation(extract)
+            try assetsCatalog.performOperation(operation: extract)
         }
     }
     // Cannot create catalog reader.

@@ -27,15 +27,15 @@ import Foundation
 
 // MARK: - Protocols
 protocol Operation {
-    func read(catalog: AssetsCatalog) throws -> Void
+    func read(catalg: AssetsCatalog) throws -> Void
 }
 
 struct CompoundOperation: Operation {
     let operations: [Operation]
 
-    func read(catalog: AssetsCatalog) throws {
+    func read(catalg: AssetsCatalog) throws {
         for operation in operations {
-            try operation.read(catalog)
+            try operation.read(catalg: catalg)
         }
     }
 }
@@ -47,7 +47,7 @@ let resetSeq = "[0m"
 let redColorSeq = "[31m"
 
 // MARK: - ExtractOperation
-enum ExtractOperationError: ErrorType {
+enum ExtractOperationError: Error {
     case OutputPathIsNotDirectory
     case RenditionMissingData
     case CannotSaveImage
@@ -61,18 +61,18 @@ struct ExtractOperation: Operation {
 
     // MARK: Initialization
     init(path: String) {
-        outputPath = (path as NSString).stringByExpandingTildeInPath
+        outputPath = (path as NSString).expandingTildeInPath
     }
 
     // MARK: Methods
-    func read(catalog: AssetsCatalog) throws {
+    func read(catalg: AssetsCatalog) throws {
         // Create output folder if needed
         try checkAndCreateFolder()
         // For every image set and every named image.
-        for imageSet in catalog.imageSets {
+        for imageSet in catalg.imageSets {
             for namedImage in imageSet.namedImages {
                 // Save image to file.
-                extractNamedImage(namedImage)
+                extractNamedImage(namedImage: namedImage)
             }
         }
     }
@@ -86,10 +86,10 @@ struct ExtractOperation: Operation {
     private func checkAndCreateFolder() throws {
         // Check if directory exists at given path and it is directory.
         var isDirectory: ObjCBool = false
-        if NSFileManager.defaultManager().fileExistsAtPath(outputPath, isDirectory: &isDirectory) && !isDirectory {
+        if FileManager.default.fileExists(atPath: outputPath, isDirectory: &isDirectory) && !(isDirectory.boolValue) {
             throw ExtractOperationError.OutputPathIsNotDirectory
         } else {
-            try NSFileManager.defaultManager().createDirectoryAtPath(outputPath, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(atPath: outputPath, withIntermediateDirectories: true, attributes: nil)
         }
     }
 
@@ -99,10 +99,10 @@ struct ExtractOperation: Operation {
      - parameter namedImage: Named image to save.
      */
     private func extractNamedImage(namedImage: CUINamedImage) {
-        let filePath = (outputPath as NSString).stringByAppendingPathComponent(namedImage.acImageName)
+        let filePath = (outputPath as NSString).appendingPathComponent(namedImage.acImageName)
         print("Extracting: \(namedImage.acImageName)", terminator: "")
         do {
-            try namedImage.acSaveAtPath(filePath)
+            try namedImage.acSaveAtPath(filePath: filePath)
             print(" \(escapeSeq+boldSeq)OK\(escapeSeq+resetSeq)")
         } catch {
             print(" \(escapeSeq+boldSeq)\(escapeSeq+redColorSeq)FAILED\(escapeSeq+resetSeq) \(error)")
@@ -119,10 +119,10 @@ private extension CUINamedImage {
      - throws: Thorws if there is no image data.
      */
     func acSaveAtPath(filePath: String) throws {
-        if _rendition().pdfDocument() != nil {
-            try acSavePDF(filePath)
-        } else if _rendition().unslicedImage() != nil {
-            try acSaveImage(filePath)
+        if self._rendition().pdfDocument() != nil {
+            try self.acSavePDF(filePath: filePath)
+        } else if self._rendition().unslicedImage() != nil {
+            try self.acSaveImage(filePath: filePath)
         } else {
             throw ExtractOperationError.RenditionMissingData
         }
@@ -130,7 +130,7 @@ private extension CUINamedImage {
 
     func acSaveImage(filePath: String) throws {
         let filePathURL = NSURL(fileURLWithPath: filePath)
-        guard let cgImage = _rendition().unslicedImage()?.takeUnretainedValue() else {
+        guard let cgImage = self._rendition().unslicedImage()?.takeUnretainedValue() else {
             throw ExtractOperationError.CannotSaveImage
         }
         guard let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil) else {
@@ -148,29 +148,29 @@ private extension CUINamedImage {
         // Based on:
         // http://stackoverflow.com/questions/3780745/saving-a-pdf-document-to-disk-using-quartz
 
-        guard let cgPDFDocument = _rendition().pdfDocument()?.takeUnretainedValue() else {
+        guard let cgPDFDocument = self._rendition().pdfDocument()?.takeUnretainedValue() else {
             throw ExtractOperationError.CannotCreatePDFDocument
         }
         // Create the pdf context
-        let cgPage = CGPDFDocumentGetPage(cgPDFDocument, 1)
-        var cgPageRect = CGPDFPageGetBoxRect(cgPage, .MediaBox)
+        let cgPage = CGPDFDocument.page(cgPDFDocument)
+        var cgPageRect = (cgPage as! CGPDFPage).getBoxRect(.mediaBox)
         let mutableData = NSMutableData()
 
-        let cgDataConsumer = CGDataConsumerCreateWithCFData(mutableData)
-        let cgPDFContext = CGPDFContextCreate(cgDataConsumer, &cgPageRect, nil)
+        let cgDataConsumer = CGDataConsumer(data: mutableData)
+        let cgPDFContext = CGContext(consumer: cgDataConsumer!, mediaBox: &cgPageRect, nil)
         defer {
-            CGPDFContextClose(cgPDFContext)
+            cgPDFContext!.closePDF()
         }
 
-        if CGPDFDocumentGetNumberOfPages(cgPDFDocument) > 0 {
-            CGPDFContextBeginPage(cgPDFContext, nil)
-            CGContextDrawPDFPage(cgPDFContext, cgPage)
-            CGPDFContextEndPage(cgPDFContext)
+        if cgPDFDocument.numberOfPages > 0 {
+            cgPDFContext!.beginPDFPage(nil)
+            cgPDFContext!.drawPDFPage(cgPage as! CGPDFPage)
+            cgPDFContext!.endPDFPage()
         } else {
             throw ExtractOperationError.CannotCreatePDFDocument
         }
 
-        if !mutableData.writeToFile(filePath, atomically: true) {
+        if !mutableData.write(toFile: filePath, atomically: true) {
             throw ExtractOperationError.CannotCreatePDFDocument
         }
     }

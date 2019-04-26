@@ -26,9 +26,7 @@
 @import Foundation;
 
 // Hierarchy:
-// - CUICatalog; wrapper around CUIStructuredThemeStore and CUICommonAssetStorage?
-//   - _themeStore (CUIStructuredThemeStore)
-//     - themeStore (CUICommonAssetStorage)
+// - CUICatalog:
 //   - imagesWithName (CUINamedLookup, CUINamedImage); wrapper around CUIRenditionKey and CUIThemeRendition?
 //     - _rendition (CUIThemeRendition)
 //       - sliceInformation (CUIRenditionSliceInformation)
@@ -86,15 +84,10 @@ typedef NS_ENUM(NSInteger, CUIGraphicalClass) {
 };
 
 typedef NS_ENUM(NSInteger, CUIMemoryClass) {
-    CUIMemoryClassDefault   = 0,
+    CUIMemoryClassDefault  = 0,
     CUIMemoryClassMemory1GB = 1,
     CUIMemoryClassMemory2GB = 2,
     CUIMemoryClassMemory4GB = 3,
-};
-
-struct _renditionkeytoken {
-    unsigned short identifier;
-    unsigned short value;
 };
 
 @class CUIRenditionSliceInformation;
@@ -103,24 +96,10 @@ struct _renditionkeytoken {
 
 - (CUIGraphicalClass)themeGraphicsClass;
 - (CUIMemoryClass)themeMemoryClass;
-- (nonnull const struct _renditionkeytoken *)keyList;
 
 @end
 
 @interface CUIThemeRendition : NSObject
-// _CUIExplicitlyPackedContentRendition
-// _CUIExternalLinkRendition
-// _CUIInternalLinkRendition
-// _CUIPDFRendition
-// _CUIRawDataRendition
-//   _CUILayerStackRendition
-// _CUIRawPixelRendition
-// _CUIThemeEffectRendition
-// _CUIThemeGradientRendition
-// _CUIThemePixelRendition
-// CUIMutableThemeRendition
-// CUIThemeSchemaEffectRendition
-// CUIThemeSchemaRendition
 
 - (nonnull NSString *)name;
 - (CUIImageType)type;
@@ -145,18 +124,12 @@ struct _renditionkeytoken {
 @end
 
 @interface CUINamedLookup : NSObject
-// CUINamedData
-// CUINamedExternalLink
-// CUINamedImage
-//   CUINamedLayerImage
-// CUINamedImageAtlas
-// CUINamedLayerStack
 
 @property(copy, nonatomic, nonnull) NSString *name;
 @property(readonly, nonatomic) BOOL representsOnDemandContent;
 - (nonnull CUIRenditionKey *)renditionKey;
 - (nonnull NSString *)renditionName;
-- (nonnull __kindof CUIThemeRendition *)_rendition;
+- (nonnull CUIThemeRendition *)_rendition;
 
 @end
 
@@ -208,7 +181,7 @@ struct _renditionkeytoken {
 @property(readonly, nonatomic) CUIImageType imageType;
 @property(readonly, nonatomic) double scale;
 @property(readonly, nonatomic) struct CGSize size;
-@property(readonly, nonatomic, nonnull) CGImageRef image;
+@property(readonly, nonatomic, nonnull) struct CGImage *image;
 - (CUIUserInterfaceSizeClass)sizeClassVertical;
 - (CUIUserInterfaceSizeClass)sizeClassHorizontal;
 - (CUISubtype)subtype;
@@ -221,26 +194,10 @@ struct _renditionkeytoken {
 
 @end
 
-@interface CUICommonAssetStorage : NSObject
-
-- (nonnull NSArray<NSString *> *)allRenditionNames;
-- (nonnull NSArray<CUIRenditionKey *> *)allAssetKeys;
-
-@end
-
-@interface CUIStructuredThemeStore : NSObject
-
-- (nonnull NSArray<NSString *> *)allImageNames;
-- (nonnull CUICommonAssetStorage *)themeStore;
-- (nonnull __kindof CUIThemeRendition *)renditionWithKey:(nonnull const struct _renditionkeytoken *)renditionkeytoken;
-
-@end
-
 @interface CUICatalog : NSObject
 
 - (nullable instancetype)initWithURL:(nonnull NSURL *)url error:(NSError *_Nullable __autoreleasing *_Nullable)error;
 - (nonnull NSArray<NSString *> *)allImageNames;
-- (nonnull NSArray<CUINamedImage *> *)imagesWithName:(nonnull NSString *)name;
-- (nonnull CUIStructuredThemeStore *)_themeStore;
-
+//- (nonnull NSArray<CUINamedImage *> *)imagesWithName:(nonnull NSString *)name;
+- (nonnull NSArray<id> *)imagesWithName:(nonnull NSString *)name;
 @end

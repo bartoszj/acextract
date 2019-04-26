@@ -1,0 +1,25 @@
+{
+  "images" : [
+    {
+      "idiom" : "iphone",
+      "filename" : "facebook.pdf"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "facebook-1.pdf",
+      "subtype" : "retina4"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "facebook-1-1.pdf"
+    },
+    {
+      "idiom" : "mac",
+      "filename" : "facebook-1-1-1.pdf"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

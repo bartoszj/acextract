@@ -7,26 +7,22 @@ Support Mac, iOS and AppleWatch assets. Can extract PNG and PDF files.
 
 ## Features
 
-| Feature                    | Status |
-| -------------------------- | :----: |
-| iOS / iPhone / iPad        | ✔     |
-| macOS                      | ✔     |
-| tvOS                       | ✔     |
-| watchOS                    | ✔     |
-| 4 inch iPhone              | ✔     |
-| Size classes               | ✔     |
-| Slicing                    | ✔     |
-| Memory class               | ✔     |
-| Graphics class             | ✔     |
-| Data                       | ✘      |
-| PDF                        | ✘      |
-| SpriteKit Atlas            | ✘      |
-| AppleTV image stack        | ✘      |
-| iMessage stickers          | ✘      |
-| Tags / On demand resources | ?      |
-| Right to left support      | ?      |
-| Display P3                 | ✘      |
-| Metal 3v2                  | ✘      |
+| Feature              | Status |
+| -------------------- | :----: |
+| iOS / iPhone / iPad  | ✔     |
+| macOS                | ✔     |
+| tvOS                 | ✔     |
+| watchOS              | ✔     |
+| 4 inch iPhone        | ✔     |
+| Size classes         | ✔     |
+| Slicing              | ✔     |
+| Memory class         | ✔     |
+| Graphics class       | ✔     |
+| Data                 | ✘      |
+| PDF                  | ✘      |
+| SpriteKit Atlas      | ✘      |
+| AppleTV image stack  | ✘      |
+| iMessage stickers    | ✘      |
 
 ## Usage:
     input is required

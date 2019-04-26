@@ -32,7 +32,7 @@ private protocol InformationNameStringConvertible {
 }
 
 extension ScaleFactor: InformationNameStringConvertible {
-    private var informationName: String {
+    fileprivate var informationName: String {
         switch self {
         case .scale1x: return "@1x"
         case .scale2x: return "@2x"
@@ -46,10 +46,20 @@ private protocol InformationPrintable {
     func printWithLabel(label: String)
 }
 
-private extension InformationPrintable where Self: protocol<RawRepresentable, IncorrectValueAssertion> {
+private extension InformationPrintable where Self: RawRepresentable & IncorrectValueAssertion {
     func printWithLabel(label: String) {
-        var text = "    \(label): \(self) (\(rawValue))"
-        if !assertIncorrectValue() {
+        var text = "    \(label): \(self) (\(self.rawValue))"
+        if !self.assertIncorrectValue() {
+            text += " INCORRECT!"
+        }
+        print(text)
+    }
+}
+
+private extension InformationPrintable where Self: InformationNameStringConvertible & IncorrectValueAssertion {
+    func printWithLabel(label: String) {
+        var text = "    \(label): \(self.informationName)"
+        if !self.assertIncorrectValue() {
             text += " INCORRECT!"
         }
         print(text)
@@ -62,8 +72,16 @@ extension CUIUserInterfaceSizeClass: InformationPrintable { }
 extension CUIRenderMode: InformationPrintable { }
 extension CUIResizingMode: InformationPrintable { }
 extension CUIImageType: InformationPrintable { }
-extension CUIGraphicalClass: InformationPrintable { }
-extension CUIMemoryClass: InformationPrintable { }
+extension CUIGraphicalClass: InformationPrintable {
+    func printWithLabel(label: String) {
+        
+    }
+}
+extension CUIMemoryClass: InformationPrintable {
+    func printWithLabel(label: String) {
+        
+    }
+}
 
 // MARK: - PrintInformationOperation
 struct PrintInformationOperation: Operation {
@@ -76,10 +94,10 @@ struct PrintInformationOperation: Operation {
         case VeryVeryVerbose
     }
 
-    func read(catalog: AssetsCatalog) {
-        print("Assets catalog: \(catalog.filePath)")
-        for imageSet in catalog.imageSets {
-            printImageSetData(imageSet)
+    func read(catalg: AssetsCatalog) {
+        print("Assets catalog: \(catalg.filePath)")
+        for imageSet in catalg.imageSets {
+            printImageSetData(imageSet: imageSet)
         }
     }
 
@@ -93,17 +111,17 @@ struct PrintInformationOperation: Operation {
         case .Name:
             print("\(imageSet.name)")
         case .Verbose:
-            print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq): \(imageSetData(imageSet))")
-            imageSetData(imageSet)
+            print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq): \(imageSetData(imageSet: imageSet))")
+            _ = imageSetData(imageSet: imageSet)
         case .VeryVerbose:
             print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq):")
             for namedImage in imageSet.namedImages {
-                printNamedImageShortData(namedImage)
+                printNamedImageShortData(namedImage: namedImage)
             }
         case .VeryVeryVerbose:
             print("Name: \(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq)")
             for namedImage in imageSet.namedImages {
-                printNamedImageVerboseData(namedImage)
+                printNamedImageVerboseData(namedImage: namedImage)
             }
         }
     }
@@ -127,12 +145,12 @@ struct PrintInformationOperation: Operation {
             guard images.count > 0 else {
                 return nil
             }
-            return "\(idiom): \(images.joinWithSeparator(","))"
+            return "\(idiom): \(images.joined(separator: ","))"
         }
 
         // Create output for every idiom.
-        let output = CUIDeviceIdiom.allValues.map { deviceInfo($0) }.flatMap({ $0 })
-        return output.joinWithSeparator(", ")
+        let output = CUIDeviceIdiom.allValues.map { deviceInfo(idiom: $0) }.compactMap({ $0 })
+        return output.joined(separator: ", ")
     }
 
     /**
@@ -154,66 +172,64 @@ struct PrintInformationOperation: Operation {
             if let value = value {
                 print("    \(label): \(value)")
             } else {
-                print("    \(label): \(value)")
+                print("    \(label): \(value ?? "")")
             }
         }
 
         print("  \(namedImage.acImageName):")
         //
         // CUINamedLookup
-        printProperty("name", value: namedImage.name)
-        printProperty("renditionName", value: namedImage.renditionName())
+        printProperty(label: "name", value: namedImage.name)
+        printProperty(label: "renditionName", value: namedImage.renditionName())
 
         // renditionKey() -> CUIRenditionKey
 //        printProperty("rendition key", value: namedImage.renditionKey())
-        namedImage.renditionKey().themeGraphicsClass().printWithLabel("rendition key graphical class")
-        namedImage.renditionKey().themeMemoryClass().printWithLabel("rendition key memory class")
+        namedImage.renditionKey().themeGraphicsClass().printWithLabel(label: "rendition key graphical class")
+        namedImage.renditionKey().themeMemoryClass().printWithLabel(label: "rendition key memory class")
 
         // _rendition() -> CUIThemeRendition
-//        printProperty("rendition", value: namedImage._rendition().description)
-        printProperty("rendition name", value: namedImage._rendition().name())
-        namedImage._rendition().type().printWithLabel("rendition type")
-        printProperty("rendition subtype", value: namedImage._rendition().subtype())
-        printProperty("rendition UTI type", value: namedImage._rendition().utiType())
-        printProperty("rendition data", value: namedImage._rendition().data())
-        printProperty("rendition pdf", value: namedImage._rendition().pdfDocument())
-        printProperty("rendition image", value: namedImage._rendition().unslicedImage())
+        printProperty(label: "rendition name", value: namedImage._rendition().name())
+        namedImage._rendition().type().printWithLabel(label: "rendition type")
+        printProperty(label: "rendition subtype", value: namedImage._rendition().subtype())
+        printProperty(label: "rendition UTI type", value: namedImage._rendition().utiType())
+        printProperty(label: "rendition data", value: namedImage._rendition().data())
+        printProperty(label: "rendition pdf", value: namedImage._rendition().pdfDocument())
+        printProperty(label: "rendition image", value: namedImage._rendition().unslicedImage())
 
-        // _rendition().sliceInformation() -> CUIRenditionSliceInformation
 //        printProperty("rendition slice information", value: namedImage._rendition().sliceInformation()?.description())
-        printProperty("rendition slice edgeInsets", value: namedImage._rendition().sliceInformation()?.edgeInsets)
-        printProperty("rendition slice destinationRect", value: namedImage._rendition().sliceInformation()?.destinationRect)
-        namedImage._rendition().sliceInformation()?.renditionType.printWithLabel("rendition slice renditionType")
-        printProperty("rendition slice _bottomRightCapSize", value: namedImage._rendition().sliceInformation()?._bottomRightCapSize())
-        printProperty("rendition slice _topLeftCapSize", value: namedImage._rendition().sliceInformation()?._topLeftCapSize())
+        printProperty(label: "rendition slice edgeInsets", value: namedImage._rendition().sliceInformation()?.edgeInsets)
+        printProperty(label: "rendition slice destinationRect", value: namedImage._rendition().sliceInformation()?.destinationRect)
+        namedImage._rendition().sliceInformation()?.renditionType.printWithLabel(label: "rendition slice renditionType")
+        printProperty(label: "rendition slice _bottomRightCapSize", value: namedImage._rendition().sliceInformation()?._bottomRightCapSize())
+        printProperty(label: "rendition slice _topLeftCapSize", value: namedImage._rendition().sliceInformation()?._topLeftCapSize())
 
         //
         // CUINamedImage
-        namedImage.imageType.printWithLabel("imageType")
-        namedImage.idiom().printWithLabel("idiom")
-        namedImage.subtype().printWithLabel("subtype")
-        printProperty("scale", value: namedImage.acScale.informationName)
-        namedImage.sizeClassHorizontal().printWithLabel("size vlass horizontal")
-        namedImage.sizeClassVertical().printWithLabel("size vlass vertical")
-        namedImage.graphicsClass().printWithLabel("graphics class")
-        namedImage.memoryClass().printWithLabel("memory class")
-        printProperty("opacity", value: namedImage.opacity)
-        printProperty("size", value: namedImage.size)
-        printProperty("blend mode", value: namedImage.blendMode)
-        namedImage.resizingMode.printWithLabel("resizing mode")
-        printProperty("is template", value: namedImage.isTemplate)
-        printProperty("vector based", value: namedImage.isVectorBased)
-        printProperty("hasAlignmentInformation", value: namedImage.hasAlignmentInformation)
-        printProperty("hasSliceInformation", value: namedImage.hasSliceInformation)
-        namedImage.templateRenderingMode.printWithLabel("template rendering mode")
-        printProperty("edge insets", value: namedImage.edgeInsets)
-        printProperty("alignment edge insets", value: namedImage.alignmentEdgeInsets)
-        printProperty("exifOrientation", value: namedImage.exifOrientation)
-        printProperty("image", value: namedImage.image)
+        namedImage.imageType.printWithLabel(label: "imageType")
+        namedImage.idiom().printWithLabel(label: "idiom")
+        namedImage.subtype().printWithLabel(label: "subtype")
+        printProperty(label: "scale", value: namedImage.acScale.informationName)
+        namedImage.sizeClassHorizontal().printWithLabel(label: "size vlass horizontal")
+        namedImage.sizeClassVertical().printWithLabel(label: "size vlass vertical")
+        namedImage.graphicsClass().printWithLabel(label: "graphics class")
+        namedImage.memoryClass().printWithLabel(label: "memory class")
+        printProperty(label: "opacity", value: namedImage.opacity)
+        printProperty(label: "size", value: namedImage.size)
+        printProperty(label: "blend mode", value: namedImage.blendMode)
+        namedImage.resizingMode.printWithLabel(label: "resizing mode")
+        printProperty(label: "is template", value: namedImage.isTemplate)
+        printProperty(label: "vector based", value: namedImage.isVectorBased)
+        printProperty(label: "hasAlignmentInformation", value: namedImage.hasAlignmentInformation)
+        printProperty(label: "hasSliceInformation", value: namedImage.hasSliceInformation)
+        namedImage.templateRenderingMode.printWithLabel(label: "template rendering mode")
+        printProperty(label: "edge insets", value: namedImage.edgeInsets)
+        printProperty(label: "alignment edge insets", value: namedImage.alignmentEdgeInsets)
+        printProperty(label: "exifOrientation", value: namedImage.exifOrientation)
+        printProperty(label: "image", value: namedImage.image)
 
         // baseKey -> CUIRenditionKey
-//        printProperty("base key", value: namedImage.baseKey())
-        namedImage.baseKey().themeGraphicsClass().printWithLabel("base key graphical class")
-        namedImage.baseKey().themeMemoryClass().printWithLabel("base key memory class")
+//        printProperty(label: "base key", value: namedImage.baseKey())
+        namedImage.baseKey().themeGraphicsClass().printWithLabel(label: "base key graphical class")
+        namedImage.baseKey().themeMemoryClass().printWithLabel(label: "base key memory class")
     }
 }
