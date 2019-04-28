@@ -198,6 +198,6 @@ typedef NS_ENUM(NSInteger, CUIMemoryClass) {
 
 - (nullable instancetype)initWithURL:(nonnull NSURL *)url error:(NSError *_Nullable __autoreleasing *_Nullable)error;
 - (nonnull NSArray<NSString *> *)allImageNames;
-- (nonnull NSArray<CUINamedImage *> *)imagesWithName:(nonnull NSString *)name;
-
+//- (nonnull NSArray<CUINamedImage *> *)imagesWithName:(nonnull NSString *)name;
+- (nonnull NSArray<id> *)imagesWithName:(nonnull NSString *)name;
 @end

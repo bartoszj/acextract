@@ -25,7 +25,7 @@
 
 import Foundation
 
-enum AssetsCatalogError: ErrorType {
+enum AssetsCatalogError: Error {
     case FileDoesntExists
     case CannotOpenAssetsCatalog
 }
@@ -41,13 +41,18 @@ struct AssetsCatalog {
      - returns: List of image sets.
      */
     var imageSets: [ImageSet] {
-        return self.catalog.allImageNames().map(imageSet(withName:))
+        let array = self.catalog.allImageNames()
+        var swiftArray = [ImageSet]()
+        for string in array {
+            swiftArray.append(imageSet(withName: String(string)))
+        }        
+        return swiftArray
     }
 
     // MARK: Initialization
     init(path: String) throws {
-        let fp = (path as NSString).stringByExpandingTildeInPath
-        guard NSFileManager.defaultManager().fileExistsAtPath(fp) else {
+        let fp = (path as NSString).expandingTildeInPath
+        guard FileManager.default.fileExists(atPath: fp) else {
             throw AssetsCatalogError.FileDoesntExists
         }
 
@@ -55,7 +60,7 @@ struct AssetsCatalog {
         self.filePath = fp
 
         do {
-            self.catalog = try CUICatalog(URL: url)
+            self.catalog = try CUICatalog(url: url as URL)
         } catch {
             throw AssetsCatalogError.CannotOpenAssetsCatalog
         }
@@ -70,18 +75,24 @@ struct AssetsCatalog {
      - returns: Image set with given name.
      */
     func imageSet(withName name: String) -> ImageSet {
-        let images = self.catalog.imagesWithName(name)
-        return ImageSet(name: name, namedImages: images)
+        let images = self.catalog.images(withName: name)
+        var swiftArray = [CUINamedImage]()
+        for item in images {
+            if let image = item as? CUINamedImage {
+                swiftArray.append(image)
+            }
+        }
+        return ImageSet(name: name, namedImages: swiftArray)
     }
 }
 
 extension AssetsCatalog {
     func performOperation(operation: Operation) throws {
-        try operation.read(self)
+        try operation.read(catalg: self)
     }
 
     func performOperations(operations: [Operation]) throws {
         let compundOperation = CompoundOperation(operations: operations)
-        try performOperation(compundOperation)
+        try performOperation(operation: compundOperation)
     }
 }

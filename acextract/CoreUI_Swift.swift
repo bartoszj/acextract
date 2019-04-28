@@ -38,7 +38,7 @@ protocol IncorrectValueAssertion {
     func assertIncorrectValue() -> Bool
 }
 
-extension IncorrectValueAssertion where Self: protocol<RawRepresentable, ValueCorrectness> {
+extension IncorrectValueAssertion where Self: RawRepresentable & ValueCorrectness {
     func assertIncorrectValue() -> Bool {
         let c = correct
         assert(c, "Incorrect value: \(self) - \(rawValue)")
@@ -57,7 +57,7 @@ enum ScaleFactor {
     case scale3x
 }
 
-extension ScaleFactor: FloatLiteralConvertible {
+extension ScaleFactor: ExpressibleByFloatLiteral {
     init(floatLiteral value: Double) {
         switch value {
         case 1.0: self = .scale1x
@@ -92,11 +92,12 @@ extension CUIDeviceIdiom: NameStringConvertible {
     var name: String {
         // Idiom.
         switch self {
-        case .Universal: return ""
-        case .IPhone: return "~iphone"
-        case .IPad: return "~ipad"
-        case .AppleTV: return "~tv"
-        case .AppleWatch: return "~watch"
+        case .universal: return ""
+        case .iPhone: return "~iphone"
+        case .iPad: return "~ipad"
+        case .appleTV: return "~tv"
+        case .appleWatch: return "~watch"
+        default: return ""
         }
     }
 }
@@ -104,29 +105,31 @@ extension CUIDeviceIdiom: NameStringConvertible {
 extension CUIDeviceIdiom: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
-        case .Universal: return rawValue == Universal.rawValue
-        case .IPhone: return rawValue == IPhone.rawValue
-        case .IPad: return rawValue == IPad.rawValue
-        case .AppleTV: return rawValue == AppleTV.rawValue
-        case .AppleWatch: return rawValue == AppleWatch.rawValue
+        case .universal: return rawValue == CUIDeviceIdiom.universal.rawValue
+        case .iPhone: return rawValue == CUIDeviceIdiom.iPhone.rawValue
+        case .iPad: return rawValue == CUIDeviceIdiom.iPad.rawValue
+        case .appleTV: return rawValue == CUIDeviceIdiom.appleTV.rawValue
+        case .appleWatch: return rawValue == CUIDeviceIdiom.appleWatch.rawValue
+        default: return true
         }
     }
 }
 
 extension CUIDeviceIdiom: AllValues {
     static var allValues: [CUIDeviceIdiom] {
-        return [.Universal, .IPhone, .IPad, .AppleTV, .AppleWatch]
+        return [.universal, .iPhone, .iPad, .appleTV, .appleWatch]
     }
 }
 
 extension CUIDeviceIdiom: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Universal: return "universal"
-        case .IPhone: return "iPhone"
-        case .IPad: return "iPad"
-        case .AppleTV: return "AppleTV"
-        case .AppleWatch: return "AppleWatch"
+        case .universal: return "universal"
+        case .iPhone: return "iPhone"
+        case .iPad: return "iPad"
+        case .appleTV: return "AppleTV"
+        case .appleWatch: return "AppleWatch"
+        default: return ""
         }
     }
 }
@@ -135,10 +138,11 @@ extension CUIDeviceIdiom: CustomStringConvertible {
 extension CUISubtype: NameStringConvertible {
     var name: String {
         switch self {
-        case .Normal: return ""
-        case .IPhone4Inch: return "-568h"
-        case .AppleWatch38: return "-38"
-        case .AppleWatch42: return "-42"
+        case .normal: return ""
+        case .iPhone4Inch: return "-568h"
+        case .appleWatch38: return "-38"
+        case .appleWatch42: return "-42"
+        default: return ""
         }
     }
 }
@@ -146,10 +150,11 @@ extension CUISubtype: NameStringConvertible {
 extension CUISubtype: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
-        case .Normal: return rawValue == Normal.rawValue
-        case .IPhone4Inch: return rawValue == IPhone4Inch.rawValue
-        case .AppleWatch38: return rawValue == AppleWatch38.rawValue
-        case .AppleWatch42: return rawValue == AppleWatch42.rawValue
+            case .normal: return rawValue == CUISubtype.normal.rawValue
+            case .iPhone4Inch: return rawValue == CUISubtype.iPhone4Inch.rawValue
+            case .appleWatch38: return rawValue == CUISubtype.appleWatch38.rawValue
+            case .appleWatch42: return rawValue == CUISubtype.appleWatch42.rawValue
+            default: return true
         }
     }
 }
@@ -157,10 +162,15 @@ extension CUISubtype: ValueCorrectness, IncorrectValueAssertion {
 extension CUISubtype: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Normal: return "normal"
-        case .IPhone4Inch: return "-568h"
-        case .AppleWatch38: return "-38"
-        case .AppleWatch42: return "-42"
+            case .normal:
+                return "normal"
+            case .appleWatch38:
+                return "-38"
+            case .appleWatch42:
+                return "-42"
+            case .iPhone4Inch:
+                return "-568h"
+            default: return ""
         }
     }
 }
@@ -169,9 +179,10 @@ extension CUISubtype: CustomStringConvertible {
 extension CUIUserInterfaceSizeClass: NameStringConvertible {
     var name: String {
         switch self {
-        case .Any: return "*"
-        case .Compact: return "-"
-        case .Regular: return "+"
+            case .any: return "*"
+            case .compact: return "-"
+            case .regular: return "+"
+            default: return ""
         }
     }
 }
@@ -179,9 +190,10 @@ extension CUIUserInterfaceSizeClass: NameStringConvertible {
 extension CUIUserInterfaceSizeClass: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
-        case .Any: return rawValue == Any.rawValue
-        case .Compact: return rawValue == Compact.rawValue
-        case .Regular: return rawValue == Regular.rawValue
+            case .any: return rawValue == CUIUserInterfaceSizeClass.any.rawValue
+            case .compact: return rawValue == CUIUserInterfaceSizeClass.compact.rawValue
+            case .regular: return rawValue == CUIUserInterfaceSizeClass.regular.rawValue
+            default: return true
         }
     }
 }
@@ -189,9 +201,10 @@ extension CUIUserInterfaceSizeClass: ValueCorrectness, IncorrectValueAssertion {
 extension CUIUserInterfaceSizeClass: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Any: return "any"
-        case .Compact: return "compact"
-        case .Regular: return "regular"
+            case .any: return "any"
+            case .compact: return "compact"
+            case .regular: return "regular"
+            default: return ""
         }
     }
 }
@@ -200,9 +213,10 @@ extension CUIUserInterfaceSizeClass: CustomStringConvertible {
 extension CUIRenderMode: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
-        case .Original: return rawValue == Original.rawValue
-        case .Template: return rawValue == Template.rawValue
-        case .Default: return rawValue == Default.rawValue
+            case .original: return rawValue == CUIRenderMode.original.rawValue
+            case .template: return rawValue == CUIRenderMode.template.rawValue
+            case .default: return rawValue == CUIRenderMode.default.rawValue
+            default: return true
         }
     }
 }
@@ -210,9 +224,10 @@ extension CUIRenderMode: ValueCorrectness, IncorrectValueAssertion {
 extension CUIRenderMode: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Original: return "original"
-        case .Template: return "template"
-        case .Default: return "default"
+            case .original: return "original"
+            case .template: return "template"
+            case .default: return "default"
+            default: return ""
         }
     }
 }
@@ -221,8 +236,9 @@ extension CUIRenderMode: CustomStringConvertible {
 extension CUIResizingMode: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
-        case .Tiles: return rawValue == Tiles.rawValue
-        case .Stretches: return rawValue == Stretches.rawValue
+            case .tiles: return rawValue == CUIResizingMode.tiles.rawValue
+            case .stretches: return rawValue == CUIResizingMode.stretches.rawValue
+            default: return true
         }
     }
 }
@@ -230,8 +246,9 @@ extension CUIResizingMode: ValueCorrectness, IncorrectValueAssertion {
 extension CUIResizingMode: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Tiles: return "tiles"
-        case .Stretches: return "stretches"
+            case .tiles: return "tiles"
+            case .stretches: return "stretches"
+            default: return ""
         }
     }
 }
@@ -240,10 +257,11 @@ extension CUIResizingMode: CustomStringConvertible {
 extension CUIImageType: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
-        case .None: return rawValue == None.rawValue
-        case .Horizontal: return rawValue == Horizontal.rawValue
-        case .Vertical: return rawValue == Vertical.rawValue
-        case .HorizontalAndVertical: return rawValue == HorizontalAndVertical.rawValue
+            case .none: return rawValue == CUIImageType.none.rawValue
+            case .horizontal: return rawValue == CUIImageType.horizontal.rawValue
+            case .vertical: return rawValue == CUIImageType.vertical.rawValue
+            case .horizontalAndVertical: return rawValue == CUIImageType.horizontalAndVertical.rawValue
+            default: return true
         }
     }
 }
@@ -251,10 +269,11 @@ extension CUIImageType: ValueCorrectness, IncorrectValueAssertion {
 extension CUIImageType: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .None: return "none"
-        case .Horizontal: return "horizontal"
-        case .Vertical: return "vertical"
-        case .HorizontalAndVertical: return "horizontal & vertical"
+            case .none: return "none"
+            case .horizontal: return "horizontal"
+            case .vertical: return "vertical"
+            case .horizontalAndVertical: return "horizontal & vertical"
+            default: return ""
         }
     }
 }
@@ -263,10 +282,11 @@ extension CUIImageType: CustomStringConvertible {
 extension CUIGraphicalClass: NameStringConvertible {
     var name: String {
         switch self {
-        case .Default: return ""
-        case .Metal1v2: return "1v2"
-        case .Metal2v2: return "2v2"
-        case .Metal3v1: return "3v1"
+            case .default: return ""
+            case .metal1v2: return "1v2"
+            case .metal2v2: return "2v2"
+            case .metal3v1: return "3v1"
+            default: return ""
         }
     }
 }
@@ -274,10 +294,11 @@ extension CUIGraphicalClass: NameStringConvertible {
 extension CUIGraphicalClass: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
-        case .Default: return rawValue == Default.rawValue
-        case .Metal1v2: return rawValue == Metal1v2.rawValue
-        case .Metal2v2: return rawValue == Metal2v2.rawValue
-        case .Metal3v1: return rawValue == Metal3v1.rawValue
+            case .default: return rawValue == CUIGraphicalClass.default.rawValue
+            case .metal1v2: return rawValue == CUIGraphicalClass.metal1v2.rawValue
+            case .metal2v2: return rawValue == CUIGraphicalClass.metal2v2.rawValue
+            case .metal3v1: return rawValue == CUIGraphicalClass.metal3v1.rawValue
+            default: return true
         }
     }
 }
@@ -285,10 +306,11 @@ extension CUIGraphicalClass: ValueCorrectness, IncorrectValueAssertion {
 extension CUIGraphicalClass: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Default: return "default"
-        case .Metal1v2: return "Metal 1v2"
-        case .Metal2v2: return "Metal 2v2"
-        case .Metal3v1: return "Metal 3v1"
+            case .default: return "default"
+            case .metal1v2: return "Metal 1v2"
+            case .metal2v2: return "Metal 2v2"
+            case .metal3v1: return "Metal 3v1"
+            default: return ""
         }
     }
 }
@@ -297,10 +319,11 @@ extension CUIGraphicalClass: CustomStringConvertible {
 extension CUIMemoryClass: NameStringConvertible {
     var name: String {
         switch self {
-        case .Default: return ""
-        case .Memory1GB: return "1gb"
-        case .Memory2GB: return "2gb"
-        case .Memory4GB: return "4gb"
+            case .default: return ""
+            case .memory1GB: return "1gb"
+            case .memory2GB: return "2gb"
+            case .memory4GB: return "4gb"
+            default: return ""
         }
     }
 }
@@ -308,10 +331,11 @@ extension CUIMemoryClass: NameStringConvertible {
 extension CUIMemoryClass: ValueCorrectness, IncorrectValueAssertion {
     var correct: Bool {
         switch self {
-        case .Default: return rawValue == Default.rawValue
-        case .Memory1GB: return rawValue == Memory1GB.rawValue
-        case .Memory2GB: return rawValue == Memory2GB.rawValue
-        case .Memory4GB: return rawValue == Memory4GB.rawValue
+            case .default: return rawValue == CUIMemoryClass.default.rawValue
+            case .memory1GB: return rawValue == CUIMemoryClass.memory1GB.rawValue
+            case .memory2GB: return rawValue == CUIMemoryClass.memory2GB.rawValue
+            case .memory4GB: return rawValue == CUIMemoryClass.memory4GB.rawValue
+            default: return true
         }
     }
 }
@@ -319,32 +343,26 @@ extension CUIMemoryClass: ValueCorrectness, IncorrectValueAssertion {
 extension CUIMemoryClass: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .Default: return "default"
-        case .Memory1GB: return "1GB"
-        case .Memory2GB: return "2GB"
-        case .Memory4GB: return "4GB"
+            case .default: return "default"
+            case .memory1GB: return "1GB"
+            case .memory2GB: return "2GB"
+            case .memory4GB: return "4GB"
+            default: return ""
         }
     }
 }
 
-// MARK: CUINamedImage
+//MARK: CUINamedImage
 extension CUINamedImage {
     var acScale: ScaleFactor {
         return ScaleFactor(floatLiteral: scale)
     }
 
     var acSizeClassString: String {
-        switch (self.sizeClassHorizontal(), self.sizeClassVertical()) {
-        case (.Any, .Any): return ""
+    switch (self.sizeClassHorizontal(), self.sizeClassVertical()) {
+        case (.any, .any): return ""
         case let (horizontal, vertical): return "\(horizontal.name)\(vertical.name)"
         }
-    }
-
-    private var acFileExtension: String {
-        if acIsPDF {
-            return "pdf"
-        }
-        return "png"
     }
 
     var acIsPDF: Bool {
@@ -353,8 +371,21 @@ extension CUINamedImage {
         }
         return false
     }
+    
+    fileprivate var acFileExtension: String {
+        if acIsPDF {
+            return "pdf"
+        }
+        return "png"
+    }
+
 
     var acImageName: String {
+        // image size
+        let width = self.size.width
+        let height = self.size.height
+        let size = width>0 ? "\(Int(width))x\(Int(height))" : ""
+
         // Graphical class
         let graphics = self.graphicsClass().name
 
@@ -368,7 +399,7 @@ extension CUINamedImage {
         let subtype = self.subtype().name
 
         // Scale
-        let scale = self.acScale.name
+        let scale = self.scale>1 ? "@\(Int(self.scale))x" : ""
 
         // Idiom
         let idiom = self.idiom().name
@@ -376,6 +407,8 @@ extension CUINamedImage {
         // File extension
         let fileExtension = acFileExtension
 
-        return "\(self.name)\(graphics)\(memory)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
+        //  AppIcon76x76@2x~ipad.png
+        return "\(self.name)\(size)\(graphics)\(memory)\(sizeClassSuffix)\(subtype)\(scale)\(idiom).\(fileExtension)"
     }
 }
+
