@@ -88,7 +88,7 @@ struct AssetsCatalog {
 
 extension AssetsCatalog {
     func performOperation(operation: Operation) throws {
-        try operation.read(catalg: self)
+        try operation.read(catalog: self)
     }
 
     func performOperations(operations: [Operation]) throws {

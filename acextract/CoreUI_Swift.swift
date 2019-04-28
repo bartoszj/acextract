@@ -382,7 +382,7 @@ extension CUINamedImage {
         // image size
         let width = self.size.width
         let height = self.size.height
-        let size = width>0 ? "\(Int(width))x\(Int(height))" : ""
+        let size = width > 0 ? "\(Int(width))x\(Int(height))" : ""
 
         // Graphical class
         let graphics = self.graphicsClass().name

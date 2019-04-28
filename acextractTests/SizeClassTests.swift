@@ -16,9 +16,9 @@ class SizeClassTests: XCTestCase {
         XCTAssertEqual(images.count, 6)
 
         // Any 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.sizeClassHorizontal() == .Any }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.sizeClassHorizontal() == .any }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c.png")
@@ -28,9 +28,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Any 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.sizeClassHorizontal() == .Any }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.sizeClassHorizontal() == .any }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c@2x.png")
@@ -40,9 +40,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Any 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.sizeClassHorizontal() == .Any }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.sizeClassHorizontal() == .any }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c@3x.png")
@@ -52,9 +52,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Compact 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.sizeClassHorizontal() == .Compact }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Compact)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.sizeClassHorizontal() == .compact }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.compact)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "-")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c-*.png")
@@ -64,9 +64,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Compact 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.sizeClassHorizontal() == .Compact }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Compact)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.sizeClassHorizontal() == .compact }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.compact)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "-")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c-*@2x.png")
@@ -76,9 +76,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Compact 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.sizeClassHorizontal() == .Compact }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Compact)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.sizeClassHorizontal() == .compact }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.compact)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "-")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_w_a&c-*@3x.png")
@@ -94,9 +94,9 @@ class SizeClassTests: XCTestCase {
         XCTAssertEqual(images.count, 6)
 
         // Any 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.sizeClassVertical() == .Any }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.sizeClassVertical() == .any }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_h_a&r.png")
@@ -106,9 +106,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Any 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.sizeClassVertical() == .Any }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.sizeClassVertical() == .any }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_h_a&r@2x.png")
@@ -118,9 +118,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Any 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.sizeClassVertical() == .Any }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.sizeClassVertical() == .any }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_h_a&r@3x.png")
@@ -130,9 +130,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Regular 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.sizeClassVertical() == .Regular }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Regular)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.sizeClassVertical() == .regular }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.regular)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "+")
             XCTAssertEqual(image.acImageName, "sc_h_a&r*+.png")
@@ -142,9 +142,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Regular 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.sizeClassVertical() == .Regular }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Regular)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.sizeClassVertical() == .regular }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.regular)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "+")
             XCTAssertEqual(image.acImageName, "sc_h_a&r*+@2x.png")
@@ -154,9 +154,9 @@ class SizeClassTests: XCTestCase {
         }
 
         // Regular 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.sizeClassVertical() == .Regular }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Regular)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.sizeClassVertical() == .regular }).first {
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.regular)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "+")
             XCTAssertEqual(image.acImageName, "sc_h_a&r*+@3x.png")
@@ -172,10 +172,10 @@ class SizeClassTests: XCTestCase {
         XCTAssertEqual(images.count, 12)
 
         // Any Any 1x
-        let aaImages = images.filter({ $0.sizeClassHorizontal() == .Any && $0.sizeClassVertical() == .Any })
+        let aaImages = images.filter({ $0.sizeClassHorizontal() == .any && $0.sizeClassVertical() == .any })
         if let image = aaImages.filter({ $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c.png")
@@ -186,8 +186,8 @@ class SizeClassTests: XCTestCase {
 
         // Any Any 2x
         if let image = aaImages.filter({ return $0.scale == 2.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c@2x.png")
@@ -198,8 +198,8 @@ class SizeClassTests: XCTestCase {
 
         // Any Any 3x
         if let image = aaImages.filter({ return $0.scale == 3.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c@3x.png")
@@ -209,10 +209,10 @@ class SizeClassTests: XCTestCase {
         }
 
         // Any Compact 1x
-        let acImages = images.filter({ $0.sizeClassHorizontal() == .Any && $0.sizeClassVertical() == .Compact })
+        let acImages = images.filter({ $0.sizeClassHorizontal() == .any && $0.sizeClassVertical() == .compact })
         if let image = acImages.filter({ $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Compact)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.compact)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c*-.png")
@@ -223,8 +223,8 @@ class SizeClassTests: XCTestCase {
 
         // Any Compact 2x
         if let image = acImages.filter({ return $0.scale == 2.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Compact)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.compact)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c*-@2x.png")
@@ -235,8 +235,8 @@ class SizeClassTests: XCTestCase {
 
         // Any Compact 3x
         if let image = acImages.filter({ return $0.scale == 3.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Any)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Compact)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.any)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.compact)
             XCTAssertEqual(image.sizeClassHorizontal().name, "*")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c*-@3x.png")
@@ -252,10 +252,10 @@ class SizeClassTests: XCTestCase {
         XCTAssertEqual(images.count, 12)
 
         // Regular Any 1x
-        let raImages = images.filter({ $0.sizeClassHorizontal() == .Regular && $0.sizeClassVertical() == .Any })
+        let raImages = images.filter({ $0.sizeClassHorizontal() == .regular && $0.sizeClassVertical() == .any })
         if let image = raImages.filter({ $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Regular)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.regular)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+*.png")
@@ -266,8 +266,8 @@ class SizeClassTests: XCTestCase {
 
         // Regular Any 2x
         if let image = raImages.filter({ return $0.scale == 2.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Regular)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.regular)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+*@2x.png")
@@ -278,8 +278,8 @@ class SizeClassTests: XCTestCase {
 
         // Regular Any 3x
         if let image = raImages.filter({ return $0.scale == 3.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Regular)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Any)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.regular)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.any)
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "*")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+*@3x.png")
@@ -289,10 +289,10 @@ class SizeClassTests: XCTestCase {
         }
 
         // Regular Compact 1x
-        let rcImages = images.filter({ $0.sizeClassHorizontal() == .Regular && $0.sizeClassVertical() == .Compact })
+        let rcImages = images.filter({ $0.sizeClassHorizontal() == .regular && $0.sizeClassVertical() == .compact })
         if let image = rcImages.filter({ $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Regular)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Compact)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.regular)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.compact)
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+-.png")
@@ -303,8 +303,8 @@ class SizeClassTests: XCTestCase {
 
         // Regular Compact 2x
         if let image = rcImages.filter({ return $0.scale == 2.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Regular)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Compact)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.regular)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.compact)
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+-@2x.png")
@@ -315,8 +315,8 @@ class SizeClassTests: XCTestCase {
 
         // Regular Compact 3x
         if let image = rcImages.filter({ return $0.scale == 3.0 }).first {
-            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.Regular)
-            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.Compact)
+            XCTAssertEqual(image.sizeClassHorizontal(), CUIUserInterfaceSizeClass.regular)
+            XCTAssertEqual(image.sizeClassVertical(), CUIUserInterfaceSizeClass.compact)
             XCTAssertEqual(image.sizeClassHorizontal().name, "+")
             XCTAssertEqual(image.sizeClassVertical().name, "-")
             XCTAssertEqual(image.acImageName, "sc_wh_a&r&c+-@3x.png")

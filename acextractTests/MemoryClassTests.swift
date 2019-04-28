@@ -17,9 +17,9 @@ class MemoryClassTests: XCTestCase {
 
         // Default 1x
         if let image = images.filter({ return $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_no.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -28,9 +28,9 @@ class MemoryClassTests: XCTestCase {
 
         // Default 2x
         if let image = images.filter({ return $0.scale == 2.0 }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_no@2x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -39,9 +39,9 @@ class MemoryClassTests: XCTestCase {
 
         // Default 3x
         if let image = images.filter({ return $0.scale == 3.0 }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_no@3x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -55,10 +55,10 @@ class MemoryClassTests: XCTestCase {
         XCTAssertEqual(images.count, 6)
 
         // Default 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .Default }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .default }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_1gb.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -66,10 +66,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // Default 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .Default }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .default }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_1gb@2x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -77,10 +77,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // Default 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .Default }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .default }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_1gb@3x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -88,10 +88,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // 1GB 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .Memory1GB }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Memory1GB)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Memory1GB)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Memory1GB)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .memory1GB }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.memory1GB)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.memory1GB)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.memory1GB)
             XCTAssertEqual(image.acImageName, "m_1gb1gb.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -99,10 +99,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // 1GB 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .Memory1GB }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Memory1GB)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Memory1GB)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Memory1GB)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .memory1GB }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.memory1GB)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.memory1GB)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.memory1GB)
             XCTAssertEqual(image.acImageName, "m_1gb1gb@2x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -110,10 +110,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // 1GB 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .Memory1GB }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Memory1GB)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Memory1GB)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Memory1GB)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .memory1GB }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.memory1GB)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.memory1GB)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.memory1GB)
             XCTAssertEqual(image.acImageName, "m_1gb1gb@3x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -127,10 +127,10 @@ class MemoryClassTests: XCTestCase {
         XCTAssertEqual(images.count, 6)
 
         // Default 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .Default }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .default }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_2gb.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -138,10 +138,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // Default 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .Default }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .default }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_2gb@2x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -149,10 +149,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // Default 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .Default }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .default }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_2gb@3x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -160,10 +160,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // 2GB 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .Memory2GB }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Memory2GB)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Memory2GB)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Memory2GB)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .memory2GB }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.memory2GB)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.memory2GB)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.memory2GB)
             XCTAssertEqual(image.acImageName, "m_2gb2gb.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -171,10 +171,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // 2GB 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .Memory2GB }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Memory2GB)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Memory2GB)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Memory2GB)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .memory2GB }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.memory2GB)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.memory2GB)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.memory2GB)
             XCTAssertEqual(image.acImageName, "m_2gb2gb@2x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -182,10 +182,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // 2GB 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .Memory2GB }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Memory2GB)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Memory2GB)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Memory2GB)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .memory2GB }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.memory2GB)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.memory2GB)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.memory2GB)
             XCTAssertEqual(image.acImageName, "m_2gb2gb@3x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -199,10 +199,10 @@ class MemoryClassTests: XCTestCase {
         XCTAssertEqual(images.count, 6)
 
         // Default 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .Default }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .default }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_4gb.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -210,10 +210,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // Default 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .Default }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .default }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_4gb@2x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -221,10 +221,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // Default 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .Default }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Default)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Default)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .default }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.default)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.default)
             XCTAssertEqual(image.acImageName, "m_4gb@3x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -232,10 +232,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // 4GB 1x
-        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .Memory4GB }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Memory4GB)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Memory4GB)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Memory4GB)
+        if let image = images.filter({ return $0.scale == 1.0 && $0.memoryClass() == .memory4GB }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.memory4GB)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.memory4GB)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.memory4GB)
             XCTAssertEqual(image.acImageName, "m_4gb4gb.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -243,10 +243,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // 4GB 2x
-        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .Memory4GB }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Memory4GB)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Memory4GB)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Memory4GB)
+        if let image = images.filter({ return $0.scale == 2.0 && $0.memoryClass() == .memory4GB }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.memory4GB)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.memory4GB)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.memory4GB)
             XCTAssertEqual(image.acImageName, "m_4gb4gb@2x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {
@@ -254,10 +254,10 @@ class MemoryClassTests: XCTestCase {
         }
 
         // 4GB 3x
-        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .Memory4GB }).first {
-            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.Memory4GB)
-            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.Memory4GB)
-            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.Memory4GB)
+        if let image = images.filter({ return $0.scale == 3.0 && $0.memoryClass() == .memory4GB }).first {
+            XCTAssertEqual(image.memoryClass(), CUIMemoryClass.memory4GB)
+            XCTAssertEqual(image.baseKey().themeMemoryClass(), CUIMemoryClass.memory4GB)
+            XCTAssertEqual(image.renditionKey().themeMemoryClass(), CUIMemoryClass.memory4GB)
             XCTAssertEqual(image.acImageName, "m_4gb4gb@3x.png")
             XCTAssertNotNil(image._rendition().unslicedImage())
         } else {

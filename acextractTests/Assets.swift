@@ -29,11 +29,11 @@ enum Asset: String {
 
     // MARK: Static
     static let bundleIdentifer = "com.bjanda.acextractTests"
-    static let bundle = NSBundle(identifier: bundleIdentifer)!
-    static func path(name name: String) -> String? {
-        return bundle.pathForResource(name, ofType: "car")
+    static let bundle = Bundle(identifier: bundleIdentifer)!
+    static func path(name: String) -> String? {
+        return bundle.path(forResource: name, ofType: "car")
     }
-    static func path(catalog catalog: Asset) -> String? {
+    static func path(catalog: Asset) -> String? {
         return path(name: catalog.rawValue)
     }
 }

@@ -92,9 +92,9 @@ struct PrintInformationOperation: Operation {
         case veryVeryVerbose
     }
 
-    func read(catalg: AssetsCatalog) {
-        print("Assets catalog: \(catalg.filePath)")
-        for imageSet in catalg.imageSets {
+    func read(catalog: AssetsCatalog) {
+        print("Assets catalog: \(catalog.filePath)")
+        for imageSet in catalog.imageSets {
             printImageSetData(imageSet: imageSet)
         }
     }

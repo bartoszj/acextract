@@ -37,7 +37,7 @@ class AssetsCatalogTests: XCTestCase {
         do {
             _ = try AssetsCatalog(path: "Fake path")
             XCTFail("AssetsCatalog should not be created")
-        } catch AssetsCatalogError.FileDoesntExists {
+        } catch AssetsCatalogError.fileDoesntExists {
 
         } catch {
             XCTFail("Unknown exception \(error)")
@@ -48,7 +48,7 @@ class AssetsCatalogTests: XCTestCase {
      Incorrect file.
      */
     func testCreateAssetsCatalog03() {
-        guard let path = Asset.bundle.pathForResource("data/fake_assets", ofType: nil) else {
+        guard let path = Asset.bundle.path(forResource: "data/fake_assets", ofType: nil) else {
             XCTFail("Cannot find fake asset")
             return
         }
@@ -56,7 +56,7 @@ class AssetsCatalogTests: XCTestCase {
         do {
             _ = try AssetsCatalog(path: path)
             XCTFail("AssetsCatalog should not be created")
-        } catch AssetsCatalogError.CannotOpenAssetsCatalog {
+        } catch AssetsCatalogError.cannotOpenAssetsCatalog {
 
         } catch {
             XCTFail("Unknown exception \(error)")
@@ -69,7 +69,7 @@ class AssetsCatalogTests: XCTestCase {
     func testOperation01() {
         do {
             let operation = FakeOperation()
-            try assetsContainer.iOS.performOperation(operation)
+            try assetsContainer.iOS.performOperation(operation: operation)
             XCTAssertTrue(operation.executed)
         } catch {
             XCTFail("Unknown exception \(error)")
@@ -83,7 +83,7 @@ class AssetsCatalogTests: XCTestCase {
         do {
             let operation1 = FakeOperation()
             let operation2 = FakeOperation()
-            try assetsContainer.iOS.performOperations([operation1, operation2])
+            try assetsContainer.iOS.performOperations(operations: [operation1, operation2])
             XCTAssertTrue(operation1.executed)
             XCTAssertTrue(operation2.executed)
         } catch {

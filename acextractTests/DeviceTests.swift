@@ -82,8 +82,8 @@ class DeviceTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 2)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.IPad)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.iPad)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_ipad~ipad.png")
@@ -93,8 +93,8 @@ class DeviceTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 2.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.IPad)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.iPad)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_ipad@2x~ipad.png")
@@ -109,8 +109,8 @@ class DeviceTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.IPhone)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.iPhone)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone~iphone.png")
@@ -120,8 +120,8 @@ class DeviceTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 2.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.IPhone)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.iPhone)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone@2x~iphone.png")
@@ -131,8 +131,8 @@ class DeviceTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 3.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.IPhone)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.iPhone)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "@3x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone@3x~iphone.png")
@@ -146,9 +146,9 @@ class DeviceTests: XCTestCase {
         let imageSet = assetsContainer.iPhone.imageSet(withName: "d_iphone4")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 2)
-        if let image = images.filter({ return $0.subtype() == .Normal }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.IPhone)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+        if let image = images.filter({ return $0.subtype() == .normal }).first {
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.iPhone)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone4@2x~iphone.png")
@@ -157,9 +157,9 @@ class DeviceTests: XCTestCase {
             XCTFail("Cannot find image")
         }
 
-        if let image = images.filter({ return $0.subtype() == .IPhone4Inch }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.IPhone)
-            XCTAssertEqual(image.subtype(), CUISubtype.IPhone4Inch)
+        if let image = images.filter({ return $0.subtype() == .iPhone4Inch }).first {
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.iPhone)
+            XCTAssertEqual(image.subtype(), CUISubtype.iPhone4Inch)
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_iphone4-568h@2x~iphone.png")
@@ -174,8 +174,8 @@ class DeviceTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 2)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.Universal)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.universal)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_mac.png")
@@ -185,8 +185,8 @@ class DeviceTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 2.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.Universal)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.universal)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_mac@2x.png")
@@ -201,8 +201,8 @@ class DeviceTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 1)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.AppleTV)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.appleTV)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_tv~tv.png")
@@ -217,8 +217,8 @@ class DeviceTests: XCTestCase {
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
         if let image = images.filter({ return $0.scale == 1.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.Universal)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.universal)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_universal.png")
@@ -228,8 +228,8 @@ class DeviceTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 2.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.Universal)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.universal)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_universal@2x.png")
@@ -239,8 +239,8 @@ class DeviceTests: XCTestCase {
         }
 
         if let image = images.filter({ return $0.scale == 3.0 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.Universal)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.universal)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "@3x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_universal@3x.png")
@@ -254,9 +254,9 @@ class DeviceTests: XCTestCase {
         let imageSet = assetsContainer.watchOS.imageSet(withName: "d_watch")
         let images = imageSet.namedImages
         XCTAssertEqual(images.count, 3)
-        if let image = images.filter({ return $0.subtype() == .Normal }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.AppleWatch)
-            XCTAssertEqual(image.subtype(), CUISubtype.Normal)
+        if let image = images.filter({ return $0.subtype() == .normal }).first {
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.appleWatch)
+            XCTAssertEqual(image.subtype(), CUISubtype.normal)
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_watch@2x~watch.png")
@@ -265,9 +265,9 @@ class DeviceTests: XCTestCase {
             XCTFail("Cannot find image")
         }
 
-        if let image = images.filter({ return $0.subtype() == .AppleWatch38 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.AppleWatch)
-            XCTAssertEqual(image.subtype(), CUISubtype.AppleWatch38)
+        if let image = images.filter({ return $0.subtype() == .appleWatch38 }).first {
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.appleWatch)
+            XCTAssertEqual(image.subtype(), CUISubtype.appleWatch38)
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_watch-38@2x~watch.png")
@@ -276,9 +276,9 @@ class DeviceTests: XCTestCase {
             XCTFail("Cannot find image")
         }
 
-        if let image = images.filter({ return $0.subtype() == .AppleWatch42 }).first {
-            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.AppleWatch)
-            XCTAssertEqual(image.subtype(), CUISubtype.AppleWatch42)
+        if let image = images.filter({ return $0.subtype() == .appleWatch42 }).first {
+            XCTAssertEqual(image.idiom(), CUIDeviceIdiom.appleWatch)
+            XCTAssertEqual(image.subtype(), CUISubtype.appleWatch42)
             XCTAssertEqual(image.acScale.name, "@2x")
             XCTAssertEqual(image.acIsPDF, false)
             XCTAssertEqual(image.acImageName, "d_watch-42@2x~watch.png")

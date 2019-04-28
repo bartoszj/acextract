@@ -27,15 +27,15 @@ import Foundation
 
 // MARK: - Protocols
 protocol Operation {
-    func read(catalg: AssetsCatalog) throws
+    func read(catalog: AssetsCatalog) throws
 }
 
 struct CompoundOperation: Operation {
     let operations: [Operation]
 
-    func read(catalg: AssetsCatalog) throws {
+    func read(catalog: AssetsCatalog) throws {
         for operation in operations {
-            try operation.read(catalg: catalg)
+            try operation.read(catalog: catalog)
         }
     }
 }
@@ -65,11 +65,11 @@ struct ExtractOperation: Operation {
     }
 
     // MARK: Methods
-    func read(catalg: AssetsCatalog) throws {
+    func read(catalog: AssetsCatalog) throws {
         // Create output folder if needed
         try checkAndCreateFolder()
         // For every image set and every named image.
-        for imageSet in catalg.imageSets {
+        for imageSet in catalog.imageSets {
             for namedImage in imageSet.namedImages {
                 // Save image to file.
                 extractNamedImage(namedImage: namedImage)
