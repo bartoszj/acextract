@@ -42,7 +42,7 @@ Support Mac, iOS and AppleWatch assets. Can extract PNG and PDF files.
 
 ### From archive
 
-- download the newest [version](https://github.com/iHTCboy/acextract/releases) from GitHub
+- download the newest [version](https://github.com/bartoszj/acextract/releases) from GitHub
 - extract archive
 - copy `acextract` to `/usr/local/bin/` folder
 
