@@ -28,8 +28,16 @@
     },
     {
       "idiom" : "watch",
+      "screen-width" : ">161"
+    },
+    {
+      "idiom" : "watch",
       "filename" : "facebook-5.pdf",
       "screen-width" : ">145"
+    },
+    {
+      "idiom" : "watch",
+      "screen-width" : ">183"
     },
     {
       "idiom" : "tv",

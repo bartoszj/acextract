@@ -26,8 +26,8 @@
 import Foundation
 
 enum AssetsCatalogError: Error {
-    case FileDoesntExists
-    case CannotOpenAssetsCatalog
+    case fileDoesntExists
+    case cannotOpenAssetsCatalog
 }
 
 struct AssetsCatalog {
@@ -45,24 +45,24 @@ struct AssetsCatalog {
         var swiftArray = [ImageSet]()
         for string in array {
             swiftArray.append(imageSet(withName: String(string)))
-        }        
+        }
         return swiftArray
     }
 
     // MARK: Initialization
     init(path: String) throws {
-        let fp = (path as NSString).expandingTildeInPath
-        guard FileManager.default.fileExists(atPath: fp) else {
-            throw AssetsCatalogError.FileDoesntExists
+        let filePath = (path as NSString).expandingTildeInPath
+        guard FileManager.default.fileExists(atPath: filePath) else {
+            throw AssetsCatalogError.fileDoesntExists
         }
 
-        let url = NSURL(fileURLWithPath: fp)
-        self.filePath = fp
+        let url = NSURL(fileURLWithPath: filePath)
+        self.filePath = filePath
 
         do {
             self.catalog = try CUICatalog(url: url as URL)
         } catch {
-            throw AssetsCatalogError.CannotOpenAssetsCatalog
+            throw AssetsCatalogError.cannotOpenAssetsCatalog
         }
     }
 

@@ -74,12 +74,10 @@ extension CUIResizingMode: InformationPrintable { }
 extension CUIImageType: InformationPrintable { }
 extension CUIGraphicalClass: InformationPrintable {
     func printWithLabel(label: String) {
-        
     }
 }
 extension CUIMemoryClass: InformationPrintable {
     func printWithLabel(label: String) {
-        
     }
 }
 
@@ -88,10 +86,10 @@ struct PrintInformationOperation: Operation {
     let verbose: Verbose
 
     enum Verbose {
-        case Name
-        case Verbose
-        case VeryVerbose
-        case VeryVeryVerbose
+        case name
+        case verbose
+        case veryVerbose
+        case veryVeryVerbose
     }
 
     func read(catalg: AssetsCatalog) {
@@ -108,17 +106,17 @@ struct PrintInformationOperation: Operation {
      */
     private func printImageSetData(imageSet: ImageSet) {
         switch verbose {
-        case .Name:
+        case .name:
             print("\(imageSet.name)")
-        case .Verbose:
+        case .verbose:
             print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq): \(imageSetData(imageSet: imageSet))")
             _ = imageSetData(imageSet: imageSet)
-        case .VeryVerbose:
+        case .veryVerbose:
             print("\(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq):")
             for namedImage in imageSet.namedImages {
                 printNamedImageShortData(namedImage: namedImage)
             }
-        case .VeryVeryVerbose:
+        case .veryVeryVerbose:
             print("Name: \(escapeSeq+boldSeq)\(imageSet.name)\(escapeSeq+resetSeq)")
             for namedImage in imageSet.namedImages {
                 printNamedImageVerboseData(namedImage: namedImage)

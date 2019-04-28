@@ -60,13 +60,13 @@ else if let input = cliInput.value {
         if cliList.value {
             let verbose: PrintInformationOperation.Verbose
             switch cliVerbose.value {
-            case 0: verbose = .Name
-            case 1: verbose = .Verbose
-            case 2: verbose = .VeryVerbose
-            default: verbose = .VeryVeryVerbose
+            case 0: verbose = .name
+            case 1: verbose = .verbose
+            case 2: verbose = .veryVerbose
+            default: verbose = .veryVeryVerbose
             }
-            let pi = PrintInformationOperation(verbose: verbose)
-            try assetsCatalog.performOperation(operation: pi)
+            let pio = PrintInformationOperation(verbose: verbose)
+            try assetsCatalog.performOperation(operation: pio)
         }
         // Extract to folder.
         if let output = cliOutput.value {

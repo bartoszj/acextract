@@ -27,7 +27,7 @@ import Foundation
 
 // MARK: - Protocols
 protocol Operation {
-    func read(catalg: AssetsCatalog) throws -> Void
+    func read(catalg: AssetsCatalog) throws
 }
 
 struct CompoundOperation: Operation {
@@ -48,10 +48,10 @@ let redColorSeq = "[31m"
 
 // MARK: - ExtractOperation
 enum ExtractOperationError: Error {
-    case OutputPathIsNotDirectory
-    case RenditionMissingData
-    case CannotSaveImage
-    case CannotCreatePDFDocument
+    case outputPathIsNotDirectory
+    case renditionMissingData
+    case cannotSaveImage
+    case cannotCreatePDFDocument
 }
 
 struct ExtractOperation: Operation {
@@ -87,7 +87,7 @@ struct ExtractOperation: Operation {
         // Check if directory exists at given path and it is directory.
         var isDirectory: ObjCBool = false
         if FileManager.default.fileExists(atPath: outputPath, isDirectory: &isDirectory) && !(isDirectory.boolValue) {
-            throw ExtractOperationError.OutputPathIsNotDirectory
+            throw ExtractOperationError.outputPathIsNotDirectory
         } else {
             try FileManager.default.createDirectory(atPath: outputPath, withIntermediateDirectories: true, attributes: nil)
         }
@@ -124,23 +124,23 @@ private extension CUINamedImage {
         } else if self._rendition().unslicedImage() != nil {
             try self.acSaveImage(filePath: filePath)
         } else {
-            throw ExtractOperationError.RenditionMissingData
+            throw ExtractOperationError.renditionMissingData
         }
     }
 
     func acSaveImage(filePath: String) throws {
         let filePathURL = NSURL(fileURLWithPath: filePath)
         guard let cgImage = self._rendition().unslicedImage()?.takeUnretainedValue() else {
-            throw ExtractOperationError.CannotSaveImage
+            throw ExtractOperationError.cannotSaveImage
         }
         guard let cgDestination = CGImageDestinationCreateWithURL(filePathURL, kUTTypePNG, 1, nil) else {
-            throw ExtractOperationError.CannotSaveImage
+            throw ExtractOperationError.cannotSaveImage
         }
 
         CGImageDestinationAddImage(cgDestination, cgImage, nil)
 
         if !CGImageDestinationFinalize(cgDestination) {
-            throw ExtractOperationError.CannotSaveImage
+            throw ExtractOperationError.cannotSaveImage
         }
     }
 
@@ -149,11 +149,11 @@ private extension CUINamedImage {
         // http://stackoverflow.com/questions/3780745/saving-a-pdf-document-to-disk-using-quartz
 
         guard let cgPDFDocument = self._rendition().pdfDocument()?.takeUnretainedValue() else {
-            throw ExtractOperationError.CannotCreatePDFDocument
+            throw ExtractOperationError.cannotCreatePDFDocument
         }
         // Create the pdf context
-        let cgPage = CGPDFDocument.page(cgPDFDocument)
-        var cgPageRect = (cgPage as! CGPDFPage).getBoxRect(.mediaBox)
+        let cgPage = CGPDFDocument.page(cgPDFDocument) as! CGPDFPage // swiftlint:disable:this force_cast
+        var cgPageRect = cgPage.getBoxRect(.mediaBox)
         let mutableData = NSMutableData()
 
         let cgDataConsumer = CGDataConsumer(data: mutableData)
@@ -164,14 +164,14 @@ private extension CUINamedImage {
 
         if cgPDFDocument.numberOfPages > 0 {
             cgPDFContext!.beginPDFPage(nil)
-            cgPDFContext!.drawPDFPage(cgPage as! CGPDFPage)
+            cgPDFContext!.drawPDFPage(cgPage)
             cgPDFContext!.endPDFPage()
         } else {
-            throw ExtractOperationError.CannotCreatePDFDocument
+            throw ExtractOperationError.cannotCreatePDFDocument
         }
 
         if !mutableData.write(toFile: filePath, atomically: true) {
-            throw ExtractOperationError.CannotCreatePDFDocument
+            throw ExtractOperationError.cannotCreatePDFDocument
         }
     }
 }

@@ -297,6 +297,18 @@
 			path = "watchTestApp Extension";
 			sourceTree = "<group>";
 		};
+		9627F8F62275F8FB0090BCB7 /* TestApps */ = {
+			isa = PBXGroup;
+			children = (
+				968FAAC01A48C1500083A943 /* iOSTestApp */,
+				968FAAE81A48C16E0083A943 /* macTestApp */,
+				96A84A561D0DF0D500B79D25 /* tvTestApp */,
+				961DEFDF1D0DDD2F002AD0CC /* watchTestApp */,
+				961DEFEE1D0DDD2F002AD0CC /* watchTestApp Extension */,
+			);
+			path = TestApps;
+			sourceTree = "<group>";
+		};
 		966A50291A3DEBE0002C814F = {
 			isa = PBXGroup;
 			children = (
@@ -304,11 +316,7 @@
 				9614270E1D1F1109005831AA /* Templates.xcassets */,
 				966A50341A3DEBE0002C814F /* acextract */,
 				96E9F6A81D0DD31F001588FF /* acextractTests */,
-				968FAAC01A48C1500083A943 /* iOSTestApp */,
-				968FAAE81A48C16E0083A943 /* macTestApp */,
-				96A84A561D0DF0D500B79D25 /* tvTestApp */,
-				961DEFDF1D0DDD2F002AD0CC /* watchTestApp */,
-				961DEFEE1D0DDD2F002AD0CC /* watchTestApp Extension */,
+				9627F8F62275F8FB0090BCB7 /* TestApps */,
 				960CEF851A3F7BEB00F0B156 /* Frameworks */,
 				966A50331A3DEBE0002C814F /* Products */,
 				960CEF861A3F7BF700F0B156 /* CommandLine.xcodeproj */,
@@ -852,7 +860,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "watchTestApp Extension/Info.plist";
+				INFOPLIST_FILE = "TestApps/watchTestApp Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bjanda.iOSTestApp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -870,7 +878,7 @@
 				CLANG_ANALYZER_NONNULL = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "watchTestApp Extension/Info.plist";
+				INFOPLIST_FILE = "TestApps/watchTestApp Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bjanda.iOSTestApp.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
@@ -892,7 +900,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = watchTestApp_Extension;
-				INFOPLIST_FILE = watchTestApp/Info.plist;
+				INFOPLIST_FILE = TestApps/watchTestApp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bjanda.iOSTestApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -912,7 +920,7 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = watchTestApp_Extension;
-				INFOPLIST_FILE = watchTestApp/Info.plist;
+				INFOPLIST_FILE = TestApps/watchTestApp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bjanda.iOSTestApp.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1062,7 +1070,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = iOSTestApp/Info.plist;
+				INFOPLIST_FILE = TestApps/iOSTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bjanda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1077,7 +1085,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = iOSTestApp/Info.plist;
+				INFOPLIST_FILE = TestApps/iOSTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bjanda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1097,7 +1105,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = macTestApp/Info.plist;
+				INFOPLIST_FILE = TestApps/macTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bjanda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1110,7 +1118,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = macTestApp/Info.plist;
+				INFOPLIST_FILE = TestApps/macTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bjanda.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1127,7 +1135,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = tvTestApp/Info.plist;
+				INFOPLIST_FILE = TestApps/tvTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bjanda.tvTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1146,7 +1154,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = tvTestApp/Info.plist;
+				INFOPLIST_FILE = TestApps/tvTestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bjanda.tvTestApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
