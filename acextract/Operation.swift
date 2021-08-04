@@ -130,6 +130,9 @@ private extension CUINamedImage {
 
     func acSaveImage(filePath: String) throws {
         let filePathURL = NSURL(fileURLWithPath: filePath)
+        
+        try FileManager.default.createDirectory(at: filePathURL.deletingLastPathComponent! as URL, withIntermediateDirectories: true, attributes: nil)
+        
         guard let cgImage = self._rendition().unslicedImage()?.takeUnretainedValue() else {
             throw ExtractOperationError.cannotSaveImage
         }
